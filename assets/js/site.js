@@ -14,55 +14,88 @@
   var EXT = '<span aria-hidden="true">&nearr;</span>';
   var CHEV = '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 4.5l3 3 3-3"/></svg>';
 
+  // Main menu: one list drives the desktop dropdowns and the mobile menu.
+  // An item is [title, description, href]; links that leave the site open in a new tab.
+  var MENUS = [
+    { label: "Services", pages: ["transformation", "book"], items: [
+      ["AI transformation", "Assess, build, amplify: our process, start to finish", "transformation.html"],
+      ["The readiness assessment", "Free, online: where AI pays in your business", "https://ocv-ai-assessment.netlify.app/"],
+      ["Leadership workshop", "Leading your company through AI, in 90 minutes", "education.html#workshops"],
+      ["Fractional AI leadership", "Advisory, governance and a roadmap, month to month", "transformation.html#options"],
+      ["How an engagement runs", "The model in writing, before you book", "transformation.html#engagement"]
+    ] },
+    { label: "Learning", pages: ["education", "courses", "course", "diagnostic"], items: [
+      ["The learning solution", "How we teach a whole company", "education.html"],
+      ["Courses", "Every course, in two tracks", "courses.html"],
+      ["The AI diagnostic", "Find out what you know, in about five minutes", "diagnostic.html"],
+      ["The platform", "What leadership sees", "education.html#platform"],
+      ["Workshops", "Leaders first, then the whole company", "education.html#workshops"]
+    ] },
+    { label: "Resources", pages: ["resources"], items: [
+      ["The quarterly guide", "AI for small business, every quarter", "resources.html#guide"],
+      ["Papers", "The thinking behind how we work", "resources.html#papers"],
+      ["Demonstration case", "A full engagement, chapter by chapter", "https://oceancrest.ai/case-001/"],
+      ["Membership", "Every course, for everyone on the team", "education.html#membership"],
+      ["Newsletter", "Hear about the next paper", "resources.html#subscribe"]
+    ] },
+    { label: "About", pages: ["about"], items: [
+      ["Our team", "The people in the room", "about.html#team"],
+      ["Advisory board", "Who we answer to", "about.html#advisory"],
+      ["Our lineage", "A division of OceanCrest Ventures", "about.html#lineage"]
+    ] }
+  ];
+  // Learner login. Courses are public to browse; lessons need a seat (invite or company code).
+  // Placeholder: the learning-site prototype's sign-in page. Swap for the live platform URL.
+  var LOGIN_URL = "http://localhost:8000/signin.html";
+  function ext(href) { return /^https?:/.test(href) ? ' target="_blank" rel="noopener"' : ""; }
+
   function header(page) {
-    var eduPages = ["education", "courses", "diagnostic"];
     var h = document.createElement("header");
     h.className = "site-head";
     h.innerHTML =
       '<a class="skip" href="#main">Skip to content</a>' +
       '<div class="wrap">' +
-        '<a class="logo" href="index.html" aria-label="OceanCrest AI home"><img src="assets/img/logos/oceancrest-ai-lockup-rgb-navy.svg" alt="OceanCrest AI" width="216" height="25"></a>' +
+        '<a class="logo" href="index.html" aria-label="OceanCrest AI home"><img src="assets/img/logos/oceancrest-ai-lockup-rgb-fullcolor.svg" alt="OceanCrest AI" width="216" height="25"></a>' +
         '<nav class="site-nav" aria-label="Main">' +
-          '<a href="transformation.html"' + (page === "transformation" ? ' class="cur"' : "") + '>Transformation</a>' +
-          '<div class="dd' + (eduPages.indexOf(page) >= 0 ? " cur" : "") + '"><button type="button" aria-expanded="false" aria-haspopup="true">Education ' + CHEV + '</button>' +
-            '<div class="dd-panel">' +
-              '<a href="education.html"><b>The learning solution</b><span>How we teach a whole company</span></a>' +
-              '<a href="courses.html"><b>Courses</b><span>Every course, in two tracks</span></a>' +
-              '<a href="diagnostic.html"><b>The AI diagnostic</b><span>Find out what you know, in about five minutes</span></a>' +
-              '<a href="education.html#platform"><b>The platform</b><span>What leadership sees</span></a>' +
-              '<a href="education.html#workshops"><b>Workshops</b><span>Leaders first, then the whole company</span></a>' +
-              '<a href="education.html#membership"><b>Membership</b><span>Every course, for everyone on the team</span></a>' +
-            '</div></div>' +
-          '<a href="resources.html"' + (page === "resources" ? ' class="cur"' : "") + '>Resources</a>' +
-          '<a href="about.html"' + (page === "about" ? ' class="cur"' : "") + '>About</a>' +
-        '</nav>' +
+          MENUS.map(function (m) {
+            return '<div class="dd' + (m.pages.indexOf(page) >= 0 ? " cur" : "") + '"><button type="button" aria-expanded="false" aria-haspopup="true">' + m.label + " " + CHEV + "</button>" +
+              '<div class="dd-panel">' + m.items.map(function (it) {
+                return '<a href="' + it[2] + '"' + ext(it[2]) + "><b>" + it[0] + (ext(it[2]) ? " &nearr;" : "") + "</b><span>" + it[1] + "</span></a>";
+              }).join("") + "</div></div>";
+          }).join("") +
+        "</nav>" +
         '<div class="head-actions">' +
+          '<a class="login" href="' + LOGIN_URL + '">Log in</a>' +
           '<a class="btn ghost sm" href="diagnostic.html">Take the diagnostic</a>' +
           '<a class="btn primary sm" href="book.html">Book now</a>' +
           '<button type="button" class="menu-btn" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 5h14M2 9h14M2 13h14"/></svg></button>' +
-        '</div>' +
-      '</div>' +
+        "</div>" +
+      "</div>" +
       '<nav class="mobile-nav" id="mobile-nav" aria-label="Main">' +
-        '<a href="transformation.html">Transformation</a>' +
-        '<a href="education.html">Education</a>' +
-        '<a class="sub" href="courses.html">Courses</a>' +
-        '<a class="sub" href="diagnostic.html">The AI diagnostic</a>' +
-        '<a class="sub" href="education.html#platform">The platform</a>' +
-        '<a class="sub" href="education.html#workshops">Workshops</a>' +
-        '<a class="sub" href="education.html#membership">Membership</a>' +
-        '<a href="resources.html">Resources</a>' +
-        '<a href="about.html">About</a>' +
+        MENUS.map(function (m) {
+          return '<span class="mn-h">' + m.label + "</span>" + m.items.map(function (it) {
+            return '<a class="sub" href="' + it[2] + '"' + ext(it[2]) + ">" + it[0] + "</a>";
+          }).join("");
+        }).join("") +
+        '<a href="' + LOGIN_URL + '">Log in</a>' +
         '<div class="btns"><a class="btn primary" href="book.html">Book now</a><a class="btn" href="diagnostic.html">Take the diagnostic</a></div>' +
-      '</nav>';
+      "</nav>";
     document.body.insertBefore(h, document.body.firstChild);
 
-    var dd = h.querySelector(".dd"), ddBtn = dd.querySelector("button");
-    function setDD(open) { dd.classList.toggle("open", open); ddBtn.setAttribute("aria-expanded", open); }
-    ddBtn.addEventListener("click", function (e) { e.stopPropagation(); setDD(!dd.classList.contains("open")); });
-    dd.addEventListener("mouseenter", function () { if (matchMedia("(hover:hover)").matches) setDD(true); });
-    dd.addEventListener("mouseleave", function () { if (matchMedia("(hover:hover)").matches) setDD(false); });
-    document.addEventListener("click", function (e) { if (!dd.contains(e.target)) setDD(false); });
-    document.addEventListener("keydown", function (e) { if (e.key === "Escape") { setDD(false); ddBtn.focus(); } });
+    var dds = [].slice.call(h.querySelectorAll(".dd"));
+    function setDD(dd, open) { dd.classList.toggle("open", open); dd.querySelector("button").setAttribute("aria-expanded", open); }
+    function closeAll(except) { dds.forEach(function (d) { if (d !== except) setDD(d, false); }); }
+    dds.forEach(function (dd) {
+      dd.querySelector("button").addEventListener("click", function (e) { e.stopPropagation(); closeAll(dd); setDD(dd, !dd.classList.contains("open")); });
+      dd.addEventListener("mouseenter", function () { if (matchMedia("(hover:hover)").matches) { closeAll(dd); setDD(dd, true); } });
+      dd.addEventListener("mouseleave", function () { if (matchMedia("(hover:hover)").matches) setDD(dd, false); });
+    });
+    document.addEventListener("click", function (e) { if (!e.target.closest(".dd")) closeAll(); });
+    document.addEventListener("keydown", function (e) {
+      if (e.key !== "Escape") return;
+      var open = h.querySelector(".dd.open");
+      if (open) { setDD(open, false); open.querySelector("button").focus(); }
+    });
 
     var mb = h.querySelector(".menu-btn"), mn = h.querySelector(".mobile-nav");
     mb.addEventListener("click", function () { var o = !mn.classList.contains("open"); mn.classList.toggle("open", o); mb.setAttribute("aria-expanded", o); });

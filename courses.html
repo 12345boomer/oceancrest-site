@@ -10,12 +10,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;500;600&family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/site.css?v=2">
 <script src="assets/js/courses.js"></script>
 <script src="assets/js/cards.js"></script>
-<script src="assets/js/coast.js"></script>
+<script src="assets/js/coast.js?v=2"></script>
 <script src="assets/js/sea.js"></script>
-<script src="assets/js/site.js"></script>
+<script src="assets/js/site.js?v=2"></script>
 <script src="assets/js/contours.js"></script>
 <!--
   COURSES. The catalog, ported from the learning-site prototype (public view only).
@@ -41,20 +41,33 @@
 .search input{flex:1;min-width:0;border:0;outline:0;font:inherit;font-size:16px;color:var(--navy);background:none;min-height:44px}
 .search input:focus-visible{outline:0}
 #count{white-space:nowrap}
-.chipgroups{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px 32px}
-.chipgroups .wide{grid-column:1/-1}
-.chipgroups h2{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--slate);margin-bottom:10px}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chips button{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:8px 14px 8px 10px;font-size:14px;color:var(--navy);position:relative;overflow:hidden;transition:border-color .2s,background .2s,transform .2s var(--ease)}
-.chips button::before{content:"";width:14px;height:14px;border-radius:50%;border:1.5px solid var(--silver);flex:0 0 auto;box-sizing:border-box;transition:border-color .2s,box-shadow .2s}
+/* Filters: two switches (track, level), then categories grouped by track */
+.frow{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 20px}
+.seg{display:flex;gap:2px;padding:4px;border:1px solid var(--line);border-radius:999px;background:var(--paper);max-width:100%;overflow-x:auto;scrollbar-width:none}
+.seg::-webkit-scrollbar{display:none}
+.seg button{flex:0 0 auto;display:inline-flex;align-items:center;gap:8px;border:0;background:none;border-radius:999px;padding:9px 14px;font-size:14px;font-weight:500;color:var(--slate);white-space:nowrap;transition:background .25s,color .25s}
+.seg button:hover{color:var(--navy);background:var(--wash)}
+.seg button[aria-pressed="true"]{background:var(--navy);color:#fff}
+.seg button i{width:9px;height:9px;border-radius:50%;background:var(--lagoon)}
+.seg button i.e{background:var(--coral)}
+.seg .n{font-family:var(--mono);font-size:11px;font-weight:400;opacity:.6}
+.cats{display:grid;gap:12px;padding-top:18px;border-top:1px dashed var(--silver)}
+.catline{display:grid;grid-template-columns:150px 1fr 112px;align-items:center;gap:10px 14px}
+.catline>.ref{display:flex;align-items:center;gap:8px;color:var(--slate)}
+.catline>.ref::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--lagoon)}
+.catline.e>.ref::before{background:var(--coral)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:6px 12px 6px 10px;font-size:13px;color:var(--navy);transition:border-color .2s,background .2s,color .2s,transform .2s var(--ease)}
+.chips button i{width:9px;height:9px;border-radius:50%;background:var(--tag)}
 .chips button:hover{border-color:var(--lagoon);transform:translateY(-1px)}
-.chips button[aria-pressed="true"]{border-color:var(--blue);background:var(--wash)}
-.chips button[aria-pressed="true"]::before{border-color:var(--blue);box-shadow:inset 0 0 0 3px var(--paper);background:var(--blue)}
+.chips button[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
 .chips button .n{font-family:var(--mono);font-size:11px;color:var(--muted)}
-.chips button .tr{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate)}
-.chips button[disabled]{opacity:.45;cursor:default}
+.chips button[aria-pressed="true"] .n{color:rgba(255,255,255,.65)}
+.seg button[disabled],.chips button[disabled]{opacity:.4;cursor:default}
 .chips button[disabled]:hover{border-color:var(--line);transform:none}
-@media (max-width:480px){.chips button{padding:7px 12px 7px 9px;font-size:13px}}
+.clear{justify-self:end;border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:6px 14px;font:inherit;font-size:13px;color:var(--navy);white-space:nowrap;transition:border-color .2s}
+.clear:hover{border-color:var(--lagoon)}
+@media (max-width:640px){.catline{grid-template-columns:1fr}.clear{justify-self:start}.seg{width:100%}}
 
 /* Results */
 .cat-results{padding-block:clamp(32px,4vw,48px) clamp(64px,8vw,96px)}
@@ -106,11 +119,11 @@
         </label>
         <span class="ref" id="count" aria-live="polite"></span>
       </div>
-      <div class="chipgroups">
-        <div><h2 id="h-track">Track</h2><div class="chips" id="f-track" role="group" aria-labelledby="h-track"></div></div>
-        <div><h2 id="h-level">Level</h2><div class="chips" id="f-level" role="group" aria-labelledby="h-level"></div></div>
-        <div class="wide"><h2 id="h-cat">Category</h2><div class="chips" id="f-cat" role="group" aria-labelledby="h-cat"></div></div>
+      <div class="frow">
+        <div class="seg" id="f-track" role="group" aria-label="Track"></div>
+        <div class="seg" id="f-level" role="group" aria-label="Level"></div>
       </div>
+      <div class="cats" id="f-cat" role="group" aria-label="Category"></div>
     </div>
   </section>
 </div>
@@ -183,20 +196,22 @@
     if (group === "track") st.cat = "all";
     return COURSES.filter(function (c) { return matches(c, st); }).length;
   }
-  function btn(group, value, label, extra) {
+  function btn(group, value, label, before) {
     var n = countFor(group, value), on = state[group] === value;
-    return '<button type="button" data-group="' + group + '" data-value="' + E(value) + '" aria-pressed="' + on + '"' + (!n && !on ? " disabled" : "") + '><span>' + E(label) + '</span>' + (extra || "") + '<span class="n">' + n + '</span></button>';
+    return '<button type="button" data-group="' + group + '" data-value="' + E(value) + '" aria-pressed="' + on + '"' + (!n && !on ? " disabled" : "") + '>' + (before || "") + '<span>' + E(label) + '</span><span class="n">' + n + '</span></button>';
   }
   function renderFilters() {
-    document.getElementById("f-track").innerHTML =
-      btn("track", "all", "All courses") + btn("track", "mindset", TRACKS.mindset.name) + btn("track", "technical", TRACKS.technical.name);
+    document.getElementById("f-track").innerHTML = btn("track", "all", "Both tracks") +
+      btn("track", "mindset", TRACKS.mindset.name, '<i class="e"></i>') + btn("track", "technical", TRACKS.technical.name, "<i></i>");
     document.getElementById("f-level").innerHTML = ["all", "Beginner", "Intermediate", "Advanced"].map(function (l) {
       return btn("level", l, l === "all" ? "Any level" : l);
     }).join("");
-    var cats = CATEGORIES.filter(function (c) { return state.track === "all" || c.track === state.track; });
-    document.getElementById("f-cat").innerHTML = btn("cat", "all", "All categories") + cats.map(function (c) {
-      var extra = state.track === "all" ? '<span class="tr">' + (c.track === "mindset" ? "Mindset" : "Technical") + '</span>' : "";
-      return btn("cat", c.id, c.name, extra);
+    // Categories sit under their track; pressing a selected one again clears it.
+    var active = state.track !== "all" || state.cat !== "all" || state.level !== "all" || state.q;
+    document.getElementById("f-cat").innerHTML = ["mindset", "technical"].filter(function (t) { return state.track === "all" || state.track === t; }).map(function (t, i) {
+      return '<div class="catline' + (t === "mindset" ? " e" : "") + '"><span class="ref">' + E(TRACKS[t].name) + '</span><div class="chips">' +
+        CATEGORIES.filter(function (c) { return c.track === t; }).map(function (c) { return btn("cat", c.id, c.name, '<i class="cat-' + c.id + '"></i>'); }).join("") +
+        '</div>' + (i === 0 && active ? '<button type="button" class="clear" id="clear">Clear filters</button>' : "<span></span>") + '</div>';
     }).join("");
   }
 
@@ -258,9 +273,11 @@
     var b = e.target.closest("[data-group]");
     if (!b || b.disabled) return;
     var g = b.getAttribute("data-group"), v = b.getAttribute("data-value");
+    if (g === "cat" && state.cat === v) v = "all";
     state[g] = v;
     if (g === "track") state.cat = "all";
     if (g === "cat" && v !== "all") state.track = categoryById(v).track;
+    if (g === "cat") v = state.cat;
     update();
     // Re-rendering replaces the chip; keep keyboard focus on its replacement.
     var nb = document.querySelector('[data-group="' + g + '"][data-value="' + v + '"]');
