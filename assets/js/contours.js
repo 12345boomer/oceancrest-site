@@ -1,0 +1,252 @@
+/*
+ * Ported from the live oceancrest.ai (contours.js, the hero "survey chart") on 2026-10-06.
+ * Changes: ink colours are options, and any <canvas data-contours="navy|white|sea"> auto-starts.
+ *   navy  = the original: navy hairlines with one blue isoline (for white or pale grounds)
+ *   white = white hairlines with one lagoon isoline (for laying over the painted coast)
+ *   sea   = deep-sea hairlines with one lagoon isoline (for pastel tinted sections)
+ * The canvas fills its positioned parent; give it class="contours".
+ *
+ * OceanCrest AI — hero survey-chart engine.
+ * Draws drifting bathymetric isolines: marching squares over hash-based
+ * value noise, quantized to LEVELS depth thresholds. Navy hairlines on
+ * paper, with one emphasized blue isoline. The field drifts slowly in
+ * time; the frame steps at ~20fps while the page runs at full rate.
+ * Pauses offscreen and in hidden tabs. Under reduced motion, renders a
+ * single static frame.
+ */
+(() => {
+  const CELL_PX = 16;          // field sample spacing, CSS px
+  const STEP_MS = 50;          // ~20fps field updates
+  const LEVELS = [0.34, 0.42, 0.48, 0.53, 0.58, 0.64, 0.72];
+  const BLUE_LEVEL = 3;        // index into LEVELS drawn in blue
+  const NOISE_SCALE = 0.055;   // field frequency per grid unit
+  const DRIFT_X = 0.012;       // field translation per second
+  const DRIFT_Y = 0.007;
+  const RIPPLE_R = 7;          // pointer perturbation radius, grid units
+  const RIPPLE_AMP = 0.045;
+  const INK_NAVY = 'rgba(22, 32, 46, 0.16)';
+  const INK_BLUE = 'rgba(37, 99, 235, 0.38)';
+  const SEED = 7;
+
+  function hash(ix, iy) {
+    let h = (ix * 374761393 + iy * 668265263 + SEED * 144665) | 0;
+    h = ((h ^ (h >>> 13)) * 1274126177) | 0;
+    return ((h ^ (h >>> 16)) >>> 0) / 4294967295;
+  }
+
+  function smooth(t) { return t * t * (3 - 2 * t); }
+
+  function noise(x, y) {
+    const ix = Math.floor(x), iy = Math.floor(y);
+    const fx = smooth(x - ix), fy = smooth(y - iy);
+    const a = hash(ix, iy), b = hash(ix + 1, iy);
+    const c = hash(ix, iy + 1), d = hash(ix + 1, iy + 1);
+    return a + (b - a) * fx + (c - a) * fy + (a - b - c + d) * fx * fy;
+  }
+
+  function init(canvas, opts = {}) {
+    const ctx = canvas.getContext('2d');
+    const reduced = !!opts.reduced;
+    const finePointer = matchMedia('(pointer: fine)').matches;
+
+    let gw = 0, gh = 0, cw = 0, ch = 0, dpr = 1;
+    let field = null;
+    let t = 0;                 // drift time, seconds
+    let acc = 0;               // ms accumulator for stepping
+    let running = false;
+    let destroyed = false;
+    let inView = true;
+    const mouse = { x: -1e6, y: -1e6 };
+
+    function resize() {
+      const w = canvas.clientWidth, h = canvas.clientHeight;
+      if (!w || !h) return;
+      dpr = Math.min(2, window.devicePixelRatio || 1);
+      cw = w; ch = h;
+      canvas.width = Math.round(w * dpr);
+      canvas.height = Math.round(h * dpr);
+      gw = Math.ceil(w / CELL_PX) + 1;
+      gh = Math.ceil(h / CELL_PX) + 1;
+      field = new Float32Array(gw * gh);
+      render();
+    }
+
+    function sample(gx, gy) {
+      let v =
+        noise(gx * NOISE_SCALE * CELL_PX * 0.06 + t * DRIFT_X * 60, gy * NOISE_SCALE * CELL_PX * 0.06 + t * DRIFT_Y * 60) * 0.6 +
+        noise(gx * NOISE_SCALE * CELL_PX * 0.12 + t * DRIFT_X * 96, gy * NOISE_SCALE * CELL_PX * 0.12 + t * DRIFT_Y * 96) * 0.28 +
+        noise(gx * NOISE_SCALE * CELL_PX * 0.24 + t * DRIFT_X * 150, gy * NOISE_SCALE * CELL_PX * 0.24 + t * DRIFT_Y * 150) * 0.12;
+      if (finePointer && mouse.x > -1e5) {
+        const dx = gx - mouse.x, dy = gy - mouse.y;
+        const d2 = dx * dx + dy * dy;
+        if (d2 < RIPPLE_R * RIPPLE_R) {
+          v += RIPPLE_AMP * (1 - Math.sqrt(d2) / RIPPLE_R);
+        }
+      }
+      return v;
+    }
+
+    function computeField() {
+      let i = 0;
+      for (let gy = 0; gy < gh; gy++) {
+        for (let gx = 0; gx < gw; gx++) {
+          field[i++] = sample(gx, gy);
+        }
+      }
+    }
+
+    /* Marching squares: stroke every segment of one iso level. */
+    function traceLevel(level) {
+      ctx.beginPath();
+      for (let gy = 0; gy < gh - 1; gy++) {
+        const row = gy * gw, next = row + gw;
+        const y0 = gy * CELL_PX, y1 = y0 + CELL_PX;
+        for (let gx = 0; gx < gw - 1; gx++) {
+          const tl = field[row + gx], tr = field[row + gx + 1];
+          const bl = field[next + gx], br = field[next + gx + 1];
+          let code = 0;
+          if (tl > level) code |= 8;
+          if (tr > level) code |= 4;
+          if (br > level) code |= 2;
+          if (bl > level) code |= 1;
+          if (code === 0 || code === 15) continue;
+          const x0 = gx * CELL_PX, x1 = x0 + CELL_PX;
+          // interpolated edge crossings
+          const top = x0 + CELL_PX * ((level - tl) / (tr - tl));
+          const bottom = x0 + CELL_PX * ((level - bl) / (br - bl));
+          const left = y0 + CELL_PX * ((level - tl) / (bl - tl));
+          const right = y0 + CELL_PX * ((level - tr) / (br - tr));
+          switch (code) {
+            case 1: case 14: ctx.moveTo(x0, left); ctx.lineTo(bottom, y1); break;
+            case 2: case 13: ctx.moveTo(bottom, y1); ctx.lineTo(x1, right); break;
+            case 3: case 12: ctx.moveTo(x0, left); ctx.lineTo(x1, right); break;
+            case 4: case 11: ctx.moveTo(top, y0); ctx.lineTo(x1, right); break;
+            case 5:  ctx.moveTo(x0, left); ctx.lineTo(top, y0); ctx.moveTo(bottom, y1); ctx.lineTo(x1, right); break;
+            case 6: case 9: ctx.moveTo(top, y0); ctx.lineTo(bottom, y1); break;
+            case 7: case 8: ctx.moveTo(x0, left); ctx.lineTo(top, y0); break;
+            case 10: ctx.moveTo(top, y0); ctx.lineTo(x1, right); ctx.moveTo(x0, left); ctx.lineTo(bottom, y1); break;
+          }
+        }
+      }
+      ctx.stroke();
+    }
+
+    const inkLine = opts.ink || INK_NAVY, inkAccent = opts.accent || INK_BLUE;
+    function render() {
+      if (!field) return;
+      computeField();
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, cw, ch);
+      ctx.lineWidth = opts.width || 1;
+      for (let li = 0; li < LEVELS.length; li++) {
+        ctx.strokeStyle = li === BLUE_LEVEL ? inkAccent : inkLine;
+        traceLevel(LEVELS[li]);
+      }
+    }
+
+    function tick(_time, deltaMS) {
+      if (!running) return;
+      acc += deltaMS;
+      if (acc < STEP_MS) return;
+      t += acc / 1000;
+      acc = 0;
+      render();
+    }
+
+    // Prefer gsap's ticker (single rAF loop for the page); fall back to rAF.
+    let rafId = 0, lastRaf = 0;
+    const hasGsap = typeof window.gsap !== 'undefined';
+    function rafLoop(now) {
+      if (destroyed) return;
+      tick(now, now - (lastRaf || now));
+      lastRaf = now;
+      rafId = requestAnimationFrame(rafLoop);
+    }
+    function gsapTick(time, deltaTime) { tick(time, deltaTime); }
+
+    function updateRunning() {
+      const should = !reduced && !destroyed && inView && !document.hidden;
+      if (should === running) return;
+      running = should;
+      canvas.style.willChange = running ? 'contents' : '';
+    }
+
+    const io = new IntersectionObserver((entries) => {
+      inView = entries[0].isIntersecting;
+      updateRunning();
+    });
+    io.observe(canvas);
+
+    const onVis = () => updateRunning();
+    document.addEventListener('visibilitychange', onVis);
+
+    const onPointer = (e) => {
+      const r = canvas.getBoundingClientRect();
+      mouse.x = (e.clientX - r.left) / CELL_PX;
+      mouse.y = (e.clientY - r.top) / CELL_PX;
+    };
+    const onPointerLeave = () => { mouse.x = -1e6; mouse.y = -1e6; };
+    if (finePointer && !reduced) {
+      canvas.parentElement.addEventListener('pointermove', onPointer);
+      canvas.parentElement.addEventListener('pointerleave', onPointerLeave);
+    }
+
+    let resizeTimer = 0;
+    const ro = new ResizeObserver(() => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(resize, 120);
+    });
+    ro.observe(canvas.parentElement);
+
+    resize();
+    if (!reduced) {
+      if (hasGsap) gsap.ticker.add(gsapTick);
+      else rafId = requestAnimationFrame(rafLoop);
+      updateRunning();
+    }
+
+    return {
+      resize,
+      pause() { running = false; },
+      resume() { updateRunning(); },
+      destroy() {
+        destroyed = true;
+        running = false;
+        io.disconnect();
+        ro.disconnect();
+        document.removeEventListener('visibilitychange', onVis);
+        if (finePointer && !reduced) {
+          canvas.parentElement.removeEventListener('pointermove', onPointer);
+          canvas.parentElement.removeEventListener('pointerleave', onPointerLeave);
+        }
+        if (hasGsap) gsap.ticker.remove(gsapTick);
+        if (rafId) cancelAnimationFrame(rafId);
+      },
+    };
+  }
+
+  window.Contours = { init };
+
+  const INKS = {
+    navy: { ink: INK_NAVY, accent: INK_BLUE },
+    white: { ink: 'rgba(255, 255, 255, 0.42)', accent: 'rgba(255, 255, 255, 0.85)', width: 1.2 },
+    sea: { ink: 'rgba(31, 78, 112, 0.13)', accent: 'rgba(74, 143, 184, 0.5)' }
+  };
+  function boot() {
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.querySelectorAll('canvas[data-contours]').forEach((c) => {
+      if (c._contours) return;
+      const ink = INKS[c.getAttribute('data-contours')] || INKS.navy;
+      c._contours = init(c, Object.assign({ reduced }, ink));
+    });
+  }
+  window.Contours.inks = INKS;
+  window.Contours.boot = boot;
+  function start() {
+    boot();
+    // Canvases added later (e.g. a results panel) start on their own.
+    new MutationObserver(boot).observe(document.body, { childList: true, subtree: true });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+  else start();
+})();

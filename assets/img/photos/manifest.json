@@ -1,0 +1,853 @@
+{
+ "library": "OceanCrest photo library v1",
+ "generated": "2026-09-09",
+ "model": "nano_banana_pro (Higgsfield; executed as nano_banana_2)",
+ "post_process": "v1 'cool': luminance, 1%/99.5% black/white point, three-stop tone map navy #16202e -> slate #667280 at 50% -> white; JPG progressive, q82 stepping down to fit 450 KB; long edge 2400 (wide) / 2000 (tall, card)",
+ "anchor": {
+  "job_id": "0f628f80-0c6b-4509-81a4-38745e40a288",
+  "note": "anchor: subject 01 wide, best of 4 at 21:9 4K, used as image_references on every A candidate"
+ },
+ "template": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. {SUBJECT} Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, {COMPOSITION} Plain unmarked surfaces, quiet and still, editorial and minimal.",
+ "images": [
+  {
+   "file": "assets/photos/oc-01-skyline-fog-wide.jpg",
+   "subject": 1,
+   "slug": "skyline-fog",
+   "crop": "wide",
+   "aspect": "21:9",
+   "resolution": "4k",
+   "px": [
+    2400,
+    1018
+   ],
+   "bytes": 155310,
+   "jpeg_quality": 82,
+   "candidate": "B-plain",
+   "job_id": "3e549e14-f4cd-4f34-9066-1c0ca5b67eee",
+   "alternate_job_id": "25f0445f-98e1-42d5-afe6-2de429420f2c",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. The towers of an imaginary city of unnamed glass and stone towers of varied heights rising out of a sea of morning fog, photographed from a high rooftop above the cloud layer, only the upper floors and spires visible, the fog soft and bright. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a wide panoramic frame, low horizon, the sky taking two thirds of the frame, the subject anchored along the base. Plain unmarked surfaces, quiet and still, editorial and minimal.",
+   "reference": null,
+   "credits": 4
+  },
+  {
+   "file": "assets/photos/oc-01-skyline-fog-tall.jpg",
+   "subject": 1,
+   "slug": "skyline-fog",
+   "crop": "tall",
+   "aspect": "2:3",
+   "resolution": "2k",
+   "px": [
+    1342,
+    2000
+   ],
+   "bytes": 404279,
+   "jpeg_quality": 82,
+   "candidate": "A-ref",
+   "job_id": "924967cd-af2b-4418-82ea-aa8be0484303",
+   "alternate_job_id": "69aa107c-006d-48a1-8bbd-d58cf72f7747",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. The upper floors of two tall unnamed glass towers of an imaginary city rising out of bright morning fog, seen from above, the fog filling the lower half. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a tall vertical frame, the structure repeating upward through the frame, the ground or figure in the bottom third. Plain unmarked surfaces, quiet and still, editorial and minimal. Use the reference image only for its tonal grade, contrast and haze; the subject is entirely different from the reference.",
+   "reference": "0f628f80-0c6b-4509-81a4-38745e40a288",
+   "credits": 2
+  },
+  {
+   "file": "assets/photos/oc-01-skyline-fog-card.jpg",
+   "subject": 1,
+   "slug": "skyline-fog",
+   "crop": "card",
+   "aspect": "4:3",
+   "resolution": "2k",
+   "px": [
+    2000,
+    1493
+   ],
+   "bytes": 216068,
+   "jpeg_quality": 82,
+   "candidate": "A-ref",
+   "job_id": "9556ce18-0801-4fef-9e0a-306fef671057",
+   "alternate_job_id": "a2c97c9f-f4d6-4c21-89b3-aa0793a8ef50",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. A cluster of unnamed modern towers of an imaginary city emerging from a soft bank of morning fog, seen from above. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a centered composition, the detail filling the frame with even margins. Plain unmarked surfaces, quiet and still, editorial and minimal. Use the reference image only for its tonal grade, contrast and haze; the subject is entirely different from the reference.",
+   "reference": "0f628f80-0c6b-4509-81a4-38745e40a288",
+   "credits": 2
+  },
+  {
+   "file": "assets/photos/oc-02-curve-figure-wide.jpg",
+   "subject": 2,
+   "slug": "curve-figure",
+   "crop": "wide",
+   "aspect": "21:9",
+   "resolution": "4k",
+   "px": [
+    2400,
+    1018
+   ],
+   "bytes": 140587,
+   "jpeg_quality": 82,
+   "candidate": "A-ref",
+   "job_id": "abdcd527-d82a-4650-b49e-98ac813d0e7d",
+   "alternate_job_id": "0a929b95-625c-4a68-bce7-ca0c83cd8193",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. A lone figure in a plain dark coat standing inside a sweeping curved white concrete hall, seen from behind, looking out through a vast opening at the distant skyline of an imaginary city across water. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a wide panoramic frame, low horizon, the sky taking two thirds of the frame, the subject anchored along the base. Plain unmarked surfaces, quiet and still, editorial and minimal. Use the reference image only for its tonal grade, contrast and haze; the subject is entirely different from the reference.",
+   "reference": "0f628f80-0c6b-4509-81a4-38745e40a288",
+   "credits": 4
+  },
+  {
+   "file": "assets/photos/oc-02-curve-figure-tall.jpg",
+   "subject": 2,
+   "slug": "curve-figure",
+   "crop": "tall",
+   "aspect": "2:3",
+   "resolution": "2k",
+   "px": [
+    1342,
+    2000
+   ],
+   "bytes": 334887,
+   "jpeg_quality": 82,
+   "candidate": "A-ref",
+   "job_id": "a13378bc-f0f9-4429-93d1-c92b5b450700",
+   "alternate_job_id": "2c04171a-67ec-42d6-a534-468cd9d1e483",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. A lone figure in a plain dark coat standing inside a sweeping curved white concrete hall, seen from behind, looking out through a vast opening at the distant skyline of an imaginary city across water. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a tall vertical frame, the structure repeating upward through the frame, the ground or figure in the bottom third. Plain unmarked surfaces, quiet and still, editorial and minimal. Use the reference image only for its tonal grade, contrast and haze; the subject is entirely different from the reference.",
+   "reference": "0f628f80-0c6b-4509-81a4-38745e40a288",
+   "credits": 2
+  },
+  {
+   "file": "assets/photos/oc-02-curve-figure-card.jpg",
+   "subject": 2,
+   "slug": "curve-figure",
+   "crop": "card",
+   "aspect": "4:3",
+   "resolution": "2k",
+   "px": [
+    2000,
+    1493
+   ],
+   "bytes": 306257,
+   "jpeg_quality": 82,
+   "candidate": "A-ref",
+   "job_id": "317bbe30-bf3c-48cb-8759-eff89abaf0f3",
+   "alternate_job_id": "7df4f739-b892-4b8c-9e6f-120af16419b2",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. A lone figure in a plain dark coat standing inside a sweeping curved white concrete hall, seen from behind, looking out through a vast opening at the distant skyline of an imaginary city across water. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a centered composition, the detail filling the frame with even margins. Plain unmarked surfaces, quiet and still, editorial and minimal. Use the reference image only for its tonal grade, contrast and haze; the subject is entirely different from the reference.",
+   "reference": "0f628f80-0c6b-4509-81a4-38745e40a288",
+   "credits": 2
+  },
+  {
+   "file": "assets/photos/oc-03-spiral-wide.jpg",
+   "subject": 3,
+   "slug": "spiral",
+   "crop": "wide",
+   "aspect": "21:9",
+   "resolution": "4k",
+   "px": [
+    2400,
+    1018
+   ],
+   "bytes": 102801,
+   "jpeg_quality": 82,
+   "candidate": "B-plain",
+   "job_id": "3c5907b7-fe88-4dfd-b66a-e8a5f02b5d12",
+   "alternate_job_id": "4f38a3ff-9dab-40b0-a879-db2e94856863",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. A smooth concrete spiral ramp curving across the frame, its stacked coils catching soft light, photographed from a low angle. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a wide panoramic frame, low horizon, the sky taking two thirds of the frame, the subject anchored along the base. Plain unmarked surfaces, quiet and still, editorial and minimal.",
+   "reference": null,
+   "credits": 4
+  },
+  {
+   "file": "assets/photos/oc-03-spiral-tall.jpg",
+   "subject": 3,
+   "slug": "spiral",
+   "crop": "tall",
+   "aspect": "2:3",
+   "resolution": "2k",
+   "px": [
+    1342,
+    2000
+   ],
+   "bytes": 199610,
+   "jpeg_quality": 82,
+   "candidate": "A-ref",
+   "job_id": "3f5b0df6-994c-41e8-8576-eccc449b33d9",
+   "alternate_job_id": "2e0b939c-319b-4aca-b127-bee0aa70a0c5",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. A smooth concrete spiral ramp inside a parking structure, photographed from directly below, its curved edges catching soft light, the coils receding upward. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a tall vertical frame, the structure repeating upward through the frame, the ground or figure in the bottom third. Plain unmarked surfaces, quiet and still, editorial and minimal. Use the reference image only for its tonal grade, contrast and haze; the subject is entirely different from the reference.",
+   "reference": "0f628f80-0c6b-4509-81a4-38745e40a288",
+   "credits": 2
+  },
+  {
+   "file": "assets/photos/oc-03-spiral-card.jpg",
+   "subject": 3,
+   "slug": "spiral",
+   "crop": "card",
+   "aspect": "4:3",
+   "resolution": "2k",
+   "px": [
+    2000,
+    1493
+   ],
+   "bytes": 412684,
+   "jpeg_quality": 82,
+   "candidate": "B-plain",
+   "job_id": "a2749a98-7cc8-4008-8787-af50e78a308c",
+   "alternate_job_id": "e52ae514-fcb1-4a02-b6e8-13b054a00cee",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. A smooth concrete spiral ramp inside a parking structure, photographed from directly below, its curved edges catching soft light, the coils receding upward. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a centered composition, the detail filling the frame with even margins. Plain unmarked surfaces, quiet and still, editorial and minimal.",
+   "reference": null,
+   "credits": 2
+  },
+  {
+   "file": "assets/photos/oc-04-honeycomb-wide.jpg",
+   "subject": 4,
+   "slug": "honeycomb",
+   "crop": "wide",
+   "aspect": "21:9",
+   "resolution": "4k",
+   "px": [
+    2400,
+    1018
+   ],
+   "bytes": 207155,
+   "jpeg_quality": 82,
+   "candidate": "A-ref",
+   "job_id": "2fb0eb4a-30a6-4922-bcd4-2cad1c2f8828",
+   "alternate_job_id": "0279409a-1911-453b-977b-d219bf56ec66",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. A building facade made of a hexagonal honeycomb lattice of pale concrete, photographed in oblique perspective so the cells recede to a vanishing point. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a wide panoramic frame, low horizon, the sky taking two thirds of the frame, the subject anchored along the base. Plain unmarked surfaces, quiet and still, editorial and minimal. Use the reference image only for its tonal grade, contrast and haze; the subject is entirely different from the reference.",
+   "reference": "0f628f80-0c6b-4509-81a4-38745e40a288",
+   "credits": 4
+  },
+  {
+   "file": "assets/photos/oc-04-honeycomb-tall.jpg",
+   "subject": 4,
+   "slug": "honeycomb",
+   "crop": "tall",
+   "aspect": "2:3",
+   "resolution": "2k",
+   "px": [
+    1342,
+    2000
+   ],
+   "bytes": 445250,
+   "jpeg_quality": 82,
+   "candidate": "B-plain",
+   "job_id": "b81c0b2c-852d-4451-a7de-4f7553718bb5",
+   "alternate_job_id": "93cea892-7c7b-40f3-965a-24ee66488737",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. A building facade made of a hexagonal honeycomb lattice of pale concrete, photographed in oblique perspective so the cells recede to a vanishing point. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a tall vertical frame, the structure repeating upward through the frame, the ground or figure in the bottom third. Plain unmarked surfaces, quiet and still, editorial and minimal.",
+   "reference": null,
+   "credits": 2
+  },
+  {
+   "file": "assets/photos/oc-04-honeycomb-card.jpg",
+   "subject": 4,
+   "slug": "honeycomb",
+   "crop": "card",
+   "aspect": "4:3",
+   "resolution": "2k",
+   "px": [
+    2000,
+    1493
+   ],
+   "bytes": 327420,
+   "jpeg_quality": 82,
+   "candidate": "A-ref",
+   "job_id": "70993d81-a523-4c40-bb60-810008e69ad1",
+   "alternate_job_id": "faad786e-742b-4ac2-9d6f-b5d5c59ce7e3",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. A building facade made of a hexagonal honeycomb lattice of pale concrete, photographed in oblique perspective so the cells recede to a vanishing point. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a centered composition, the detail filling the frame with even margins. Plain unmarked surfaces, quiet and still, editorial and minimal. Use the reference image only for its tonal grade, contrast and haze; the subject is entirely different from the reference.",
+   "reference": "0f628f80-0c6b-4509-81a4-38745e40a288",
+   "credits": 2
+  },
+  {
+   "file": "assets/photos/oc-05-zigzag-stairs-wide.jpg",
+   "subject": 5,
+   "slug": "zigzag-stairs",
+   "crop": "wide",
+   "aspect": "21:9",
+   "resolution": "4k",
+   "px": [
+    2400,
+    1018
+   ],
+   "bytes": 104778,
+   "jpeg_quality": 82,
+   "candidate": "B-plain",
+   "job_id": "5bb67540-42a4-448d-8c4a-e60f4d7f63e0",
+   "alternate_job_id": "44ca38ab-c4e1-484e-8b8c-b0cea76dcd75",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. Stacked zigzag exterior concrete stairs on a modern building, in raking light, photographed from a high oblique angle so the flights form a pattern. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a wide panoramic frame, low horizon, the sky taking two thirds of the frame, the subject anchored along the base. Plain unmarked surfaces, quiet and still, editorial and minimal.",
+   "reference": null,
+   "credits": 4
+  },
+  {
+   "file": "assets/photos/oc-05-zigzag-stairs-tall.jpg",
+   "subject": 5,
+   "slug": "zigzag-stairs",
+   "crop": "tall",
+   "aspect": "2:3",
+   "resolution": "2k",
+   "px": [
+    1342,
+    2000
+   ],
+   "bytes": 291808,
+   "jpeg_quality": 82,
+   "candidate": "A-ref",
+   "job_id": "9caf1709-27e5-4538-a4f6-8a3c4afdf7af",
+   "alternate_job_id": "168eab69-bf6c-4e12-88fb-6bdd2d86e86a",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. Stacked zigzag exterior concrete stairs on a modern building, in raking light, photographed from a high oblique angle so the flights form a pattern. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a tall vertical frame, the structure repeating upward through the frame, the ground or figure in the bottom third. Plain unmarked surfaces, quiet and still, editorial and minimal. Use the reference image only for its tonal grade, contrast and haze; the subject is entirely different from the reference.",
+   "reference": "0f628f80-0c6b-4509-81a4-38745e40a288",
+   "credits": 2
+  },
+  {
+   "file": "assets/photos/oc-05-zigzag-stairs-card.jpg",
+   "subject": 5,
+   "slug": "zigzag-stairs",
+   "crop": "card",
+   "aspect": "4:3",
+   "resolution": "2k",
+   "px": [
+    2000,
+    1493
+   ],
+   "bytes": 259856,
+   "jpeg_quality": 82,
+   "candidate": "A-ref",
+   "job_id": "7f462197-10bb-426a-a12a-d71fb21c7d11",
+   "alternate_job_id": "ef5a542a-871e-4cce-aa0c-8674e0913b6f",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. Stacked zigzag exterior concrete stairs on a modern building, in raking light, photographed from a high oblique angle so the flights form a pattern. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a centered composition, the detail filling the frame with even margins. Plain unmarked surfaces, quiet and still, editorial and minimal. Use the reference image only for its tonal grade, contrast and haze; the subject is entirely different from the reference.",
+   "reference": "0f628f80-0c6b-4509-81a4-38745e40a288",
+   "credits": 2
+  },
+  {
+   "file": "assets/photos/oc-06-stepped-roof-wide.jpg",
+   "subject": 6,
+   "slug": "stepped-roof",
+   "crop": "wide",
+   "aspect": "21:9",
+   "resolution": "4k",
+   "px": [
+    2400,
+    1018
+   ],
+   "bytes": 126891,
+   "jpeg_quality": 82,
+   "candidate": "A-ref",
+   "job_id": "e50c49a9-34fa-46ac-99f3-9df5dc1ac0a8",
+   "alternate_job_id": "1660dd74-6a23-4d56-9af9-6a4b0b5c615a",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. A stepped concrete roofline of a large building, each step a clean horizontal block, rising like a staircase against a pale hazy sky. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a wide panoramic frame, low horizon, the sky taking two thirds of the frame, the subject anchored along the base. Plain unmarked surfaces, quiet and still, editorial and minimal. Use the reference image only for its tonal grade, contrast and haze; the subject is entirely different from the reference.",
+   "reference": "0f628f80-0c6b-4509-81a4-38745e40a288",
+   "credits": 4
+  },
+  {
+   "file": "assets/photos/oc-06-stepped-roof-tall.jpg",
+   "subject": 6,
+   "slug": "stepped-roof",
+   "crop": "tall",
+   "aspect": "2:3",
+   "resolution": "2k",
+   "px": [
+    1342,
+    2000
+   ],
+   "bytes": 153531,
+   "jpeg_quality": 82,
+   "candidate": "A-ref",
+   "job_id": "3d5d96fd-b484-4d21-ab5e-1d53b7918a3b",
+   "alternate_job_id": "9f887618-533d-4ed2-8c1c-303e9c6ef5c6",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. A stepped concrete roofline of a large building, each step a clean horizontal block, rising like a staircase against a pale hazy sky. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a tall vertical frame, the structure repeating upward through the frame, the ground or figure in the bottom third. Plain unmarked surfaces, quiet and still, editorial and minimal. Use the reference image only for its tonal grade, contrast and haze; the subject is entirely different from the reference.",
+   "reference": "0f628f80-0c6b-4509-81a4-38745e40a288",
+   "credits": 2
+  },
+  {
+   "file": "assets/photos/oc-06-stepped-roof-card.jpg",
+   "subject": 6,
+   "slug": "stepped-roof",
+   "crop": "card",
+   "aspect": "4:3",
+   "resolution": "2k",
+   "px": [
+    2000,
+    1493
+   ],
+   "bytes": 321328,
+   "jpeg_quality": 82,
+   "candidate": "A-ref",
+   "job_id": "e632d532-e520-4ada-8bca-126dc3244155",
+   "alternate_job_id": "d78398b8-13af-42f6-8dff-aab3a23f9411",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. A stepped concrete roofline of a large building, each step a clean horizontal block, rising like a staircase against a pale hazy sky. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a centered composition, the detail filling the frame with even margins. Plain unmarked surfaces, quiet and still, editorial and minimal. Use the reference image only for its tonal grade, contrast and haze; the subject is entirely different from the reference.",
+   "reference": "0f628f80-0c6b-4509-81a4-38745e40a288",
+   "credits": 2
+  },
+  {
+   "file": "assets/photos/oc-07-columns-wide.jpg",
+   "subject": 7,
+   "slug": "columns",
+   "crop": "wide",
+   "aspect": "21:9",
+   "resolution": "4k",
+   "px": [
+    2400,
+    1018
+   ],
+   "bytes": 230227,
+   "jpeg_quality": 82,
+   "candidate": "B-plain",
+   "job_id": "fa1c9d23-3b74-46dc-8ef8-4cc7de53bca9",
+   "alternate_job_id": "7f211dac-bca5-4f67-9ce1-609390573bd6",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. A colonnade of tall fluted stone columns along a civic building, deep shadow between the columns, photographed at eye level looking down the row. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a wide panoramic frame, low horizon, the sky taking two thirds of the frame, the subject anchored along the base. Plain unmarked surfaces, quiet and still, editorial and minimal.",
+   "reference": null,
+   "credits": 4
+  },
+  {
+   "file": "assets/photos/oc-07-columns-tall.jpg",
+   "subject": 7,
+   "slug": "columns",
+   "crop": "tall",
+   "aspect": "2:3",
+   "resolution": "2k",
+   "px": [
+    1342,
+    2000
+   ],
+   "bytes": 422307,
+   "jpeg_quality": 78,
+   "candidate": "B-plain",
+   "job_id": "a0cb5e17-b132-4ef7-9b84-4673d544da3d",
+   "alternate_job_id": "28879a26-94c7-441c-b85f-d20af2aa170d",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. A colonnade of tall fluted stone columns along a civic building, deep shadow between the columns, photographed at eye level looking down the row. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a tall vertical frame, the structure repeating upward through the frame, the ground or figure in the bottom third. Plain unmarked surfaces, quiet and still, editorial and minimal.",
+   "reference": null,
+   "credits": 2
+  },
+  {
+   "file": "assets/photos/oc-07-columns-card.jpg",
+   "subject": 7,
+   "slug": "columns",
+   "crop": "card",
+   "aspect": "4:3",
+   "resolution": "2k",
+   "px": [
+    2000,
+    1493
+   ],
+   "bytes": 415168,
+   "jpeg_quality": 82,
+   "candidate": "A-ref",
+   "job_id": "ab105972-07f5-4e23-9e4c-2a78ec69c2be",
+   "alternate_job_id": "5da206d4-6a3b-4036-9959-78360b9efe50",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. A colonnade of tall fluted stone columns along a civic building, deep shadow between the columns, photographed at eye level looking down the row. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a centered composition, the detail filling the frame with even margins. Plain unmarked surfaces, quiet and still, editorial and minimal. Use the reference image only for its tonal grade, contrast and haze; the subject is entirely different from the reference.",
+   "reference": "0f628f80-0c6b-4509-81a4-38745e40a288",
+   "credits": 2
+  },
+  {
+   "file": "assets/photos/oc-08-atrium-wide.jpg",
+   "subject": 8,
+   "slug": "atrium",
+   "crop": "wide",
+   "aspect": "21:9",
+   "resolution": "4k",
+   "px": [
+    2400,
+    1018
+   ],
+   "bytes": 275304,
+   "jpeg_quality": 82,
+   "candidate": "B-plain",
+   "job_id": "4e94d6fd-8a00-4130-96a6-d8157f8fde4a",
+   "alternate_job_id": "7982cdca-085b-4e8b-9638-8f3f5e73d600",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. The interior of a tall glass atrium with stacked open walkways on every floor, two small human silhouettes on one walkway, bright diffuse light from above. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a wide panoramic frame, low horizon, the sky taking two thirds of the frame, the subject anchored along the base. Plain unmarked surfaces, quiet and still, editorial and minimal.",
+   "reference": null,
+   "credits": 4
+  },
+  {
+   "file": "assets/photos/oc-08-atrium-tall.jpg",
+   "subject": 8,
+   "slug": "atrium",
+   "crop": "tall",
+   "aspect": "2:3",
+   "resolution": "2k",
+   "px": [
+    1342,
+    2000
+   ],
+   "bytes": 435319,
+   "jpeg_quality": 78,
+   "candidate": "A-ref",
+   "job_id": "3fe6fbd3-51d4-4a65-aafd-a3655d0b942c",
+   "alternate_job_id": "c8cad718-2a17-4ab3-98ef-ecb8fa950e44",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. The interior of a tall glass atrium with stacked open walkways on every floor, two small human silhouettes on one walkway, bright diffuse light from above. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a tall vertical frame, the structure repeating upward through the frame, the ground or figure in the bottom third. Plain unmarked surfaces, quiet and still, editorial and minimal. Use the reference image only for its tonal grade, contrast and haze; the subject is entirely different from the reference.",
+   "reference": "0f628f80-0c6b-4509-81a4-38745e40a288",
+   "credits": 2
+  },
+  {
+   "file": "assets/photos/oc-08-atrium-card.jpg",
+   "subject": 8,
+   "slug": "atrium",
+   "crop": "card",
+   "aspect": "4:3",
+   "resolution": "2k",
+   "px": [
+    2000,
+    1493
+   ],
+   "bytes": 424153,
+   "jpeg_quality": 78,
+   "candidate": "A-ref",
+   "job_id": "c6c595d7-78b3-4e91-91d1-b4d560283379",
+   "alternate_job_id": "cfae6e0b-b3a6-461e-9551-acba9e3945e8",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. The interior of a tall glass atrium with stacked open walkways on every floor, two small human silhouettes on one walkway, bright diffuse light from above. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a centered composition, the detail filling the frame with even margins. Plain unmarked surfaces, quiet and still, editorial and minimal. Use the reference image only for its tonal grade, contrast and haze; the subject is entirely different from the reference.",
+   "reference": "0f628f80-0c6b-4509-81a4-38745e40a288",
+   "credits": 2
+  },
+  {
+   "file": "assets/photos/oc-09-cantilever-wide.jpg",
+   "subject": 9,
+   "slug": "cantilever",
+   "crop": "wide",
+   "aspect": "21:9",
+   "resolution": "4k",
+   "px": [
+    2400,
+    1018
+   ],
+   "bytes": 202237,
+   "jpeg_quality": 82,
+   "candidate": "B-plain",
+   "job_id": "f983d88c-e3f4-40fd-8b66-6a13c3a59e90",
+   "alternate_job_id": "c76d796c-0e37-4aba-a4eb-d0fc63437442",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. Brutalist concrete cantilevers stacked over an empty plaza, photographed from below so the slabs stagger across the frame against a pale sky. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a wide panoramic frame, low horizon, the sky taking two thirds of the frame, the subject anchored along the base. Plain unmarked surfaces, quiet and still, editorial and minimal.",
+   "reference": null,
+   "credits": 4
+  },
+  {
+   "file": "assets/photos/oc-09-cantilever-tall.jpg",
+   "subject": 9,
+   "slug": "cantilever",
+   "crop": "tall",
+   "aspect": "2:3",
+   "resolution": "2k",
+   "px": [
+    1342,
+    2000
+   ],
+   "bytes": 379620,
+   "jpeg_quality": 82,
+   "candidate": "B-plain",
+   "job_id": "97eb9a16-8f7c-4ee7-92d6-47fcfb92af46",
+   "alternate_job_id": "da093d34-b0eb-4862-885a-bc99a0ce3371",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. Brutalist concrete cantilevers stacked over an empty plaza, photographed from below so the slabs stagger across the frame against a pale sky. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a tall vertical frame, the structure repeating upward through the frame, the ground or figure in the bottom third. Plain unmarked surfaces, quiet and still, editorial and minimal.",
+   "reference": null,
+   "credits": 2
+  },
+  {
+   "file": "assets/photos/oc-09-cantilever-card.jpg",
+   "subject": 9,
+   "slug": "cantilever",
+   "crop": "card",
+   "aspect": "4:3",
+   "resolution": "2k",
+   "px": [
+    2000,
+    1493
+   ],
+   "bytes": 280307,
+   "jpeg_quality": 82,
+   "candidate": "A-ref",
+   "job_id": "7bd77844-873d-4a49-8994-a37bba4abbf5",
+   "alternate_job_id": "ead8b104-d244-458b-9d8b-122b27161590",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. Brutalist concrete cantilevers stacked over an empty plaza, photographed from below so the slabs stagger across the frame against a pale sky. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a centered composition, the detail filling the frame with even margins. Plain unmarked surfaces, quiet and still, editorial and minimal. Use the reference image only for its tonal grade, contrast and haze; the subject is entirely different from the reference.",
+   "reference": "0f628f80-0c6b-4509-81a4-38745e40a288",
+   "credits": 2
+  },
+  {
+   "file": "assets/photos/oc-10-plaza-shadow-wide.jpg",
+   "subject": 10,
+   "slug": "plaza-shadow",
+   "crop": "wide",
+   "aspect": "21:9",
+   "resolution": "4k",
+   "px": [
+    2400,
+    1018
+   ],
+   "bytes": 152228,
+   "jpeg_quality": 82,
+   "candidate": "A-ref",
+   "job_id": "63a04924-69f5-4058-bef2-7e1f6741c104",
+   "alternate_job_id": "cb1b561b-7ff8-4710-ad5a-ff97c52f9e21",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. A wide empty stone plaza beside a modern building, one long diagonal shadow cutting across the paving, one small figure walking through the light. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a wide panoramic frame, low horizon, the sky taking two thirds of the frame, the subject anchored along the base. Plain unmarked surfaces, quiet and still, editorial and minimal. Use the reference image only for its tonal grade, contrast and haze; the subject is entirely different from the reference.",
+   "reference": "0f628f80-0c6b-4509-81a4-38745e40a288",
+   "credits": 4
+  },
+  {
+   "file": "assets/photos/oc-10-plaza-shadow-tall.jpg",
+   "subject": 10,
+   "slug": "plaza-shadow",
+   "crop": "tall",
+   "aspect": "2:3",
+   "resolution": "2k",
+   "px": [
+    1342,
+    2000
+   ],
+   "bytes": 385766,
+   "jpeg_quality": 82,
+   "candidate": "B-plain",
+   "job_id": "43c99a80-4a02-4dc7-aba7-0f25c00fbe31",
+   "alternate_job_id": "ba01599c-674f-4b20-9b55-2917a5ded16a",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. A wide empty stone plaza beside a modern building, one long diagonal shadow cutting across the paving, one small figure walking through the light. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a tall vertical frame, the structure repeating upward through the frame, the ground or figure in the bottom third. Plain unmarked surfaces, quiet and still, editorial and minimal.",
+   "reference": null,
+   "credits": 2
+  },
+  {
+   "file": "assets/photos/oc-10-plaza-shadow-card.jpg",
+   "subject": 10,
+   "slug": "plaza-shadow",
+   "crop": "card",
+   "aspect": "4:3",
+   "resolution": "2k",
+   "px": [
+    2000,
+    1493
+   ],
+   "bytes": 343056,
+   "jpeg_quality": 82,
+   "candidate": "A-ref",
+   "job_id": "c8581fad-c3b2-42e9-8598-5045b885d96a",
+   "alternate_job_id": "e2090813-91ed-4d12-a17b-682b2e51608f",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. A wide empty stone plaza beside a modern building, one long diagonal shadow cutting across the paving, one small figure walking through the light. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a centered composition, the detail filling the frame with even margins. Plain unmarked surfaces, quiet and still, editorial and minimal. Use the reference image only for its tonal grade, contrast and haze; the subject is entirely different from the reference.",
+   "reference": "0f628f80-0c6b-4509-81a4-38745e40a288",
+   "credits": 2
+  },
+  {
+   "file": "assets/photos/oc-11-louvers-wide.jpg",
+   "subject": 11,
+   "slug": "louvers",
+   "crop": "wide",
+   "aspect": "21:9",
+   "resolution": "4k",
+   "px": [
+    2400,
+    1018
+   ],
+   "bytes": 181294,
+   "jpeg_quality": 82,
+   "candidate": "B-plain",
+   "job_id": "0d21f2d1-97f5-4762-9b59-dff2e84e41da",
+   "alternate_job_id": "d8768c7b-520c-4462-a22f-c93b597668ba",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. A building facade of vertical steel louvers, hundreds of identical fins in perspective, photographed close and oblique so they fill the frame. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a wide panoramic frame, low horizon, the sky taking two thirds of the frame, the subject anchored along the base. Plain unmarked surfaces, quiet and still, editorial and minimal.",
+   "reference": null,
+   "credits": 4
+  },
+  {
+   "file": "assets/photos/oc-11-louvers-tall.jpg",
+   "subject": 11,
+   "slug": "louvers",
+   "crop": "tall",
+   "aspect": "2:3",
+   "resolution": "2k",
+   "px": [
+    1342,
+    2000
+   ],
+   "bytes": 442222,
+   "jpeg_quality": 82,
+   "candidate": "B-plain",
+   "job_id": "ccb4bdef-c849-4ac7-8b26-8194ea57100b",
+   "alternate_job_id": "80db1a07-6af9-4d06-a075-b1ebb021d613",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. A building facade of vertical steel louvers, hundreds of identical fins in perspective, photographed close and oblique so they fill the frame. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a tall vertical frame, the structure repeating upward through the frame, the ground or figure in the bottom third. Plain unmarked surfaces, quiet and still, editorial and minimal.",
+   "reference": null,
+   "credits": 2
+  },
+  {
+   "file": "assets/photos/oc-11-louvers-card.jpg",
+   "subject": 11,
+   "slug": "louvers",
+   "crop": "card",
+   "aspect": "4:3",
+   "resolution": "2k",
+   "px": [
+    2000,
+    1493
+   ],
+   "bytes": 411346,
+   "jpeg_quality": 74,
+   "candidate": "A-ref",
+   "job_id": "eaaa42cc-4e0a-4423-bd6e-bbf88319de83",
+   "alternate_job_id": "e69411b4-690f-4681-adcf-93ca464f52a2",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. A building facade of vertical steel louvers, hundreds of identical fins in perspective, photographed close and oblique so they fill the frame. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a centered composition, the detail filling the frame with even margins. Plain unmarked surfaces, quiet and still, editorial and minimal. Use the reference image only for its tonal grade, contrast and haze; the subject is entirely different from the reference.",
+   "reference": "0f628f80-0c6b-4509-81a4-38745e40a288",
+   "credits": 2
+  },
+  {
+   "file": "assets/photos/oc-12-curtain-wall-wide.jpg",
+   "subject": 12,
+   "slug": "curtain-wall",
+   "crop": "wide",
+   "aspect": "21:9",
+   "resolution": "4k",
+   "px": [
+    2400,
+    1018
+   ],
+   "bytes": 272265,
+   "jpeg_quality": 82,
+   "candidate": "A-ref",
+   "job_id": "fd4c5a9c-e640-4971-ae13-80402432edba",
+   "alternate_job_id": "cd4e759c-f26c-4c5d-968c-a9a39cf9b236",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. A glass curtain wall reflecting a bright overcast sky, the mullion grid perfectly regular, photographed straight on so it becomes near-abstract. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a wide panoramic frame, low horizon, the sky taking two thirds of the frame, the subject anchored along the base. Plain unmarked surfaces, quiet and still, editorial and minimal. Use the reference image only for its tonal grade, contrast and haze; the subject is entirely different from the reference.",
+   "reference": "0f628f80-0c6b-4509-81a4-38745e40a288",
+   "credits": 4
+  },
+  {
+   "file": "assets/photos/oc-12-curtain-wall-tall.jpg",
+   "subject": 12,
+   "slug": "curtain-wall",
+   "crop": "tall",
+   "aspect": "2:3",
+   "resolution": "2k",
+   "px": [
+    1342,
+    2000
+   ],
+   "bytes": 408533,
+   "jpeg_quality": 70,
+   "candidate": "A-ref",
+   "job_id": "5c0b982e-6c3b-43cb-9369-4cf322ab2983",
+   "alternate_job_id": "5207bc51-3006-4448-a752-783f6f317921",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. A glass curtain wall reflecting a bright overcast sky, the mullion grid perfectly regular, photographed straight on so it becomes near-abstract. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a tall vertical frame, the structure repeating upward through the frame, the ground or figure in the bottom third. Plain unmarked surfaces, quiet and still, editorial and minimal. Use the reference image only for its tonal grade, contrast and haze; the subject is entirely different from the reference.",
+   "reference": "0f628f80-0c6b-4509-81a4-38745e40a288",
+   "credits": 2
+  },
+  {
+   "file": "assets/photos/oc-12-curtain-wall-card.jpg",
+   "subject": 12,
+   "slug": "curtain-wall",
+   "crop": "card",
+   "aspect": "4:3",
+   "resolution": "2k",
+   "px": [
+    2000,
+    1493
+   ],
+   "bytes": 338833,
+   "jpeg_quality": 82,
+   "candidate": "A-ref",
+   "job_id": "c11b47ef-224a-4f3f-857b-241dd4145e2d",
+   "alternate_job_id": "538e2d48-8b36-4524-b9c2-006c87c86998",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. A glass curtain wall reflecting a bright overcast sky, the mullion grid perfectly regular, photographed straight on so it becomes near-abstract. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a centered composition, the detail filling the frame with even margins. Plain unmarked surfaces, quiet and still, editorial and minimal. Use the reference image only for its tonal grade, contrast and haze; the subject is entirely different from the reference.",
+   "reference": "0f628f80-0c6b-4509-81a4-38745e40a288",
+   "credits": 2
+  },
+  {
+   "file": "assets/photos/oc-13-footbridge-wide.jpg",
+   "subject": 13,
+   "slug": "footbridge",
+   "crop": "wide",
+   "aspect": "21:9",
+   "resolution": "4k",
+   "px": [
+    2400,
+    1018
+   ],
+   "bytes": 161205,
+   "jpeg_quality": 82,
+   "candidate": "B-plain",
+   "job_id": "a5524fcf-7cc6-44eb-9038-4774fb358094",
+   "alternate_job_id": "41c26dca-d130-451d-beb4-fd2968ccf358",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. A long straight pedestrian footbridge deck receding into bright fog, only the railings and deck visible, nobody on it, photographed from its start. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a wide panoramic frame, low horizon, the sky taking two thirds of the frame, the subject anchored along the base. Plain unmarked surfaces, quiet and still, editorial and minimal.",
+   "reference": null,
+   "credits": 4
+  },
+  {
+   "file": "assets/photos/oc-13-footbridge-tall.jpg",
+   "subject": 13,
+   "slug": "footbridge",
+   "crop": "tall",
+   "aspect": "2:3",
+   "resolution": "2k",
+   "px": [
+    1342,
+    2000
+   ],
+   "bytes": 278363,
+   "jpeg_quality": 82,
+   "candidate": "A-ref",
+   "job_id": "0232161b-48ab-49cd-8da8-21c319ab880d",
+   "alternate_job_id": "64421e57-5788-493c-8a2b-4cbe9f1dc70e",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. A long straight pedestrian footbridge deck receding into bright fog, only the railings and deck visible, nobody on it, photographed from its start. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a tall vertical frame, the structure repeating upward through the frame, the ground or figure in the bottom third. Plain unmarked surfaces, quiet and still, editorial and minimal. Use the reference image only for its tonal grade, contrast and haze; the subject is entirely different from the reference.",
+   "reference": "0f628f80-0c6b-4509-81a4-38745e40a288",
+   "credits": 2
+  },
+  {
+   "file": "assets/photos/oc-13-footbridge-card.jpg",
+   "subject": 13,
+   "slug": "footbridge",
+   "crop": "card",
+   "aspect": "4:3",
+   "resolution": "2k",
+   "px": [
+    2000,
+    1493
+   ],
+   "bytes": 249928,
+   "jpeg_quality": 82,
+   "candidate": "A-ref",
+   "job_id": "23fe6e4d-3e63-4904-a100-02cdc029d07a",
+   "alternate_job_id": "815a95d3-d8df-401a-9947-37230f29576c",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. A long straight pedestrian footbridge deck receding into bright fog, only the railings and deck visible, nobody on it, photographed from its start. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a centered composition, the detail filling the frame with even margins. Plain unmarked surfaces, quiet and still, editorial and minimal. Use the reference image only for its tonal grade, contrast and haze; the subject is entirely different from the reference.",
+   "reference": "0f628f80-0c6b-4509-81a4-38745e40a288",
+   "credits": 2
+  },
+  {
+   "file": "assets/photos/oc-14-underpass-wide.jpg",
+   "subject": 14,
+   "slug": "underpass",
+   "crop": "wide",
+   "aspect": "21:9",
+   "resolution": "4k",
+   "px": [
+    2400,
+    1018
+   ],
+   "bytes": 91957,
+   "jpeg_quality": 82,
+   "candidate": "A-ref",
+   "job_id": "b8adf5da-d42e-4936-95e3-c818f8992d48",
+   "alternate_job_id": "a755b178-4d49-4ed8-96bb-79ead40dec7f",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. A concrete pedestrian underpass, its walls and ceiling in shadow, a bright white opening at the far end, one small figure walking toward the light. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a wide panoramic frame, low horizon, the sky taking two thirds of the frame, the subject anchored along the base. Plain unmarked surfaces, quiet and still, editorial and minimal. Use the reference image only for its tonal grade, contrast and haze; the subject is entirely different from the reference.",
+   "reference": "0f628f80-0c6b-4509-81a4-38745e40a288",
+   "credits": 4
+  },
+  {
+   "file": "assets/photos/oc-14-underpass-tall.jpg",
+   "subject": 14,
+   "slug": "underpass",
+   "crop": "tall",
+   "aspect": "2:3",
+   "resolution": "2k",
+   "px": [
+    1342,
+    2000
+   ],
+   "bytes": 347261,
+   "jpeg_quality": 82,
+   "candidate": "B-plain",
+   "job_id": "c114016d-ea47-4ca0-8b71-c1daf9738aba",
+   "alternate_job_id": "6964c83a-c335-4cf0-bafd-0b1ccf266f73",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. A concrete pedestrian underpass, its walls and ceiling in shadow, a bright white opening at the far end, one small figure walking toward the light. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a tall vertical frame, the structure repeating upward through the frame, the ground or figure in the bottom third. Plain unmarked surfaces, quiet and still, editorial and minimal.",
+   "reference": null,
+   "credits": 2
+  },
+  {
+   "file": "assets/photos/oc-14-underpass-card.jpg",
+   "subject": 14,
+   "slug": "underpass",
+   "crop": "card",
+   "aspect": "4:3",
+   "resolution": "2k",
+   "px": [
+    2000,
+    1493
+   ],
+   "bytes": 242436,
+   "jpeg_quality": 82,
+   "candidate": "A-ref",
+   "job_id": "712822b0-7fd7-4b34-9252-2d38bd91d13f",
+   "alternate_job_id": "521af4bc-5792-4a4d-97cb-b043a9d77e73",
+   "prompt": "A full-frame black-and-white architectural photograph, the image filling the entire frame edge to edge, toned in cool blue-slate: deep navy #16202e in the shadows, silver-grey #b3b8bf in the highlights, a faint steel-blue cast through the mid-tones, white haze in the sky. A concrete pedestrian underpass, its walls and ceiling in shadow, a bright white opening at the far end, one small figure walking toward the light. Soft overcast daylight, high-key, long tonal range, fine grain, 35mm, a centered composition, the detail filling the frame with even margins. Plain unmarked surfaces, quiet and still, editorial and minimal. Use the reference image only for its tonal grade, contrast and haze; the subject is entirely different from the reference.",
+   "reference": "0f628f80-0c6b-4509-81a4-38745e40a288",
+   "credits": 2
+  }
+ ]
+}

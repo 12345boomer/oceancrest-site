@@ -1,0 +1,779 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>The AI diagnostic — OceanCrest AI</title>
+<meta name="description" content="Find out what you know about AI, and what you don't yet. Fifteen short questions, about five minutes. You get a level, a score in each area, and the courses that close your gaps. Free, no sign-up, results stay in your browser.">
+<link rel="icon" href="assets/img/logos/oceancrest-ai-mark-primary-rgb-fullcolor.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;500;600&family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/css/site.css">
+<script src="assets/js/courses.js"></script>
+<script src="assets/js/cards.js"></script>
+<script src="assets/js/coast.js"></script>
+<script src="assets/js/sea.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/contours.js"></script>
+<!--
+  THE AI DIAGNOSTIC. An individual self-check that runs entirely in the browser: no network calls,
+  no sign-up. 15 scenario questions, 3 in each of 5 areas. Levels from the total score:
+    0-5 Wading · 6-9 Swimming · 10-12 Sailing · 13-15 Navigating
+  The last result is kept in localStorage ("oc-diagnostic-last") so it can be shown on return.
+  No benchmarks or comparisons with other people: it is a self-check, not a certification.
+
+  Debug hooks (harmless; never saved): #demo=intro · #demo=resume · #demo=q5 (unanswered)
+  · #demo=q5a (answered, wrong) · #demo=q5r (answered, right) · #demo=results · #demo=results-low
+  · #demo=results-top
+-->
+<style>
+/* Hero */
+.dg-hero{min-height:0;padding-block:clamp(56px,8vw,104px) clamp(170px,18vw,230px)}
+.dg-hero .wrap{width:100%}
+.dg-hero .h1{max-width:760px}
+.dg-hero .lede{max-width:640px}
+.dg-hero .title-block{top:24px;right:clamp(20px,4vw,48px)}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.facts .tag{background:var(--paper)}
+@media (max-width:1100px){.dg-hero .title-block{display:none}}
+
+/* Stage: the white rounded panel the quiz runs in */
+.stage-wrap{margin-top:calc(-1 * clamp(130px,14vw,180px));position:relative;z-index:3;padding-bottom:clamp(56px,8vw,96px)}
+.stage{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-xl);padding:clamp(18px,3.4vw,44px);min-height:460px;scroll-margin-top:88px}
+.screen{animation:rise .5s var(--ease) both}
+.q-main.swap{animation:rise .45s var(--ease) both}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.screen,.q-main.swap{animation:none}}
+.stage.still .screen,.stage.still .fb,.stage.still .badge{animation:none}.stage.still .bar>i{transition:none}
+
+/* Intro */
+.resume{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 24px;padding:16px 20px;border-radius:var(--r);background:rgba(253,233,184,.45);margin-bottom:28px}
+.resume p{color:var(--navy)}
+.resume .btns{gap:8px}
+.intro-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(28px,4vw,56px)}
+@media (max-width:860px){.intro-grid{grid-template-columns:1fr}}
+.intro-grid h2{margin-top:12px}
+.intro-grid .body{margin-top:12px;max-width:560px}
+.areas{list-style:none;padding:0;margin:20px 0 0;display:flex;flex-direction:column}
+.areas li{display:grid;grid-template-columns:14px minmax(0,1fr) auto;gap:4px 14px;align-items:baseline;padding:12px 0;border-top:1px dashed var(--line)}
+.areas li::before{content:"";width:12px;height:12px;border-radius:50%;background:var(--ac);transform:translateY(1px)}
+.areas b{font-weight:500}
+.areas span{grid-column:2;color:var(--ink);font-size:15px}
+.areas em{grid-column:3;grid-row:1;font-style:normal;font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.06em}
+.levels{list-style:none;padding:0;margin:18px 0 0;display:flex;flex-direction:column;gap:10px}
+.levels li{display:flex;gap:14px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:var(--r)}
+.levels .pebble{--peb:var(--lv)}
+.levels b{font-weight:500;display:block}
+.levels div span{color:var(--ink);font-size:14px;display:block;line-height:1.45}
+.levels em{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.06em;margin-left:auto;white-space:nowrap;padding-left:8px}
+.profile{margin-top:clamp(28px,4vw,40px);padding:clamp(18px,2.6vw,28px);border-radius:var(--r-lg);background:var(--foam);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px 32px;align-items:end}
+@media (max-width:860px){.profile{grid-template-columns:1fr}}
+.profile .note{color:var(--ink);font-size:15px;margin-top:6px}
+.chip-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;align-items:center}
+.chip-row .ref{flex:0 0 100%;margin-bottom:2px}
+.chip[aria-pressed="true"]{border-color:var(--blue)}
+.chip[aria-pressed="true"] i{background:var(--blue)}
+.chip i{background:var(--line)}
+.start-col{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.btn.big{min-height:56px;padding:0 30px;font-size:16px}
+
+/* Question */
+.q-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.back-btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:8px 16px;font-size:14px;color:var(--navy);position:relative;overflow:hidden}
+.back-btn:hover{border-color:var(--navy)}
+.q-bar{height:12px}
+.q-bar>i{background:var(--lagoon)}
+.q-grid{display:grid;grid-template-columns:260px minmax(0,1fr);gap:clamp(20px,3vw,40px);margin-top:24px}
+.q-art{border-radius:var(--r-lg);min-height:440px;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;padding:16px}
+.q-art .in{background:var(--paper);border-radius:var(--r);padding:12px 14px;width:100%}
+.q-art .in b{display:block;font-family:var(--display);font-weight:500;font-size:19px;line-height:1.2}
+.q-art .in span{display:block;font-size:13px;color:var(--slate);margin-top:4px}
+.dots{display:flex;gap:6px;margin-top:10px}
+.dots i{width:22px;height:6px;border-radius:999px;background:var(--line)}
+.dots i.on{background:var(--ac)}
+.dots i.cur{background:var(--navy)}
+@media (max-width:820px){
+  .q-grid{grid-template-columns:1fr;margin-top:18px}
+  .q-art{min-height:132px;flex-direction:row;align-items:flex-end;justify-content:space-between;gap:12px}
+  .q-art .in{width:auto;max-width:70%}
+  .q-art .tag{align-self:flex-start}
+}
+.q-text{font-family:var(--display);font-weight:500;font-size:clamp(21px,2.2vw,27px);line-height:1.22;letter-spacing:-.01em;max-width:720px}
+.q-text:focus{outline:none}
+.opts{display:flex;flex-direction:column;gap:10px;margin-top:22px}
+.opt{position:relative;overflow:hidden;display:flex;align-items:flex-start;gap:14px;width:100%;text-align:left;padding:14px 18px 14px 14px;border:1px solid var(--line);border-radius:20px;background:var(--paper);font-size:16px;line-height:1.45;color:var(--navy);transition:border-color .2s,background-color .25s,transform .2s var(--ease)}
+.opt:hover:not([aria-disabled="true"]){border-color:var(--lagoon);transform:translateY(-1px)}
+.opt .k{flex:0 0 32px;height:32px;border-radius:50%;display:grid;place-items:center;font-family:var(--mono);font-size:12px;background:var(--foam);color:var(--navy);margin-top:-3px;transition:background-color .2s,color .2s}
+.opt .tx{flex:1;position:relative;z-index:1}
+.opt .mk{align-self:center;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate);white-space:nowrap;position:relative;z-index:1}
+.opt[aria-pressed="true"]{border-color:var(--blue)}
+.opt[aria-pressed="true"] .k{background:var(--blue);color:#fff}
+.opt.is-right{background:rgba(196,224,207,.5)}
+.opt.is-right:not([aria-pressed="true"]){border-color:var(--sage)}
+.opt.is-wrong{background:rgba(247,214,203,.5)}
+.opt[aria-disabled="true"]{cursor:default}
+.opt[aria-disabled="true"]:not(.is-right):not(.is-wrong) .tx{color:var(--slate)}
+@media (prefers-reduced-motion:reduce){.opt:hover:not([aria-disabled="true"]){transform:none}}
+.keys{margin-top:12px}
+.fb{margin-top:18px;border-radius:20px;padding:18px 20px;background:var(--foam);display:grid;gap:10px;animation:rise .4s var(--ease) both}
+.fb.no{background:rgba(253,233,184,.5)}
+.fb-head{display:flex;align-items:center;gap:12px;font-family:var(--display);font-size:22px;font-weight:500}
+.fb-head .pebble{--peb:var(--sage)}
+.fb.no .fb-head .pebble{--peb:var(--coral)}
+.fb p.body{max-width:680px}
+.fb .btns{margin-top:4px}
+@media (prefers-reduced-motion:reduce){.fb{animation:none}}
+
+/* Results */
+.res-banner{border-radius:var(--r-xl);padding:clamp(18px,3vw,36px);display:flex;flex-wrap:wrap;align-items:center;gap:20px clamp(20px,3vw,36px);min-height:320px}
+.badge{flex:0 0 auto;width:clamp(170px,19vw,210px);aspect-ratio:1;border-radius:46% 54% 50% 50%/55% 45% 55% 45%;background:var(--lv);border:6px solid var(--paper);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:6px;animation:settle .8s var(--ease) both}
+.badge b{font-family:var(--display);font-weight:500;font-size:clamp(30px,3.2vw,38px);line-height:1;letter-spacing:-.01em}
+.badge .ref{color:var(--navy)}
+@keyframes settle{from{opacity:0;transform:scale(.88) rotate(-4deg)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.badge{animation:none}}
+.res-card{background:var(--paper);border-radius:var(--r-lg);padding:clamp(18px,2.4vw,28px);flex:1 1 320px;max-width:600px}
+.res-card h2{margin-top:10px}
+.res-card h2:focus{outline:none}
+.res-card .lede{margin-top:12px;font-size:clamp(17px,1.4vw,19px)}
+.res-card .ref{display:block}
+.res-card .tailor{margin-top:14px}
+.res-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(28px,4vw,56px);margin-top:clamp(32px,4vw,48px)}
+@media (max-width:900px){.res-grid{grid-template-columns:1fr}}
+.res-grid h3{margin:12px 0 20px}
+.ares{display:flex;flex-direction:column;gap:14px}
+.ar{display:grid;grid-template-columns:minmax(120px,170px) minmax(0,1fr) 40px;gap:12px;align-items:center;font-size:15px}
+.ar .bar{height:12px}
+.ar .bar>i{width:0}
+.ar span:last-child{font-family:var(--mono);font-size:12px;color:var(--slate);text-align:right}
+@media (max-width:480px){.ar{grid-template-columns:minmax(0,1fr) 40px;gap:6px 12px}.ar .bar{grid-column:1/-1;grid-row:2}}
+.callouts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
+@media (max-width:480px){.callouts{grid-template-columns:1fr}}
+.callouts div{border-radius:var(--r);padding:14px 16px;background:var(--t-tint)}
+.callouts div.weak{background:var(--e-tint)}
+.callouts b{display:block;font-family:var(--display);font-weight:500;font-size:19px;margin-top:6px;line-height:1.2}
+.callouts span.s{display:block;font-size:14px;color:var(--ink);margin-top:4px}
+.sounding{margin-top:28px;border:1px solid var(--line);border-radius:var(--r);padding:14px 14px 10px}
+.sounding svg{display:block;width:100%;height:auto}
+.sounding figcaption{margin-top:6px}
+.res-next .ticks{margin-top:4px}
+.res-sec{margin-top:clamp(44px,6vw,72px)}
+.res-sec .head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:12px 32px;margin-bottom:24px}
+.res-sec .head .body{max-width:520px}
+.rec{display:flex;flex-direction:column;gap:8px;min-width:0}
+.rec .cc{flex:1}
+.prog{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;margin-top:18px;transition:border-color .25s,transform .25s var(--ease)}
+.prog:hover{border-color:var(--lagoon);transform:translateY(-2px)}
+.prog .art{border-radius:0;min-height:200px;display:flex;align-items:flex-start;padding:14px}
+.prog .tx{padding:clamp(20px,2.6vw,28px);display:flex;flex-direction:column;gap:10px}
+.prog h3{font-size:22px;font-weight:500;line-height:1.2}
+.prog p{color:var(--ink);font-size:15px}
+@media (max-width:720px){.prog{grid-template-columns:1fr}.prog .art{min-height:140px}}
+@media (prefers-reduced-motion:reduce){.prog:hover{transform:none}}
+.team{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);border-radius:var(--r-xl);overflow:hidden;background:var(--e-tint)}
+@media (max-width:860px){.team{grid-template-columns:1fr}}
+.team .art{border-radius:0;min-height:300px;display:flex;align-items:flex-end;padding:20px}
+.team .crew{display:flex;flex-wrap:wrap;gap:8px;background:var(--paper);border-radius:var(--r);padding:12px 14px;align-items:center}
+.team .crew i{width:22px;height:22px;border-radius:46% 54% 50% 50%/55% 45% 55% 45%;background:var(--c)}
+.team .crew .ref{margin-left:6px}
+.team .tx{padding:clamp(24px,4vw,48px)}
+.team .tx .body{margin-top:16px;max-width:540px}
+.team .tx .btns{margin-top:26px}
+.review{margin-top:clamp(40px,5vw,56px);border-top:1px solid var(--line);padding-top:20px}
+.review summary{cursor:pointer;font-weight:500;display:flex;align-items:center;gap:10px;list-style:none;padding:6px 0}
+.review summary::-webkit-details-marker{display:none}
+.review summary::before{content:"+";display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--foam);font-family:var(--mono)}
+.review[open] summary::before{content:"−"}
+.review ol{list-style:none;padding:0;margin:12px 0 0;display:flex;flex-direction:column;gap:10px}
+.review li{border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;display:grid;gap:8px}
+.review li .q{font-weight:500}
+.review li p{font-size:15px;color:var(--ink)}
+.review li p b{color:var(--navy);font-weight:500}
+.review .top{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.res-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:28px}
+.fine{margin-top:20px;max-width:760px}
+</style>
+</head>
+<body data-page="diagnostic">
+<main id="main">
+
+<section class="page-hero coast has-contours dg-hero" data-coast="diagnostic-hero" data-palette="mindset" data-size="hero" data-scene="beach" data-glints>
+  <canvas class="contours" data-contours="white" aria-hidden="true"></canvas>
+  <i class="tick tick-tl" aria-hidden="true"></i><i class="tick tick-tr" aria-hidden="true"></i>
+  <div class="title-block" aria-hidden="true"><p>OceanCrest AI · Education</p><p>Chart OC-03 — Soundings, your own</p><p>Fifteen casts of the lead line</p></div>
+  <div class="wrap">
+    <div class="eyebrow">The AI diagnostic · Education</div>
+    <h1 class="h1">Find out what you know about AI, and what you don't <span class="stroke warm">yet</span>.</h1>
+    <p class="lede">Fifteen short questions, about five minutes. Real situations, not trivia: spotting a made-up answer, what never goes into a public tool, when a task is worth automating. You get a level, a score in each area, and the courses that close your gaps.</p>
+    <div class="facts"><span class="tag line">15 questions</span><span class="tag line">About 5 minutes</span><span class="tag line">Free · no sign-up</span><span class="tag line">Results stay in your browser</span></div>
+  </div>
+</section>
+
+<section class="stage-wrap">
+  <div class="wrap">
+    <div class="stage" id="stage" aria-live="off">
+      <noscript><p class="body">The diagnostic runs in your browser and needs JavaScript. Turn it on and reload the page, or <a class="link" href="courses.html">browse the courses</a> instead.</p></noscript>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------------- content ---------------- */
+  var AREAS = [
+    { id: "basics", name: "What AI is", tag: "t", c: "var(--shallows)", palette: "hero", scene: "cove",
+      line: "What it's good at, where it goes wrong, and why." },
+    { id: "prompting", name: "Prompting", tag: "lilac", c: "var(--lilac)", palette: "technical", scene: "headland",
+      line: "Giving it the context, examples and format to get a usable answer." },
+    { id: "checking", name: "Checking the output", tag: "sun", c: "var(--dawn)", palette: "mindset", scene: "open",
+      line: "Spotting made-up facts and checking numbers before they go out." },
+    { id: "data", name: "Data and safety", tag: "e", c: "var(--blush)", palette: "dusk", scene: "beach",
+      line: "What never goes into a public tool, and which accounts to use." },
+    { id: "automating", name: "Automating the work", tag: "sage", c: "var(--sage)", palette: "technical", scene: "open",
+      line: "Which tasks are worth automating, and where a person stays in charge." }
+  ];
+
+  var LEVELS = [
+    { id: "wading", name: "Wading", min: 0, max: 5, tag: "sand", c: "var(--sand)",
+      line: "Getting your feet wet. The basics will pay off quickly." },
+    { id: "swimming", name: "Swimming", min: 6, max: 9, tag: "t", c: "var(--shallows)",
+      line: "Using AI and getting somewhere, with a few gaps that could cost you." },
+    { id: "sailing", name: "Sailing", min: 10, max: 12, tag: "sage", c: "var(--sage)",
+      line: "Using AI well and safely, with a gap or two to close." },
+    { id: "navigating", name: "Navigating", min: 13, max: 15, tag: "lilac", c: "var(--lilac)",
+      line: "Confident and careful. Ready to build, and to help others find their way." }
+  ];
+
+  // a = index of the best answer
+  var Q = [
+    { area: "basics", a: 1,
+      q: "An AI chat tool gives you a wrong answer in a completely confident tone. Why can that happen?",
+      o: ["It's designed to hide its mistakes so it seems more useful.",
+          "It predicts likely words from patterns it learned, and how sure it sounds isn't tied to whether it's right.",
+          "It only makes mistakes when the internet connection drops mid-answer.",
+          "It checked a database first, so the database must have been wrong."],
+      why: "Chat tools generate text by predicting likely words from patterns in what they learned. That makes them fluent, but fluency isn't accuracy, and the tone doesn't change when the facts are wrong. Treat confidence as style, not evidence." },
+    { area: "basics", a: 2,
+      q: "Your manager asks an AI chat tool about a rule change your industry regulator announced last week. What should you expect?",
+      o: ["It will know, because models update themselves from the news every day.",
+          "It will refuse, because AI tools can't discuss regulations.",
+          "Unless it searches the web or you give it the announcement, it may not know, and may answer anyway.",
+          "It will know, as long as you ask in a formal tone."],
+      why: "A model learns from data up to a cutoff date. Unless the tool searches the web or you paste in the source, it may not know about last week's change, and it can still answer as if it does. Give it the announcement, or check the regulator's own site." },
+    { area: "basics", a: 0,
+      q: "Which of these is a general AI chat assistant best suited to, as it comes?",
+      o: ["Drafting a first version of a customer email from your bullet points.",
+          "Telling you the exact current balance of your business bank account.",
+          "Making the final call on which job applicant to hire.",
+          "Guaranteeing that a contract is legally sound."],
+      why: "Drafting from your notes plays to its strengths: language, structure and speed, with you checking the result. It can't see your bank account unless it's connected to it, it shouldn't make decisions about people, and it can't guarantee anything is legally sound." },
+
+    { area: "prompting", a: 3,
+      q: "You need an email to a client whose invoice is overdue. Which prompt will most likely get a usable first draft?",
+      o: ["“Write a payment reminder email.”",
+          "“You are the world's best writer. Write the perfect email about the invoice.”",
+          "“WRITE A FIRM EMAIL ABOUT THE LATE INVOICE AND MAKE IT GOOD.”",
+          "“Write a polite but firm reminder to a long-time client whose invoice is 15 days overdue. Under 120 words, offer a quick call, no threats about fees.”"],
+      why: "Good prompts give the context a new colleague would need: who it's for, the facts, the tone, the length, and what to avoid. Flattery and capital letters add no information. Specifics do." },
+    { area: "prompting", a: 1,
+      q: "The first draft you get is close, but too long and too formal. What's the best next step?",
+      o: ["Paste the same prompt again until it comes out right.",
+          "Reply in the same chat with specific changes: half the length, plainer words, keep the second paragraph.",
+          "Accept it as is, since AI output can't really be adjusted.",
+          "Switch to a different AI tool, since this one got it wrong."],
+      why: "Iterating is normal. The tool keeps the conversation in view, so precise feedback on what to change usually gets you there faster than starting over or switching tools." },
+    { area: "prompting", a: 0,
+      q: "You want AI to write product descriptions that sound like your shop. What helps most?",
+      o: ["Paste two or three of your best descriptions as examples, and say what to copy: length, tone, structure.",
+          "Ask it to be as creative as possible and surprise you.",
+          "Keep the prompt very short so it doesn't get confused.",
+          "Tell it the job is urgent so it tries harder."],
+      why: "Examples are the clearest way to show a style. Saying what to copy from them helps it match your voice instead of inventing a generic one." },
+
+    { area: "checking", a: 2,
+      q: "An AI tool drafts a summary for a client report, with three statistics, each with a source link. What do you do before sending it?",
+      o: ["Send it. The links show the sources were checked.",
+          "Ask the tool “are you sure?” and send it if it says yes.",
+          "Open each source and confirm the figure is there and says what the summary claims.",
+          "Remove the links so the report looks cleaner."],
+      why: "AI tools can produce sources that look real but don't exist, or real links that don't say what the summary claims. A link is not a check, and asking the tool to check itself isn't either. Open each one, find the figure, and read it in context." },
+    { area: "checking", a: 3,
+      q: "You paste last quarter's expenses into an AI tool and ask for the total. The number looks about right. What's the best check?",
+      o: ["None needed. Computers don't make arithmetic mistakes.",
+          "Run the same prompt again. If the number matches, it's right.",
+          "Round it to the nearest thousand so small errors don't matter.",
+          "Compare it with the spreadsheet's own sum before you use it."],
+      why: "A language model can slip on arithmetic or miss a row, and asking twice can repeat the same mistake. Check numbers against the source itself, such as the spreadsheet's own total." },
+    { area: "checking", a: 1,
+      q: "An AI-drafted reply to a customer complaint reads well. What matters most before you send it?",
+      o: ["That it's long enough to look thorough.",
+          "That every fact and promise is true: the refund amount, the dates, and what your policy actually allows.",
+          "That it uses the customer's name several times.",
+          "Nothing, if the customer is unlikely to write again."],
+      why: "A polished reply can still promise a refund you don't offer or quote the wrong date. Whatever goes out under your name is yours, so check every fact and commitment against your actual policy." },
+
+    { area: "data", a: 0,
+      q: "Which of these is fine to paste into a free AI chatbot your company hasn't approved?",
+      o: ["A customer email template with the names, addresses and account numbers taken out.",
+          "Last month's customer list, so it can personalize each email.",
+          "A signed supplier contract, so it can summarize the terms.",
+          "A colleague's performance review, so it can soften the wording."],
+      why: "Customer lists, contracts and staff reviews hold personal or confidential information that shouldn't go into a tool your company hasn't approved. A template with the details stripped out gets you the same writing help without the risk." },
+    { area: "data", a: 2,
+      q: "Your company pays for a business AI account set up with data protections. You also have a personal account at home. A client asks for a summary of their confidential proposal. What should you use?",
+      o: ["Your personal account, since it's the same kind of tool.",
+          "Whichever is quicker to open at the time.",
+          "The company-approved account, following your company's AI policy.",
+          "Either one, as long as you delete the chat afterwards."],
+      why: "A company account is set up under terms and controls your company chose; a personal account may handle your data differently. Deleting a chat afterwards doesn't undo having shared it. Use the approved account and follow the policy." },
+    { area: "data", a: 3,
+      q: "You get a voicemail that sounds exactly like the owner, asking you to pay a new supplier today, urgently. What do you do?",
+      o: ["Pay it. You'd know the owner's voice anywhere.",
+          "Call back the number that left the voicemail to confirm.",
+          "Send a smaller amount first, then the rest once it clears.",
+          "Call the owner on a number you already have, and follow your normal payment approval steps."],
+      why: "Voices can now be convincingly copied with AI. Urgency plus a new payee is a classic warning sign. Confirm through a channel you already trust, and never skip your normal approval steps." },
+
+    { area: "automating", a: 1,
+      q: "Which of these is the best first candidate for automation?",
+      o: ["Deciding how to handle a key client's unusual complaint.",
+          "Copying each new website enquiry into your CRM and sending a standard acknowledgement.",
+          "Negotiating the price of a large one-off contract.",
+          "Setting the company's strategy for next year."],
+      why: "Good first candidates are frequent, repetitive and rule-based, with clear inputs and a predictable result. Unusual complaints, one-off negotiations and strategy need judgment, so a person should lead them." },
+    { area: "automating", a: 2,
+      q: "Your team wants to use AI to help screen job applications. What's the responsible setup?",
+      o: ["Let it auto-reject anyone below a set score, to save time.",
+          "Use it only on the applications nobody has time to read.",
+          "Let it help sort and summarize, while a person makes every decision and you check the results for unfair patterns.",
+          "Keep the process private so candidates can't question it."],
+      why: "Decisions about people need human judgment and accountability. AI can repeat bias from the data it learned from, so a person should make every decision and the results should be checked for unfair patterns. Some places also regulate automated hiring decisions." },
+    { area: "automating", a: 0,
+      q: "In an automation tool, what does a “trigger” do?",
+      o: ["Starts the workflow when something happens, like a form being submitted or an email arriving.",
+          "Writes the content using AI.",
+          "Sends the final result to the customer.",
+          "Warns you when the automation has failed."],
+      why: "A trigger is the event that starts an automation. Connectors link your apps so the automation can read from and act in them, and the steps that follow the trigger are the actions." }
+  ];
+
+  var AREA_COURSES = {
+    basics: ["ai-fundamentals", "m-without-fear"],
+    prompting: ["ai-assistant", "ai-fundamentals", "writing"],
+    checking: ["research", "research-analysis", "ai-fundamentals"],
+    data: ["ai-safety", "m-responsible"],
+    automating: ["no-code-automation", "connectors", "ai-agents"]
+  };
+  var ADVANCED = ["ai-agents", "ai-c-suite", "custom-gpts"];
+  var ROLES = [["leader", "Owner or leader"], ["manager", "Manager"], ["ic", "Individual contributor"]];
+  var DEPTS = [["sales", "Sales", "sales"], ["marketing", "Marketing", "marketing"], ["finance", "Finance", "finance"],
+               ["ops", "Operations and HR", "ops-hr"], ["service", "Customer service", "customer-service"], ["other", "Something else", ""]];
+
+  var TIPS = {
+    wading: ["Start with AI Fundamentals for Work: prompting, what AI is good and bad at, and how to check its work.",
+             "Pick one low-risk task this week, like a first draft of an internal email, and try it in a company-approved tool.",
+             "Before you paste anything, ask: would I be fine if someone outside the company read this?"],
+    swimming: ["Give every prompt the context a new colleague would need: who it's for, what good looks like, and an example.",
+               "Make checking a habit: open the sources and recheck the numbers before anything goes out.",
+               "Start with the course for your weakest area below."],
+    sailing: ["Close your weakest area first. One gap can undo good habits elsewhere.",
+              "Turn a prompt that works into a saved template or a custom assistant your team can reuse.",
+              "List the repetitive, rule-based tasks in your week. One may be ready to automate."],
+    navigating: ["Write down how you use AI safely and share it. Your habits can become the team's.",
+                 "Build something: an internal assistant or a small automation, with a person approving the key steps.",
+                 "Find out where the rest of your team stands. That's where what you know is most useful."]
+  };
+
+  /* ---------------- state ---------------- */
+  var KEY = "oc-diagnostic-last";
+  var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var S = { i: 0, answers: blank(), profile: { role: "", dept: "" }, at: null, demo: false, lastPct: 0 };
+  var stage = document.getElementById("stage");
+  var esc = window.esc || function (s) { return String(s); };
+  var contour = null;
+
+  function blank() { return Q.map(function () { return null; }); }
+  function areaById(id) { for (var i = 0; i < AREAS.length; i++) if (AREAS[i].id === id) return AREAS[i]; return null; }
+  function levelFor(total) { for (var i = 0; i < LEVELS.length; i++) if (total >= LEVELS[i].min && total <= LEVELS[i].max) return LEVELS[i]; return LEVELS[0]; }
+  function areaQs(id) { var out = []; Q.forEach(function (q, i) { if (q.area === id) out.push(i); }); return out; }
+  function nameOf(list, id) { for (var i = 0; i < list.length; i++) if (list[i][0] === id) return list[i][1]; return ""; }
+
+  function loadSaved() {
+    try {
+      var raw = localStorage.getItem(KEY); if (!raw) return null;
+      var d = JSON.parse(raw);
+      if (!d || !Array.isArray(d.answers) || d.answers.length !== Q.length) return null;
+      if (d.answers.some(function (a) { return typeof a !== "number" || a < 0 || a > 3; })) return null;
+      return d;
+    } catch (e) { return null; }
+  }
+  function save() {
+    if (S.demo) return;
+    try { localStorage.setItem(KEY, JSON.stringify({ v: 1, at: S.at, answers: S.answers, profile: S.profile })); } catch (e) {}
+  }
+  function forget() { try { localStorage.removeItem(KEY); } catch (e) {} }
+
+  function score(answers) {
+    var per = {}, pct = {}, total = 0;
+    AREAS.forEach(function (a) { per[a.id] = 0; });
+    Q.forEach(function (q, i) { if (answers[i] === q.a) { per[q.area]++; total++; } });
+    AREAS.forEach(function (a) { pct[a.id] = Math.round(per[a.id] / areaQs(a.id).length * 100); });
+    return { per: per, pct: pct, total: total, level: levelFor(total) };
+  }
+
+  function fmtDate(iso) {
+    try { return new Date(iso).toLocaleDateString(undefined, { day: "numeric", month: "short", year: "numeric" }); } catch (e) { return ""; }
+  }
+
+  function setScreen(html, cls) {
+    if (contour) { try { contour.destroy(); } catch (e) {} contour = null; }
+    stage.innerHTML = '<div class="screen ' + (cls || "") + '">' + html + "</div>";
+  }
+
+  function bringIntoView() {
+    var top = stage.getBoundingClientRect().top;
+    if (top < 60 || top > window.innerHeight * 0.45) {
+      window.scrollTo({ top: window.scrollY + top - 88, behavior: reduce ? "auto" : "smooth" });
+    }
+  }
+
+  /* ---------------- intro ---------------- */
+  function renderIntro(saved) {
+    var res = "";
+    if (saved) {
+      var sc = score(saved.answers);
+      res = '<div class="resume" id="resume"><p>Welcome back. ' + (saved.at ? "On " + esc(fmtDate(saved.at)) + " you" : "Last time you") +
+        " reached <b>" + sc.level.name + "</b>, " + sc.total + " of " + Q.length + ".</p>" +
+        '<div class="btns"><button type="button" class="btn sm primary" data-act="show-last">Show my last result</button>' +
+        '<button type="button" class="btn sm ghost" data-act="forget">Clear it</button></div></div>';
+    }
+    var areas = AREAS.map(function (a) {
+      return '<li style="--ac:' + a.c + '"><b>' + a.name + "</b><em>3 questions</em><span>" + a.line + "</span></li>";
+    }).join("");
+    var levels = LEVELS.map(function (l, i) {
+      return '<li style="--lv:' + l.c + '"><span class="pebble sm" aria-hidden="true">' + (i + 1) + "</span><div><b>" + l.name + "</b><span>" + l.line + "</span></div><em>" + l.min + "–" + l.max + " right</em></li>";
+    }).join("");
+    function chips(list, key, label) {
+      return '<div class="chip-row" role="group" aria-label="' + label + '"><span class="ref">' + label + "</span>" +
+        list.map(function (r) {
+          return '<button type="button" class="chip" data-' + key + '="' + r[0] + '" aria-pressed="' + (S.profile[key] === r[0]) + '"><i aria-hidden="true"></i>' + r[1] + "</button>";
+        }).join("") + "</div>";
+    }
+    setScreen(res +
+      '<div class="intro-grid">' +
+        '<div><div class="eyebrow">How it works</div><h2 class="h3">Fifteen questions in five areas.</h2>' +
+          '<p class="body">Each question is a situation you could meet at work this week. Pick the best answer and you\'ll see why straight away. You can go back, but not change an answer once you\'ve seen why.</p>' +
+          '<ul class="areas">' + areas + "</ul></div>" +
+        '<div><div class="eyebrow">The four levels</div><h2 class="h3">From the shallows to open water.</h2><ol class="levels">' + levels + "</ol></div>" +
+      "</div>" +
+      '<div class="profile">' +
+        '<div><div class="eyebrow">Optional · about you</div><p class="note">Only used to tailor the courses we suggest. Skip it if you like.</p>' +
+          chips(ROLES, "role", "Your role") + chips(DEPTS, "dept", "Your department") + "</div>" +
+        '<div class="start-col"><button type="button" class="btn primary big" data-act="start">Start the diagnostic <span class="arr" aria-hidden="true">&rarr;</span></button>' +
+          '<span class="ref">Free · no sign-up · results stay in your browser</span></div>' +
+      "</div>", "intro");
+  }
+
+  /* ---------------- question ---------------- */
+  function renderQuestion(animateMain) {
+    var q = Q[S.i], area = areaById(q.area), list = areaQs(q.area), pos = list.indexOf(S.i);
+    var pct = Math.round(S.i / Q.length * 100);
+    var art = stage.querySelector(".q-art");
+    var keepArt = art && art.getAttribute("data-area") === q.area && stage.querySelector(".q-screen");
+    var dots = list.map(function (qi, k) { return '<i class="' + (k < pos ? "on" : k === pos ? "cur" : "") + '"></i>'; }).join("");
+    var artHtml = '<aside class="q-art coast" data-area="' + area.id + '" data-coast="diagnostic-area-' + area.id + '" data-palette="' + area.palette + '" data-size="tall" data-scene="' + area.scene + '" data-glints style="--ac:' + area.c + '" aria-hidden="true">' +
+      '<span class="tag ' + area.tag + '">Area ' + (AREAS.indexOf(area) + 1) + " of " + AREAS.length + "</span>" +
+      '<div class="in"><b>' + area.name + "</b><span>Question " + (pos + 1) + " of " + list.length + " in this area</span><div class=\"dots\">" + dots + "</div></div></aside>";
+    var main = '<div class="q-main' + (animateMain ? " swap" : "") + '">' +
+      '<span class="tag ' + area.tag + '">' + area.name + "</span>" +
+      '<h2 class="q-text" id="q-text" tabindex="-1" style="margin-top:14px">' + esc(q.q) + "</h2>" +
+      '<div class="opts" role="group" aria-labelledby="q-text">' +
+        q.o.map(function (t, k) {
+          return '<button type="button" class="opt" data-k="' + k + '" aria-pressed="false"><span class="k" aria-hidden="true">' + "ABCD"[k] + '</span><span class="tx">' + esc(t) + "</span></button>";
+        }).join("") +
+      "</div>" +
+      '<p class="ref keys" id="keys">Pick one · keys A to D, or arrows and Enter</p>' +
+      '<div id="fb-slot" aria-live="polite"></div></div>';
+    var top = '<div class="q-top"><button type="button" class="back-btn" data-act="back"><span aria-hidden="true">&larr;</span> Back</button>' +
+      '<span class="ref" id="q-count">Question ' + (S.i + 1) + " of " + Q.length + "</span></div>" +
+      '<div class="bar q-bar" role="progressbar" aria-label="Progress" aria-valuemin="0" aria-valuemax="' + Q.length + '" aria-valuenow="' + S.i + '"><i style="width:' + S.lastPct + '%"></i></div>';
+
+    if (keepArt) {
+      stage.querySelector(".q-top-slot").innerHTML = top;
+      art.querySelector(".in").innerHTML = '<b>' + area.name + "</b><span>Question " + (pos + 1) + " of " + list.length + " in this area</span><div class=\"dots\">" + dots + "</div>";
+      var old = stage.querySelector(".q-main"); var tmp = document.createElement("div"); tmp.innerHTML = main;
+      old.parentNode.replaceChild(tmp.firstChild, old);
+    } else {
+      setScreen('<div class="q-top-slot">' + top + '</div><div class="q-grid">' + artHtml + main + "</div>", "q-screen");
+    }
+    var bar = stage.querySelector(".q-bar > i");
+    requestAnimationFrame(function () { requestAnimationFrame(function () { bar.style.width = Math.max(pct, 2) + "%"; }); });
+    S.lastPct = Math.max(pct, 2);
+    if (S.answers[S.i] != null) markAnswered(false);
+  }
+
+  function markAnswered(fresh) {
+    var q = Q[S.i], pick = S.answers[S.i], right = pick === q.a;
+    stage.querySelectorAll(".opt").forEach(function (b) {
+      var k = +b.getAttribute("data-k");
+      b.setAttribute("aria-disabled", "true");
+      b.setAttribute("aria-pressed", k === pick ? "true" : "false");
+      if (k === q.a) { b.classList.add("is-right"); b.insertAdjacentHTML("beforeend", '<span class="mk">Best answer</span>'); }
+      else if (k === pick) { b.classList.add("is-wrong"); b.insertAdjacentHTML("beforeend", '<span class="mk">Your pick</span>'); }
+    });
+    var keys = document.getElementById("keys"); if (keys) keys.hidden = true;
+    var last = S.i === Q.length - 1;
+    document.getElementById("fb-slot").innerHTML =
+      '<div class="fb' + (right ? "" : " no") + '"><p class="fb-head"><span class="pebble sm" aria-hidden="true">' + (right ? "&#10003;" : "&ndash;") + "</span>" + (right ? "Right." : "Not quite.") + "</p>" +
+      '<p class="body">' + esc(q.why) + "</p>" +
+      '<div class="btns"><button type="button" class="btn primary" data-act="next"' + (last ? ' data-sound="chime"' : "") + ">" + (last ? "See your results" : "Next question") + ' <span class="arr" aria-hidden="true">&rarr;</span></button></div></div>';
+    if (fresh) document.querySelector('[data-act="next"]').focus({ preventScroll: true });
+  }
+
+  function answer(k) {
+    if (S.answers[S.i] != null) return;
+    S.answers[S.i] = k;
+    markAnswered(true);
+    var fb = stage.querySelector(".fb");
+    if (fb) {
+      var r = fb.getBoundingClientRect();
+      if (r.bottom > window.innerHeight - 20) window.scrollBy({ top: r.bottom - window.innerHeight + 90, behavior: reduce ? "auto" : "smooth" });
+    }
+  }
+
+  function goQuestion(i, focus) {
+    S.i = i;
+    renderQuestion(true);
+    bringIntoView();
+    if (focus !== false) document.getElementById("q-text").focus({ preventScroll: true });
+  }
+
+  /* ---------------- results ---------------- */
+  function recommend(sc) {
+    var picks = [];
+    function add(id) { if (id && picks.indexOf(id) < 0 && window.courseById(id)) { picks.push(id); return true; } return false; }
+    var order = AREAS.slice().sort(function (a, b) { return sc.pct[a.id] - sc.pct[b.id] || AREAS.indexOf(a) - AREAS.indexOf(b); });
+    var weak = order.filter(function (a) { return sc.pct[a.id] < 100; });
+    var why = {};
+    if (sc.level.id === "wading") { add("ai-fundamentals"); why["ai-fundamentals"] = "Start here"; }
+    weak.slice(0, 3).forEach(function (a) {
+      var list = AREA_COURSES[a.id];
+      for (var i = 0; i < list.length; i++) { if (add(list[i])) { why[list[i]] = "For " + a.name.toLowerCase(); break; } }
+    });
+    if (picks.length < 2 && weak[0]) AREA_COURSES[weak[0].id].forEach(function (id) { if (picks.length < 2 && add(id)) why[id] = "For " + weak[0].name.toLowerCase(); });
+    if (!weak.length) ADVANCED.forEach(function (id) { if (add(id)) why[id] = "Your next step: build"; });
+    picks = picks.slice(0, 3);
+    var dept = null;
+    DEPTS.forEach(function (d) { if (d[0] === S.profile.dept && d[2]) dept = d; });
+    if (dept && add(dept[2])) why[dept[2]] = "For your work in " + dept[1].toLowerCase();
+    return picks.slice(0, 4).map(function (id) { return { c: window.courseById(id), why: why[id] || "" }; });
+  }
+  function programFor(sc) {
+    var P = window.PROGRAMS || [], id = S.profile.role === "leader" ? "business-leaders" : "applied-ai";
+    for (var i = 0; i < P.length; i++) if (P[i].id === id) return P[i];
+    return null;
+  }
+
+  function soundingSvg(sc) {
+    // A depth profile: the shallows on the left, open water on the right. The lead line marks the score.
+    var W = 600, H = 232, top = 70;
+    function bed(x) { return 104 + 108 * Math.pow(x / W, 1.35); }
+    var pts = []; for (var x = 0; x <= W; x += 20) pts.push(x + " " + bed(x).toFixed(1));
+    var seabed = "M0 " + bed(0).toFixed(1) + " L" + pts.join(" L") + " L" + W + " " + H + " L0 " + H + " Z";
+    var water = "M0 " + top + " L" + W + " " + top + " L" + pts.slice().reverse().join(" L") + " Z";
+    var zw = W / LEVELS.length, lv = sc.level, li = LEVELS.indexOf(lv);
+    var px = li * zw + zw * (sc.total - lv.min + 0.5) / (lv.max - lv.min + 1), py = bed(px);
+    var zones = LEVELS.map(function (l, i) {
+      var x0 = i * zw, cur = l === lv;
+      return (i ? '<path d="M' + x0 + " " + top + "V" + bed(x0).toFixed(1) + '" stroke="#16202e" stroke-opacity=".18" stroke-dasharray="3 5"/>' : "") +
+        '<text x="' + (x0 + zw / 2) + '" y="18" text-anchor="middle" font-family="Geist Mono, monospace" font-size="14" letter-spacing="1.2" fill="' + (cur ? "#16202e" : "#64748b") + '"' + (cur ? ' font-weight="500"' : "") + ">" + l.name.toUpperCase() + "</text>" +
+        '<text x="' + (x0 + zw / 2) + '" y="36" text-anchor="middle" font-family="Geist Mono, monospace" font-size="12" fill="#71717a">' + l.min + "–" + l.max + "</text>";
+    }).join("");
+    var marks = [[70, 2], [190, 4], [300, 7], [410, 11], [530, 16]].map(function (m) {
+      return '<text x="' + m[0] + '" y="' + (bed(m[0]) - 10).toFixed(1) + '" font-family="Geist Mono, monospace" font-size="10" fill="#1f4e70" fill-opacity=".45" text-anchor="middle">' + m[1] + "</text>";
+    }).join("");
+    var boat = '<g transform="translate(' + px.toFixed(1) + " " + top + ')"><path d="M-14 -2h28l-5 6h-18z" fill="#1f4e70"/><path d="M0 -4v-22l12 20z" fill="#ffffff" stroke="#1f4e70" stroke-width="1"/><path d="M-2 -5v-16l-8 15z" fill="#f4b8a2"/></g>';
+    var lead = '<path d="M' + px.toFixed(1) + " " + (top + 4) + "V" + (py - 6).toFixed(1) + '" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="2 3"/>' +
+      '<circle cx="' + px.toFixed(1) + '" cy="' + py.toFixed(1) + '" r="6" fill="#2563eb"/><circle cx="' + px.toFixed(1) + '" cy="' + py.toFixed(1) + '" r="11" fill="none" stroke="#2563eb" stroke-opacity=".35"/>';
+    var labX = Math.min(Math.max(px, 60), W - 60);
+    var label = '<g transform="translate(' + labX.toFixed(1) + " " + Math.min(py + 26, H - 6).toFixed(1) + ')"><rect x="-54" y="-15" width="108" height="24" rx="12" fill="#ffffff"/><text text-anchor="middle" y="2" font-family="Geist Mono, monospace" font-size="13" fill="#16202e">YOU · ' + sc.total + "/" + Q.length + "</text></g>";
+    return '<svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Depth chart: the four levels from the shallows to open water. Your score of ' + sc.total + " of " + Q.length + " sits in " + lv.name + '.">' +
+      '<path d="' + water + '" fill="#a8dde3" fill-opacity=".45"/>' +
+      '<path d="M0 ' + top + "H" + W + '" stroke="#4a8fb8" stroke-opacity=".6"/>' +
+      '<path d="' + seabed + '" fill="#f2e3c6"/>' +
+      '<path d="M0 ' + bed(0).toFixed(1) + " L" + pts.join(" L") + '" fill="none" stroke="#16202e" stroke-opacity=".35"/>' +
+      zones + marks + boat + lead + label + "</svg>";
+  }
+
+  function renderResults(opts) {
+    opts = opts || {};
+    var sc = score(S.answers), lv = sc.level;
+    var order = AREAS.slice().sort(function (a, b) { return sc.pct[b.id] - sc.pct[a.id] || AREAS.indexOf(a) - AREAS.indexOf(b); });
+    var strong = order[0], weak = order[order.length - 1], even = sc.pct[strong.id] === sc.pct[weak.id];
+    var rows = AREAS.map(function (a) {
+      var p = sc.pct[a.id];
+      return '<div class="ar"><span>' + a.name + '</span><div class="bar ' + (p >= 50 ? "t" : "e") + '" role="img" aria-label="' + a.name + ": " + p + ' out of 100"><i data-w="' + p + '"></i></div><span>' + p + "</span></div>";
+    }).join("");
+    var callouts = even
+      ? '<div><span class="ref">Across the board</span><b>Even in every area</b><span class="s">' + (sc.pct[strong.id] === 100 ? "Every answer right. Time to build." : "No single area stands out, so the fundamentals will lift all five.") + "</span></div>"
+      : '<div><span class="ref">Strongest</span><b>' + strong.name + '</b><span class="s">' + sc.per[strong.id] + " of 3 right</span></div>" +
+        '<div class="weak"><span class="ref">Weakest</span><b>' + weak.name + '</b><span class="s">' + sc.per[weak.id] + " of 3 right · start here</span></div>";
+    var recs = recommend(sc), prog = programFor(sc);
+    var cards = recs.map(function (r) { return '<div class="rec"><span class="ref">' + esc(r.why) + "</span>" + window.courseCard(r.c) + "</div>"; }).join("");
+    var progHtml = prog ? '<a class="prog" href="education.html">' +
+      '<div class="art coast" data-coast="program-' + esc(prog.id) + '" data-palette="' + esc(prog.palette || "hero") + '" data-size="wide" data-scene="open"><span class="tag line">Flagship program</span></div>' +
+      '<div class="tx"><span class="ref">' + esc(prog.audience) + '</span><h3>' + esc(prog.title) + (prog.pa ? '<span class="pa" title="Working title">PA</span>' : "") + "</h3><p>" + esc(prog.summary) + '</p><span class="ref">' + esc(prog.facts) + '</span><span class="link" style="align-self:flex-start;margin-top:4px">The learning solution</span></div></a>' : "";
+    var tailor = [];
+    if (S.profile.role) tailor.push(nameOf(ROLES, S.profile.role));
+    if (S.profile.dept && S.profile.dept !== "other") tailor.push(nameOf(DEPTS, S.profile.dept));
+    var crew = ["var(--sand)", "var(--sage)", "var(--shallows)", "var(--sand)", "var(--lilac)", "var(--shallows)", "var(--sage)", "var(--shallows)", "var(--sand)"]
+      .map(function (c) { return '<i style="--c:' + c + '"></i>'; }).join("");
+    var review = Q.map(function (q, i) {
+      var a = areaById(q.area), pick = S.answers[i], ok = pick === q.a;
+      return "<li><div class=\"top\"><span class=\"tag " + a.tag + "\">" + a.name + '</span><span class="ref">Question ' + (i + 1) + " · " + (ok ? "Right" : "Not quite") + '</span></div><p class="q">' + esc(q.q) + "</p>" +
+        (ok ? "<p><b>Your answer:</b> " + esc(q.o[pick]) + "</p>" : "<p><b>Your answer:</b> " + esc(pick == null ? "None" : q.o[pick]) + "</p><p><b>Best answer:</b> " + esc(q.o[q.a]) + "</p>") +
+        "<p>" + esc(q.why) + "</p></li>";
+    }).join("");
+
+    setScreen(
+      '<div class="res-banner coast has-contours" data-coast="diagnostic-result-' + lv.id + '" data-palette="dusk" data-size="wide" data-scene="cove" data-glints>' +
+        '<canvas class="contours" aria-hidden="true"></canvas>' +
+        '<div class="badge" id="badge" style="--lv:' + lv.c + '"><span class="ref">Your level</span><b>' + lv.name + '</b><span class="ref">' + sc.total + " of " + Q.length + " right</span></div>" +
+        '<div class="res-card"><span class="ref">' + (S.demo ? "Sample result · not saved" : "Your result" + (S.at ? " · " + esc(fmtDate(S.at)) : "")) + "</span>" +
+          '<h2 class="h2" id="res-title" tabindex="-1">You\'re ' + lv.name.toLowerCase() + ".</h2>" +
+          '<p class="lede">' + lv.line + "</p>" +
+          (tailor.length ? '<p class="ref tailor">Suggestions tailored for: ' + esc(tailor.join(" · ")) + "</p>" : "") +
+        "</div>" +
+      "</div>" +
+
+      '<div class="res-grid">' +
+        '<div><div class="eyebrow">Score in each area</div><h3 class="h3">Where you stand, area by area.</h3><div class="ares">' + rows + '</div><div class="callouts">' + callouts + "</div>" +
+          '<figure class="sounding" style="margin:28px 0 0">' + soundingSvg(sc) + '<figcaption class="ref">Sounding · the four levels, shallows to open water</figcaption></figure></div>' +
+        '<div class="res-next"><div class="eyebrow">Next steps for ' + lv.name.toLowerCase() + '</div><h3 class="h3">What to do this month.</h3><ul class="ticks">' +
+          TIPS[lv.id].map(function (t) { return "<li><span>" + esc(t) + "</span></li>"; }).join("") + "</ul></div>" +
+      "</div>" +
+
+      '<div class="res-sec"><div class="head"><div><div class="eyebrow">Recommended for you</div><h3 class="h3" style="margin-top:12px">Courses that close your gaps.</h3></div>' +
+        '<p class="body">Picked from your weakest areas' + (tailor.length ? " and what you told us about your work" : "") + '. <a class="link" href="courses.html">See all the courses</a></p></div>' +
+        '<div class="cards">' + cards + "</div>" + progHtml + "</div>" +
+
+      '<div class="res-sec team">' +
+        '<div class="art coast" data-coast="diagnostic-team" data-palette="mindset" data-size="wide" data-scene="beach" data-glints aria-hidden="true"><div class="crew">' + crew + '<span class="ref">A team, at different depths</span></div></div>' +
+        '<div class="tx"><span class="half e">Your whole team</span><h2 class="h2" style="margin-top:16px">Now find out where your whole team <span class="stroke warm">stands</span>.</h2>' +
+          '<p class="body">One result tells you where to start. The real value is the whole picture: who is ready to build, who needs the basics, and which gaps the team shares. We run the same diagnostic across your team, then teach to the gaps, not the basics people already have.</p>' +
+          '<div class="btns"><a class="btn primary" href="book.html?about=learning">Book now <span class="arr" aria-hidden="true">&rarr;</span></a><a class="btn" href="courses.html">See the courses</a></div></div>' +
+      "</div>" +
+
+      '<details class="review"><summary>See every question and the best answer</summary><ol>' + review + "</ol></details>" +
+      '<div class="res-actions"><button type="button" class="btn" data-act="retake">Retake the diagnostic</button><a class="link" href="education.html">How we teach a whole company</a></div>' +
+      '<p class="sources fine">This is a self-check, not a certification or a measure of how you do your job. Fifteen questions can\'t cover everything you know; use it to decide where to start. Your answers stay in this browser and are never sent to us.</p>',
+      "results");
+
+    var cv = stage.querySelector(".res-banner canvas");
+    if (cv && window.Contours) {
+      try { contour = window.Contours.init(cv, { reduced: reduce, ink: "rgba(255, 255, 255, 0.42)", accent: "rgba(255, 255, 255, 0.85)", width: 1.2 }); } catch (e) {}
+    }
+    requestAnimationFrame(function () { requestAnimationFrame(function () {
+      stage.querySelectorAll(".ar .bar > i").forEach(function (i) { i.style.width = Math.max(+i.getAttribute("data-w"), 0) + "%"; });
+    }); });
+    if (!opts.quiet) {
+      if (window.SeaSound) window.SeaSound.play("chime");
+      setTimeout(function () { var b = document.getElementById("badge"); if (b && window.SeaLight) window.SeaLight.sparkle(b); }, 350);
+    }
+    bringIntoView();
+    if (opts.focus !== false) document.getElementById("res-title").focus({ preventScroll: true });
+  }
+
+  function finish() {
+    S.at = new Date().toISOString();
+    save();
+    renderResults();
+  }
+
+  function start() {
+    S.answers = blank(); S.i = 0; S.lastPct = 0; S.at = null;
+    goQuestion(0);
+  }
+
+  /* ---------------- events ---------------- */
+  stage.addEventListener("click", function (e) {
+    var opt = e.target.closest(".opt");
+    if (opt) { if (opt.getAttribute("aria-disabled") !== "true") answer(+opt.getAttribute("data-k")); return; }
+    var chip = e.target.closest(".chip");
+    if (chip) {
+      var key = chip.hasAttribute("data-role") ? "role" : "dept", val = chip.getAttribute("data-" + key);
+      S.profile[key] = S.profile[key] === val ? "" : val;
+      chip.parentNode.querySelectorAll(".chip").forEach(function (c) { c.setAttribute("aria-pressed", c.getAttribute("data-" + key) === S.profile[key]); });
+      return;
+    }
+    var act = e.target.closest("[data-act]");
+    if (!act) return;
+    var a = act.getAttribute("data-act");
+    if (a === "start") start();
+    else if (a === "next") { if (S.i < Q.length - 1) goQuestion(S.i + 1); else finish(); }
+    else if (a === "back") { if (S.i > 0) goQuestion(S.i - 1); else { renderIntro(S.demo ? null : loadSaved()); bringIntoView(); } }
+    else if (a === "retake") { S.demo = false; stage.classList.remove("still"); start(); }
+    else if (a === "show-last") {
+      var d = loadSaved(); if (!d) return;
+      S.answers = d.answers; S.profile = d.profile || { role: "", dept: "" }; S.at = d.at || null;
+      renderResults({ quiet: false });
+    }
+    else if (a === "forget") { forget(); var r = document.getElementById("resume"); if (r) r.remove(); }
+  });
+
+  stage.addEventListener("keydown", function (e) {
+    if (!stage.querySelector(".q-screen")) return;
+    var opts = Array.prototype.slice.call(stage.querySelectorAll(".opt"));
+    var answered = S.answers[S.i] != null;
+    var idx = opts.indexOf(document.activeElement);
+    var k = e.key;
+    if (!answered && !e.metaKey && !e.ctrlKey && !e.altKey && /^[a-dA-D1-4]$/.test(k) && !/INPUT|TEXTAREA/.test(e.target.tagName)) {
+      var n = /\d/.test(k) ? +k - 1 : k.toLowerCase().charCodeAt(0) - 97;
+      if (opts[n]) { e.preventDefault(); opts[n].focus(); opts[n].click(); }
+      return;
+    }
+    if (idx < 0) return;
+    var to = null;
+    if (k === "ArrowDown" || k === "ArrowRight") to = (idx + 1) % opts.length;
+    else if (k === "ArrowUp" || k === "ArrowLeft") to = (idx - 1 + opts.length) % opts.length;
+    else if (k === "Home") to = 0;
+    else if (k === "End") to = opts.length - 1;
+    if (to != null) { e.preventDefault(); opts[to].focus(); }
+  });
+
+  /* ---------------- boot, with harmless #demo hooks ---------------- */
+  var SAMPLE = [1, 2, 0, 3, 0, 0, 0, 3, 0, 0, 2, 3, 1, 0, 0];     // 11 of 15: Sailing, weakest in checking
+  var LOW    = [0, 2, 1, 0, 0, 0, 2, 0, 1, 0, 0, 1, 1, 0, 1];     // 5 of 15: Wading
+  function boot() {
+    var m = /^#demo=([\w-]+)$/.exec(location.hash || "");
+    if (!m) { S.demo = false; stage.classList.remove("still"); renderIntro(loadSaved()); return; }
+    S.demo = true; S.at = null; stage.classList.add("still");
+    var d = m[1], qm = /^q(\d+)([ar]?)$/.exec(d);
+    if (d === "results" || d === "results-low" || d === "results-top") {
+      S.answers = d === "results" ? SAMPLE.slice() : d === "results-low" ? LOW.slice() : Q.map(function (q) { return q.a; });
+      if (d === "results-low") S.profile = { role: "manager", dept: "sales" };
+      renderResults({ focus: false, quiet: true });
+    } else if (qm) {
+      var n = Math.min(Math.max(+qm[1], 1), Q.length) - 1;
+      S.answers = blank();
+      for (var i = 0; i < n; i++) S.answers[i] = SAMPLE[i];
+      S.i = n; S.lastPct = Math.round(n / Q.length * 100);
+      renderQuestion(false);
+      if (qm[2]) { var q = Q[n]; S.answers[n] = qm[2] === "r" ? q.a : (q.a + 1) % 4; markAnswered(false); }
+    } else if (d === "resume") {
+      renderIntro({ at: new Date().toISOString(), answers: SAMPLE.slice(), profile: {} });
+    } else {
+      renderIntro(null);
+    }
+  }
+  window.addEventListener("hashchange", boot);
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot); else boot();
+})();
+</script>
+</body>
+</html>

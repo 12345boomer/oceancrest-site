@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>White papers and guides — OceanCrest AI</title>
+<meta name="description" content="What we would hand you in the room, published. The quarterly Small Business Guide to AI and the papers behind how we work. All of it is free.">
+<link rel="icon" href="assets/img/logos/oceancrest-ai-mark-primary-rgb-fullcolor.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;500;600&family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/css/site.css">
+<script src="assets/js/courses.js"></script>
+<script src="assets/js/cards.js"></script>
+<script src="assets/js/coast.js"></script>
+<script src="assets/js/sea.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/contours.js"></script>
+<!--
+  RESOURCES. Sources (our own copy, lightly edited for flow): resources/ OC-400.
+  - The guide OC-206 (2026-08-18, 17 sheets), papers OC-401 and OC-402 (2026-08-28, 4 sheets each),
+    and the three in preparation (OC-403, OC-404, OC-405, no dates set). Documents link to the live site.
+  - Subscribe: there is no backend in this build. The form validates, then shows an inline thank-you
+    and plays the chime. TODO(owner): wire it to the live site's Netlify form before launch.
+  Photographs: curtain wall (oc-12) as on the live resources hero; columns (oc-07) for the papers.
+  No figures about the world appear on this page.
+-->
+<style>
+/* Hero */
+.r-hero{flex-direction:column}
+.r-hero .h1{max-width:760px}
+.r-hero .lede{max-width:640px}
+.jump{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.jump .chip{background:var(--paper)}
+.r-band{margin-top:clamp(40px,6vw,72px);height:clamp(150px,16vw,220px)}
+
+/* The guide */
+.guide{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(32px,5vw,72px);align-items:center}
+.frame{padding:clamp(18px,3.4vw,44px);border-radius:var(--r-xl);display:block}
+.frame img{display:block;width:100%;border-radius:var(--r);background:#fff;transition:transform .6s var(--ease)}
+.frame:hover img{transform:translateY(-4px)}
+.guide .meta{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+.guide h2{font-size:clamp(28px,3vw,40px);font-weight:300;line-height:1.1;letter-spacing:-.02em;margin-top:16px}
+.guide .body{margin-top:18px;max-width:540px}
+.guide .btns{margin-top:28px}
+@media (max-width:860px){.guide{grid-template-columns:1fr}}
+
+/* Papers */
+.papers{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1fr);gap:clamp(16px,2vw,24px)}
+.papers .photo{min-height:420px}
+@media (max-width:980px){.papers{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}.papers .photo{grid-column:1/-1;min-height:0;height:220px}}
+.pub{display:flex;flex-direction:column}
+.pub .cover{aspect-ratio:3/2;border-radius:var(--r-sm);overflow:hidden;margin-bottom:18px;background:var(--foam)}
+.pub .cover img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform .6s var(--ease)}
+.pub:hover .cover img{transform:scale(1.04)}
+.pub h3{font-size:22px;margin:10px 0 8px}
+.pub p{color:var(--ink);font-size:15px}
+.pub .go{align-self:flex-start;margin-top:auto;padding-top:14px}
+.pub .go span{border-bottom:1px solid var(--silver);padding-bottom:1px;transition:border-color .2s}
+.pub:hover .go span{border-color:var(--blue)}
+
+/* In preparation */
+.prep{display:flex;flex-direction:column}
+.prep .art-top{justify-content:space-between}
+.prep .art-top .tag{background:var(--paper)}
+.prep h3{font-size:22px;margin:10px 0 8px}
+.prep p{color:var(--ink);font-size:15px}
+.prep .go{margin-top:auto;padding-top:16px}
+
+/* Subscribe */
+.sub-art{border-radius:var(--r-xl);padding:clamp(16px,6vw,88px) clamp(12px,4vw,56px);display:flex;justify-content:center}
+.sub-panel{background:var(--paper);border-radius:var(--r-lg);padding:clamp(24px,4vw,48px);width:100%;max-width:640px;text-align:center}
+.sub-panel .lede{margin:14px auto 0}
+.sub-form{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px;text-align:left}
+.sub-form label{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--slate)}
+.sub-form input{font:inherit;font-size:16px;color:var(--navy);border:1px solid var(--line);border-radius:999px;padding:12px 18px;background:var(--paper);min-height:48px;width:100%;transition:border-color .2s}
+.sub-form input:hover{border-color:var(--silver)}
+.sub-form input:focus{outline:2px solid var(--blue);outline-offset:2px;border-color:var(--blue)}
+.sub-form .btn{grid-column:1/-1;margin-top:6px}
+.sub-form .fine{grid-column:1/-1;text-align:center;font-size:13px;color:var(--muted)}
+.thanks{margin-top:24px;padding:16px 20px;border-radius:var(--r);background:var(--t-tint);color:var(--navy);display:flex;gap:12px;align-items:center;justify-content:center;font-size:16px}
+.thanks .pebble{--peb:var(--sage)}
+@media (max-width:560px){.sub-form{grid-template-columns:1fr}.sub-form .btn{white-space:normal;text-align:center}}
+/* Narrow phones: let the closing pills wrap instead of clipping */
+@media (max-width:560px){.final .alt a{flex-wrap:wrap;justify-content:center;text-align:center;border-radius:var(--r);gap:2px 10px}}
+</style>
+</head>
+<body data-page="resources">
+<main id="main">
+
+<!-- 1. Hero -->
+<section class="page-hero r-hero coast has-contours" data-coast="resources-hero-beach" data-palette="hero" data-size="hero" data-scene="beach" data-glints>
+  <canvas class="contours" data-contours="white" aria-hidden="true"></canvas>
+  <i class="tick tick-tl" aria-hidden="true"></i><i class="tick tick-tr" aria-hidden="true"></i>
+  <div class="title-block" aria-hidden="true" style="top:24px;right:clamp(20px,4vw,48px)"><p>OceanCrest AI · A division of OceanCrest Ventures</p><p>Chart OC-400 — The library</p><p>Guides and white papers · All free</p></div>
+  <div class="wrap" style="width:100%">
+    <div class="eyebrow">Resources <span class="chart-ref" style="margin-left:10px;color:var(--deep)">OC-400 / Publications</span></div>
+    <h1 class="h1">White papers and <span class="stroke">guides</span>.</h1>
+    <p class="lede">What we would hand you in the room, published. Plain-language guidance on AI adoption for small and mid-sized businesses: the quarterly Small Business Guide and the papers behind how we work. Every figure carries its source or an honest mark that says we're still confirming it. All of it is free.</p>
+    <div class="jump">
+      <a class="chip" href="#guide"><i style="background:var(--lagoon)"></i>The quarterly guide</a>
+      <a class="chip" href="#papers"><i style="background:var(--sage)"></i>White papers</a>
+      <a class="chip" href="#preparation"><i style="background:var(--dawn)"></i>In preparation</a>
+      <a class="chip" href="#subscribe"><i style="background:var(--coral)"></i>Hear about the next one</a>
+    </div>
+  </div>
+  <div class="wrap" style="width:100%">
+    <figure class="photo r-band"><img src="assets/img/photos/oc-12-curtain-wall-wide.jpg" alt="A glass curtain wall reflecting an overcast sky. Generated image."></figure>
+  </div>
+</section>
+
+<!-- 2. The quarterly guide -->
+<section class="lane-host section" id="guide">
+  <div class="course-lane" aria-hidden="true"><span class="course-waypoint"></span><span class="course-rule"></span><span class="course-bearing">CO 172°</span></div>
+  <div class="wrap guide">
+    <a class="frame coast reveal" href="https://oceancrest.ai/guide/" target="_blank" rel="noopener" data-coast="resources-guide-frame" data-palette="technical" data-size="wide" data-scene="open" data-glints>
+      <img src="assets/img/covers/cover-small-business-guide-q3-2026.jpg" alt="Cover sheet of the Q3 2026 Small Business Guide to AI Education and Adoption" loading="lazy">
+    </a>
+    <div class="reveal">
+      <div class="eyebrow">The quarterly guide</div>
+      <div class="meta" style="margin-top:16px"><span class="tag sun">Current edition</span><span class="ref">OC-206 · 2026-08-18 · 17 sheets · Free</span></div>
+      <h2>The Small Business Guide to AI Education and Adoption, Q3 2026.</h2>
+      <p class="body">Seventeen sheets, once a quarter, in plain language: where small businesses actually stand with AI, what changed in the last ninety days, and the first moves that save money, energy, and time. This is the current edition; the next ships at the start of Q4.</p>
+      <div class="btns"><a class="btn" href="https://oceancrest.ai/guide/" target="_blank" rel="noopener">Read the guide <span aria-hidden="true">&nearr;</span></a><a class="link" href="#subscribe">Get the Q4 edition when it ships</a></div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="notch" aria-hidden="true"><svg viewBox="0 0 1200 28" preserveAspectRatio="none"><path d="M0 10 H452 L480 18 H1200" fill="none" stroke="#b3b8bf" stroke-width="1" vector-effect="non-scaling-stroke"/></svg><i></i></div></div>
+
+<!-- 3. White papers -->
+<section class="lane-host section tinted has-contours" id="papers" style="margin-top:28px">
+  <canvas class="contours" data-contours="sea" aria-hidden="true"></canvas>
+  <div class="course-lane" aria-hidden="true"><span class="course-waypoint"></span><span class="course-rule"></span><span class="course-bearing">CO 170°</span></div>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><div class="eyebrow">White papers</div><h2 class="h2">The papers behind how we <span class="stroke">work</span>.</h2></div>
+      <p class="lede">Four letter sheets each, built to read on screen or print. No purchase required for any of it: just decisions, in order.</p>
+    </div>
+    <div class="papers">
+      <figure class="photo sage reveal"><img src="assets/img/photos/oc-07-columns-tall.jpg" alt="A colonnade of tall fluted columns seen from below, one small figure walking beneath them. Generated image." loading="lazy"></figure>
+      <a class="card pub reveal" href="https://oceancrest.ai/resources/engagement-model/" target="_blank" rel="noopener">
+        <div class="cover"><img src="assets/img/covers/cover-engagement-model.jpg" alt="Cover sheet of the white paper The engagement model, in four phases" loading="lazy"></div>
+        <span class="ref">OC-401 · 2026-08-28 · 4 sheets · Free</span>
+        <h3>The engagement model, in four phases.</h3>
+        <p>How an OceanCrest AI engagement runs, from the first record we ask for to the day the build team steps back, and what stays behind. Four phases, in order, with what each one asks of you.</p>
+        <span class="go"><span>Read the paper ↗</span></span>
+      </a>
+      <a class="card pub reveal" href="https://oceancrest.ai/resources/ninety-days/" target="_blank" rel="noopener">
+        <div class="cover"><img src="assets/img/covers/cover-ninety-days.jpg" alt="Cover sheet of the white paper Your next ninety days" loading="lazy"></div>
+        <span class="ref">OC-402 · 2026-08-28 · 4 sheets · Free</span>
+        <h3>Your next ninety days.</h3>
+        <p>The one-page AI policy and the 90-day plan from the Q3 guide, on their own so you can hand them to your team.</p>
+        <span class="go"><span>Read the paper ↗</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 4. In preparation -->
+<section class="lane-host section" id="preparation">
+  <div class="course-lane" aria-hidden="true"><span class="course-waypoint"></span><span class="course-rule"></span><span class="course-bearing">CO 168°</span></div>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><div class="eyebrow">In preparation</div><h2 class="h2">On the drawing <span class="stroke sun">table</span>.</h2></div>
+      <p class="lede">Three papers we are writing now. None has a date yet; subscribe and we'll send one email when each one ships.</p>
+    </div>
+    <div class="grid g3">
+      <article class="card prep reveal">
+        <div class="art-top coast" data-coast="prep-oc403-loop" data-palette="technical" data-size="card" data-scene="cove" data-glints><span class="tag sun">In preparation</span></div>
+        <span class="ref">OC-403 · No date set</span>
+        <h3>The engagement loop.</h3>
+        <p>The seven stations every engagement passes through, from the first conversation to proven ROI, and why the loop closes on itself.</p>
+        <a class="link go" href="#subscribe" style="align-self:flex-start">Notify me ↓</a>
+      </article>
+      <article class="card prep reveal">
+        <div class="art-top coast" data-coast="prep-oc404-curriculum" data-palette="mindset" data-size="card" data-scene="beach" data-glints><span class="tag sun">In preparation</span></div>
+        <span class="ref">OC-404 · No date set</span>
+        <h3>AI for Business Leaders — the curriculum.</h3>
+        <p>The fifteen-hour course, module by module, and the all-staff companion course that follows it.</p>
+        <a class="link go" href="#subscribe" style="align-self:flex-start">Notify me ↓</a>
+      </article>
+      <article class="card prep reveal">
+        <div class="art-top coast" data-coast="prep-oc405-stand" data-palette="hero" data-size="card" data-scene="headland" data-glints><span class="tag sun">In preparation</span></div>
+        <span class="ref">OC-405 · No date set</span>
+        <h3>Where small businesses stand.</h3>
+        <p>The adoption spectrum, drawn from the surveys we trust, and why every station on it is a fine place to board from.</p>
+        <a class="link go" href="#subscribe" style="align-self:flex-start">Notify me ↓</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Subscribe -->
+<section class="section" id="subscribe" style="padding-top:0">
+  <div class="wrap">
+    <div class="sub-art coast has-contours" data-coast="resources-subscribe-open" data-palette="technical" data-size="wide" data-scene="open" data-glints>
+      <canvas class="contours" data-contours="white" aria-hidden="true"></canvas>
+      <i class="tick tick-tl" aria-hidden="true"></i><i class="tick tick-tr" aria-hidden="true"></i><i class="tick tick-bl" aria-hidden="true"></i><i class="tick tick-br" aria-hidden="true"></i>
+      <div class="sub-panel reveal">
+        <div class="eyebrow">Subscribe</div>
+        <h2 class="h2" style="margin-top:14px">Hear about the next <span class="stroke warm">one</span>.</h2>
+        <p class="lede">One email when a new paper or the next quarterly edition ships. Nothing else: no sequence, no sales call.</p>
+        <form class="sub-form" id="sub-form">
+          <label>Email, required<input type="email" name="email" required autocomplete="email" placeholder="you@company.com"></label>
+          <label>Name, optional<input type="text" name="name" autocomplete="name" placeholder="Your name"></label>
+          <button type="submit" class="btn primary" data-sound="none">Tell me when the next one ships</button>
+          <p class="fine">We use this for that one email and nothing else.</p>
+        </form>
+        <div class="thanks" id="sub-thanks" role="status" aria-live="polite" hidden><span class="pebble sm" aria-hidden="true">✓</span><span>Thanks — we'll send one email when the next one ships.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Final call -->
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="final coast has-contours" data-coast="resources-final-dusk" data-palette="dusk" data-size="wide" data-scene="cove" data-glints>
+      <canvas class="contours" data-contours="white" aria-hidden="true"></canvas>
+      <i class="tick tick-tl" aria-hidden="true"></i><i class="tick tick-tr" aria-hidden="true"></i><i class="tick tick-bl" aria-hidden="true"></i><i class="tick tick-br" aria-hidden="true"></i>
+      <div class="eyebrow" style="color:var(--deep)">Begin</div>
+      <h2 class="h2" style="margin-top:14px">Read enough? Then let's talk about your <span class="stroke">operation</span>.</h2>
+      <p class="lede">Book a 30-minute meeting on Teams about transforming the operation. If you're not ready, we'll tell you, and tell you what to fix first. Or start with your team's knowledge: take the diagnostic.</p>
+      <div class="btns"><a class="btn primary" href="book.html" data-sound="chime" data-sparkle>Book now <span class="arr" aria-hidden="true">&rarr;</span></a><a class="btn" href="diagnostic.html" style="background:var(--paper)">Take the diagnostic</a></div>
+      <div class="alt">
+        <a href="https://ocv-ai-assessment.netlify.app/" target="_blank" rel="noopener"><span class="ref">Not ready for a call</span>Score your AI readiness, 0 to 100 ↗</a>
+        <a href="transformation.html"><span class="ref">How we work</span>See the partnership &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  // No backend in this build: validate, thank, chime. TODO(owner): post to the live Netlify form.
+  var form = document.getElementById("sub-form"), thanks = document.getElementById("sub-thanks");
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var btn = form.querySelector('button[type="submit"]');
+    if (window.SeaSound) SeaSound.play("chime");
+    if (window.SeaLight) SeaLight.sparkle(btn);
+    form.hidden = true;
+    thanks.hidden = false;
+  });
+});
+</script>
+</body>
+</html>

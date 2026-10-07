@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Courses — OceanCrest AI</title>
+<meta name="description" content="Every OceanCrest AI course in one place: two tracks, mindset and culture and technical skills, filtered by track, level and category.">
+<link rel="icon" href="assets/img/logos/oceancrest-ai-mark-primary-rgb-fullcolor.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;500;600&family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/css/site.css">
+<script src="assets/js/courses.js"></script>
+<script src="assets/js/cards.js"></script>
+<script src="assets/js/coast.js"></script>
+<script src="assets/js/sea.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/contours.js"></script>
+<!--
+  COURSES. The catalog, ported from the learning-site prototype (public view only).
+  Filters can be preset with ?track=technical|mindset, ?cat=<category id> and ?q=<words>;
+  the address bar follows the filters so a filtered view can be shared.
+  Every card comes from courseCard() in cards.js; every course from COURSES in courses.js.
+  Flagship programs come from PROGRAMS. Mindset titles are working titles (shown on the cards).
+-->
+<style>
+/* Painted banner with a floating white filter panel */
+.cat-banner{margin-top:20px;border-radius:var(--r-lg);padding:clamp(48px,6vw,80px) clamp(14px,3vw,32px) clamp(14px,3vw,28px)}
+.cat-banner .coast-img{object-position:50% 80%}
+.cat-head{text-align:center;max-width:760px;margin:0 auto}
+.cat-head .eyebrow{color:var(--deep);margin-top:10px}
+.cat-head .h1{margin-top:14px}
+.cat-head .lede{margin:18px auto 0}
+.cat-head .chart-ref{color:var(--deep)}
+.panel{background:var(--paper);border-radius:var(--r-lg);padding:clamp(16px,2.5vw,26px);margin-top:clamp(56px,10vw,150px);display:flex;flex-direction:column;gap:18px}
+.searchrow{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center}
+.search{flex:1 1 260px;display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:999px;padding:0 18px;min-height:48px;transition:border-color .2s}
+.search:focus-within{border-color:var(--blue)}
+.search svg{flex:0 0 auto;color:var(--slate)}
+.search input{flex:1;min-width:0;border:0;outline:0;font:inherit;font-size:16px;color:var(--navy);background:none;min-height:44px}
+.search input:focus-visible{outline:0}
+#count{white-space:nowrap}
+.chipgroups{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px 32px}
+.chipgroups .wide{grid-column:1/-1}
+.chipgroups h2{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--slate);margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:8px 14px 8px 10px;font-size:14px;color:var(--navy);position:relative;overflow:hidden;transition:border-color .2s,background .2s,transform .2s var(--ease)}
+.chips button::before{content:"";width:14px;height:14px;border-radius:50%;border:1.5px solid var(--silver);flex:0 0 auto;box-sizing:border-box;transition:border-color .2s,box-shadow .2s}
+.chips button:hover{border-color:var(--lagoon);transform:translateY(-1px)}
+.chips button[aria-pressed="true"]{border-color:var(--blue);background:var(--wash)}
+.chips button[aria-pressed="true"]::before{border-color:var(--blue);box-shadow:inset 0 0 0 3px var(--paper);background:var(--blue)}
+.chips button .n{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.chips button .tr{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate)}
+.chips button[disabled]{opacity:.45;cursor:default}
+.chips button[disabled]:hover{border-color:var(--line);transform:none}
+@media (max-width:480px){.chips button{padding:7px 12px 7px 9px;font-size:13px}}
+
+/* Results */
+.cat-results{padding-block:clamp(32px,4vw,48px) clamp(64px,8vw,96px)}
+.nudge{display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px;border-radius:var(--r-lg);background:var(--e-tint);padding:clamp(16px,2.4vw,22px) clamp(18px,2.6vw,26px);margin-bottom:clamp(36px,4vw,52px)}
+.nudge .pebble{--peb:var(--blush)}
+.nudge div{flex:1 1 300px}
+.nudge b{display:block;font-family:var(--display);font-weight:500;font-size:20px;color:var(--navy)}
+.nudge p{color:var(--ink);font-size:15px;margin-top:4px}
+.group{margin-bottom:clamp(40px,5vw,56px)}
+.group-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px 20px;margin-bottom:18px;padding-bottom:12px;border-bottom:1px dashed var(--silver)}
+.group-h h2{display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-size:clamp(22px,2.2vw,26px);font-weight:500;letter-spacing:-.01em}
+.group-h h2::before{content:"";width:14px;height:14px;border-radius:50%;background:var(--tag,var(--shallows))}
+.group-h p{font-size:14px;color:var(--slate)}
+.flag .cc-art .tag{background:var(--paper)}
+.flag .cards{grid-template-columns:repeat(auto-fill,minmax(min(100%,200px),1fr))}
+.flag .cc h3 .pa{font-size:9px}
+.empty{padding:48px 0;color:var(--slate);display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+.legend{margin-top:-8px}
+
+/* Live-site chart furniture. Shared .has-contours>* sets position:relative at higher specificity,
+   so absolutely placed furniture is restated here. */
+.has-contours>.tick:not(.contours):not(.coast-layer),.has-contours>.title-block:not(.contours):not(.coast-layer),.has-contours>.course-lane:not(.contours):not(.coast-layer){position:absolute}
+.has-contours>.tick:not(.contours):not(.coast-layer){z-index:2}
+.cat-banner .title-block{top:22px;left:clamp(20px,3vw,32px)}
+@media (max-width:1180px){.cat-banner .title-block{display:none}}
+.final .btn:not(.primary){background:var(--paper)}
+</style>
+</head>
+<body data-page="courses">
+<main id="main">
+
+<div class="wrap">
+  <section class="cat-banner coast has-contours" data-coast="courses-catalog-banner" data-palette="mindset" data-size="wide" data-scene="beach" data-glints aria-labelledby="cat-title">
+    <canvas class="contours" data-contours="white" aria-hidden="true"></canvas>
+    <i class="tick tick-tl" aria-hidden="true"></i><i class="tick tick-tr" aria-hidden="true"></i><i class="tick tick-bl" aria-hidden="true"></i><i class="tick tick-br" aria-hidden="true"></i>
+    <div class="title-block" aria-hidden="true"><p>OceanCrest AI · Learning</p><p>Chart OC-02d — The full chart table</p><p>Two tracks · one library · Corrected 2026</p></div>
+    <div class="cat-head">
+      <span class="chart-ref">OC-02d / Catalogue</span>
+      <div class="eyebrow">Courses · two tracks</div>
+      <h1 class="h1" id="cat-title">Every course, in one <span class="stroke warm">place</span>.</h1>
+      <p class="lede">Start with the foundations in each track, then pick the courses that fit your role. A seat unlocks every course.</p>
+    </div>
+    <div class="panel" role="search" aria-label="Find a course">
+      <div class="searchrow">
+        <label class="search" for="q">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="5.5"/><path d="M12.2 12.2L16 16"/></svg>
+          <span class="sr">Search courses</span>
+          <input id="q" type="search" placeholder="Search courses, like &quot;sales&quot; or &quot;Excel&quot;" autocomplete="off">
+        </label>
+        <span class="ref" id="count" aria-live="polite"></span>
+      </div>
+      <div class="chipgroups">
+        <div><h2 id="h-track">Track</h2><div class="chips" id="f-track" role="group" aria-labelledby="h-track"></div></div>
+        <div><h2 id="h-level">Level</h2><div class="chips" id="f-level" role="group" aria-labelledby="h-level"></div></div>
+        <div class="wide"><h2 id="h-cat">Category</h2><div class="chips" id="f-cat" role="group" aria-labelledby="h-cat"></div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section class="lane-host cat-results">
+  <div class="course-lane" aria-hidden="true"><span class="course-waypoint"></span><span class="course-rule"></span><span class="course-bearing">CO 174°</span></div>
+  <div class="wrap">
+    <aside class="nudge" aria-label="The diagnostic">
+      <span class="pebble sm" aria-hidden="true">?</span>
+      <div><b>Not sure where to start?</b><p>Take the diagnostic: fifteen short questions, about five minutes. You get a level, a score in each area, and the courses that close your gaps.</p></div>
+      <a class="btn primary sm" href="diagnostic.html">Take the diagnostic <span class="arr" aria-hidden="true">&rarr;</span></a>
+    </aside>
+    <div id="flagship"></div>
+    <div id="groups"></div>
+  </div>
+</section>
+
+<div class="wrap"><div class="notch" aria-hidden="true"><svg viewBox="0 0 1200 28" preserveAspectRatio="none"><path d="M0 10 H452 L480 18 H1200" fill="none" stroke="#b3b8bf" stroke-width="1" vector-effect="non-scaling-stroke"/></svg><i></i></div></div>
+
+<section class="section" style="padding-top:clamp(40px,5vw,64px)">
+  <div class="wrap">
+    <div class="final coast has-contours" data-coast="courses-final" data-palette="dusk" data-size="wide" data-scene="cove" data-glints>
+      <canvas class="contours" data-contours="white" aria-hidden="true"></canvas>
+      <i class="tick tick-tl" aria-hidden="true"></i><i class="tick tick-tr" aria-hidden="true"></i><i class="tick tick-bl" aria-hidden="true"></i><i class="tick tick-br" aria-hidden="true"></i>
+      <div class="eyebrow" style="color:var(--deep)">Begin</div>
+      <h2 class="h2" style="margin-top:14px">Teach the gaps, not the <span class="stroke warm">basics</span>.</h2>
+      <p class="lede">Every course, for everyone on the team. Find out what your people know first, or talk to us about putting the whole company on the platform.</p>
+      <div class="btns"><a class="btn primary" href="diagnostic.html" data-sound="chime" data-sparkle>Take the diagnostic <span class="arr" aria-hidden="true">&rarr;</span></a><a class="btn" href="book.html?about=learning">Talk to us about membership</a></div>
+      <div class="alt">
+        <a href="education.html#membership"><span class="ref">Membership</span>What you get &rarr;</a>
+        <a href="book.html"><span class="ref">Transformation</span>Book now &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<script>
+(function () {
+  var E = window.esc;
+  var params = new URLSearchParams(location.search);
+  var state = {
+    track: params.get("track") === "mindset" || params.get("track") === "technical" ? params.get("track") : "all",
+    cat: params.get("cat") || "all",
+    level: "all",
+    q: (params.get("q") || "").trim().toLowerCase()
+  };
+  var lv = params.get("level");
+  if (lv === "Beginner" || lv === "Intermediate" || lv === "Advanced") state.level = lv;
+  if (state.cat !== "all") { var cc = categoryById(state.cat); if (cc) state.track = cc.track; else state.cat = "all"; }
+  var q = document.getElementById("q");
+  q.value = params.get("q") || "";
+
+  function matches(c, st) {
+    st = st || state;
+    if (st.track !== "all" && c.track !== st.track) return false;
+    if (st.cat !== "all" && c.category !== st.cat) return false;
+    if (st.level !== "all" && c.level !== st.level) return false;
+    if (st.q) {
+      var cat = categoryById(c.category) || {};
+      var hay = (c.title + " " + c.blurb + " " + cat.name + " " + TRACKS[c.track].name + " " + c.level).toLowerCase();
+      if (hay.indexOf(st.q) < 0) return false;
+    }
+    return true;
+  }
+  // Live counts: what you would get if you pressed this chip, given the other filters.
+  function countFor(group, value) {
+    var st = { track: state.track, cat: state.cat, level: state.level, q: state.q };
+    st[group] = value;
+    if (group === "track") st.cat = "all";
+    return COURSES.filter(function (c) { return matches(c, st); }).length;
+  }
+  function btn(group, value, label, extra) {
+    var n = countFor(group, value), on = state[group] === value;
+    return '<button type="button" data-group="' + group + '" data-value="' + E(value) + '" aria-pressed="' + on + '"' + (!n && !on ? " disabled" : "") + '><span>' + E(label) + '</span>' + (extra || "") + '<span class="n">' + n + '</span></button>';
+  }
+  function renderFilters() {
+    document.getElementById("f-track").innerHTML =
+      btn("track", "all", "All courses") + btn("track", "mindset", TRACKS.mindset.name) + btn("track", "technical", TRACKS.technical.name);
+    document.getElementById("f-level").innerHTML = ["all", "Beginner", "Intermediate", "Advanced"].map(function (l) {
+      return btn("level", l, l === "all" ? "Any level" : l);
+    }).join("");
+    var cats = CATEGORIES.filter(function (c) { return state.track === "all" || c.track === state.track; });
+    document.getElementById("f-cat").innerHTML = btn("cat", "all", "All categories") + cats.map(function (c) {
+      var extra = state.track === "all" ? '<span class="tr">' + (c.track === "mindset" ? "Mindset" : "Technical") + '</span>' : "";
+      return btn("cat", c.id, c.name, extra);
+    }).join("");
+  }
+
+  function programCard(p) {
+    var tag = p.soon ? '<span class="tag sun">Coming soon</span>' : '<span class="tag">Flagship</span>';
+    return '<a class="cc" href="education.html#' + (p.soon ? "programs" : "curriculum") + '">' +
+      '<div class="cc-art coast" data-coast="courses-prog-' + p.id + '" data-palette="' + p.palette + '" data-size="card">' + tag + '</div>' +
+      '<div class="cc-body"><div class="cc-top"><span class="ref">' + E(p.audience) + '</span></div>' +
+      '<h3>' + E(p.title) + (p.pa ? '<span class="pa">PA</span>' : "") + '</h3><p>' + E(p.summary) + '</p>' +
+      '<div class="cc-meta"><span>' + E(p.facts.split(" · ").slice(0, 2).join(" · ")) + '</span><span>' + (p.soon ? "Soon" : "On the platform") + '</span></div></div></a>';
+  }
+  function renderFlagship() {
+    var none = state.track === "all" && state.cat === "all" && state.level === "all" && !state.q;
+    var el = document.getElementById("flagship");
+    if (!none) { el.innerHTML = ""; return; }
+    el.innerHTML = '<section class="group flag" style="--tag:var(--coral)"><div class="group-h"><h2>Flagship programs</h2><p>The courses already on the platform, and two on the way. <a class="link" href="education.html#programs">How they fit together</a></p></div>' +
+      '<div class="cards">' + PROGRAMS.map(programCard).join("") + '</div></section>' +
+      '<p class="sources legend" style="margin:-28px 0 clamp(40px,5vw,56px)">PA — position approximate: the certificate course title is a working title.</p>';
+  }
+
+  function renderResults() {
+    var list = COURSES.filter(function (c) { return matches(c); });
+    document.getElementById("count").textContent = list.length + (list.length === 1 ? " course" : " courses");
+    renderFlagship();
+    var groups = document.getElementById("groups");
+    if (!list.length) {
+      groups.innerHTML = '<div class="empty"><p>No courses match. Try a different word or clear a filter.</p><button type="button" class="btn sm" id="clear">Clear all filters</button></div>';
+      return;
+    }
+    var html = "";
+    ["mindset", "technical"].forEach(function (t) {
+      CATEGORIES.filter(function (c) { return c.track === t; }).forEach(function (cat) {
+        var items = list.filter(function (c) { return c.category === cat.id; });
+        if (!items.length) return;
+        html += '<section class="group cat-' + cat.id + '"><div class="group-h"><h2>' + E(cat.name) +
+          ' <span class="ref">' + E(TRACKS[t].name) + ' · ' + items.length + '</span></h2><p>' + E(cat.note) + '</p></div>' +
+          '<div class="cards">' + items.map(function (c) { return courseCard(c); }).join("") + '</div></section>';
+      });
+    });
+    groups.innerHTML = html;
+  }
+
+  function syncURL() {
+    var p = new URLSearchParams();
+    if (state.cat !== "all") p.set("cat", state.cat);
+    else if (state.track !== "all") p.set("track", state.track);
+    if (state.level !== "all") p.set("level", state.level);
+    if (state.q) p.set("q", q.value.trim());
+    var s = p.toString();
+    try { history.replaceState(null, "", location.pathname + (s ? "?" + s : "")); } catch (e) {}
+  }
+
+  function update() { renderFilters(); renderResults(); syncURL(); }
+
+  document.addEventListener("click", function (e) {
+    if (e.target.closest("#clear")) {
+      state = { track: "all", cat: "all", level: "all", q: "" }; q.value = ""; update(); return;
+    }
+    var b = e.target.closest("[data-group]");
+    if (!b || b.disabled) return;
+    var g = b.getAttribute("data-group"), v = b.getAttribute("data-value");
+    state[g] = v;
+    if (g === "track") state.cat = "all";
+    if (g === "cat" && v !== "all") state.track = categoryById(v).track;
+    update();
+    // Re-rendering replaces the chip; keep keyboard focus on its replacement.
+    var nb = document.querySelector('[data-group="' + g + '"][data-value="' + v + '"]');
+    if (nb && document.activeElement === document.body) nb.focus({ preventScroll: true });
+  });
+  q.addEventListener("input", function () { state.q = q.value.trim().toLowerCase(); update(); });
+
+  renderFilters(); renderResults();
+})();
+</script>
+</body>
+</html>

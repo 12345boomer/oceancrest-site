@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>AI Transformation Partner — OceanCrest AI</title>
+<meta name="description" content="What we're really selling is a process. Assessment, implementation and amplification, walked in order inside your operation, with your people, and never further than the assessment justifies.">
+<link rel="icon" href="assets/img/logos/oceancrest-ai-mark-primary-rgb-fullcolor.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;500;600&family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/css/site.css">
+<script src="assets/js/courses.js"></script>
+<script src="assets/js/cards.js"></script>
+<script src="assets/js/coast.js"></script>
+<script src="assets/js/sea.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/contours.js"></script>
+<!--
+  TRANSFORMATION. The AI Transformation Partner half, in full.
+  Sources (our own copy, lightly edited for flow):
+  - Hero, phases and every detail item: services/ OC-02a #partner.
+  - Capability gap: home OC-01c #models. Illustrative chart; the axes carry no claimed numbers.
+  - Engagement options and the fractional AI leadership line: services/ OC-02a #options.
+  - Leadership workshop: workshops/ OC-02c, session 1 (90 minutes, CEO/owner/COO, three leave-with lines).
+  - Engagement paper: resources/engagement-model/ OC-401. Demonstration case: case-001/ OC-100
+    (composite engagement, fictional client, all figures PA on that page).
+  No figures about the world appear on this page, so there is no sources line.
+-->
+<style>
+/* Hero */
+.t-hero{min-height:min(820px,94vh);flex-direction:column}
+.t-hero .coast-img{object-position:50% 64%}
+.t-hero .half{margin-bottom:6px}
+.t-hero .h1{max-width:820px}
+.t-hero .lede{max-width:600px}
+.holds{margin-top:auto;padding-top:clamp(48px,8vw,110px);width:100%}
+.holds ol{list-style:none;margin:0;padding:8px;background:var(--paper);border-radius:var(--r-lg);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:4px}
+.holds a{display:flex;gap:14px;align-items:center;padding:14px 16px;border-radius:var(--r);transition:background .2s}
+.holds a:hover{background:var(--foam)}
+.holds b{display:block;font-weight:500;font-size:16px}
+.holds span.ref{display:block;margin-bottom:2px}
+.holds li:nth-child(1) .pebble{--peb:var(--shallows)} .holds li:nth-child(2) .pebble{--peb:var(--lagoon)} .holds li:nth-child(3) .pebble{--peb:var(--sage)}
+
+/* Phases: tabbed tour */
+.phase-switch{display:flex;justify-content:center;margin-bottom:32px}
+.phase-switch button[data-val="b"] i{background:var(--tide)}
+.phase-switch button[data-val="c"] i{background:var(--sage)}
+.phase{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(20px,3vw,40px);align-items:stretch;border:1px solid var(--line);border-radius:var(--r-xl);padding:clamp(12px,1.6vw,18px);background:var(--paper)}
+.phase .art{min-height:360px;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;padding:22px}
+.phase .art .pebble{width:76px;height:76px;font-size:34px;background:var(--paper)}
+.phase .art .you{background:var(--paper);border-radius:var(--r);padding:14px 18px;max-width:300px}
+.phase .art .you b{display:block;font-family:var(--display);font-weight:500;font-size:22px;line-height:1.15;margin-top:4px}
+.phase .txt{padding:clamp(8px,2vw,22px) clamp(4px,1.5vw,16px) clamp(8px,1.5vw,12px) 0;display:flex;flex-direction:column}
+.phase .txt .h3{margin-top:10px}
+.phase .txt>p.lede{margin-top:8px;font-size:18px}
+.items{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:24px}
+.items div{border-radius:var(--r);padding:16px 18px;background:var(--t-tint)}
+.items b{display:block;font-weight:500;color:var(--navy);margin-bottom:4px}
+.items p{color:var(--ink);font-size:15px;line-height:1.5}
+.phase .go{margin-top:22px;padding-top:18px;border-top:1px dashed var(--line);display:flex;flex-wrap:wrap;gap:12px 22px;align-items:center}
+.phases-foot{text-align:center;margin-top:24px;color:var(--ink)}
+@media (max-width:820px){
+  .phase{grid-template-columns:1fr}
+  .phase .art{min-height:260px}
+  .phase .txt{padding:6px 8px 10px}
+}
+@media (max-width:560px){
+  .phase-switch .switch{display:grid;grid-template-columns:repeat(3,1fr);width:100%;border-radius:var(--r-lg)}
+  .phase-switch .switch button{flex-direction:column;gap:6px;padding:10px 4px;font-size:13px;border-radius:var(--r)}
+  .items{grid-template-columns:1fr}
+}
+
+/* Capability gap: the live chart (home OC-01c, svg.gap-chart) recoloured pastel.
+   Callouts sit absolutely beside the chart; 25% and 65.91% are viewBox y=110 and y=290 over 440,
+   the two connector start points. Below 1100px they stack and the connectors go. */
+.gap-panel{background:var(--paper);border-radius:var(--r-xl);padding:clamp(18px,2.4vw,28px)}
+.gapduo{display:grid;grid-template-columns:1.35fr .9fr;gap:clamp(20px,2.6vw,44px);align-items:stretch;margin:0}
+.gapduo figcaption{grid-column:1/-1;max-width:72ch}
+.gap-chart{width:100%;height:auto;overflow:visible;display:block}
+.gap-chart .gc-grid{stroke:var(--line);stroke-width:1;stroke-dasharray:2 5}
+.gap-chart .gc-axis{stroke:var(--silver);stroke-width:1}
+.gap-chart .gc-axis-h{fill:var(--silver)}
+.gap-chart .gc-now{stroke:var(--silver);stroke-width:1;stroke-dasharray:3 4}
+.gap-chart .gc-tick{font-family:var(--mono);font-size:14px;letter-spacing:.14em;text-transform:uppercase;fill:var(--muted)}
+.gap-chart .gc-axis-lbl{font-family:var(--mono);font-size:14px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;fill:var(--slate)}
+.gap-chart .gc-cap,.gap-chart .gc-use{fill:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.gap-chart .gc-cap{stroke:#4a8fb8}
+.gap-chart .gc-use{stroke:#f2a990}
+.gap-chart .gc-brk{stroke:var(--navy);stroke-width:1.5;fill:none}
+.gap-chart .gc-note{font-family:var(--mono);font-size:14px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;fill:var(--navy)}
+.gap-chart .gc-conn path{fill:none;stroke-width:1.6;stroke-linecap:round;stroke-dasharray:5 4}
+.gap-chart .gc-conn--cap path{stroke:#4a8fb8}.gap-chart .gc-conn--cap polygon{fill:#4a8fb8}
+.gap-chart .gc-conn--use path{stroke:#f2a990}.gap-chart .gc-conn--use polygon{fill:#f2a990}
+.gap-chart .gc-end-cap{fill:#4a8fb8}.gap-chart .gc-end-use{fill:#f2a990}
+.gap-chart .sp{fill:#fff;opacity:0;animation:glint 3.6s ease-in-out infinite}
+/* draw-in, once the figure is revealed */
+.gapduo .ln{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.8s var(--ease)}
+.gapduo .gc-use.ln{transition-delay:.25s}
+.gapduo .late{opacity:0;transition:opacity .8s var(--ease) 1.2s}
+.gapduo.in .ln{stroke-dashoffset:0}
+.gapduo.in .late{opacity:1}
+.gapcalls{position:relative}
+.gapbox{position:absolute;left:0;width:100%;transform:translateY(-50%);z-index:2;border:1px solid var(--line);border-radius:var(--r);padding:10px 16px;background:var(--paper)}
+.gapbox--cap{top:25%}.gapbox--use{top:65.91%}
+.gb-head{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:500;font-size:clamp(15px,1.3vw,18px);line-height:1.25;color:var(--navy)}
+.gb-key{flex:none;width:18px;height:5px;border-radius:999px;background:#4a8fb8}
+.gapbox--use .gb-key{background:#f2a990}
+.gapbox ul{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:2px}
+.gapbox li{position:relative;padding-left:16px;font-size:14px;line-height:1.4;color:var(--ink)}
+.gapbox li::before{content:"";position:absolute;left:0;top:.5em;width:6px;height:6px;border-radius:50%;background:var(--shallows)}
+.gapbox--use li::before{background:var(--blush)}
+@media (max-width:1099px){
+  .gapduo{grid-template-columns:1fr}
+  .gapcalls{display:grid;gap:14px}
+  .gapbox{position:static;transform:none}
+  .gc-conn{display:none}
+  .gap-chart .gc-tick,.gap-chart .gc-note,.gap-chart .gc-axis-lbl{font-size:12px}
+}
+@media (max-width:700px){.gap-chart .gc-tick,.gap-chart .gc-note,.gap-chart .gc-axis-lbl{font-size:18px}}
+@media (max-width:480px){.gap-chart .gc-tick,.gap-chart .gc-note,.gap-chart .gc-axis-lbl{font-size:24px}}
+@media (prefers-reduced-motion:reduce){
+  .gapduo .ln{stroke-dashoffset:0;transition:none}
+  .gapduo .late{opacity:1;transition:none}
+  .gap-chart .sp{animation:none;opacity:.6}
+}
+
+/* Engagement options */
+.ways{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(16px,2vw,24px)}
+.way{display:flex;flex-direction:column;transition:border-color .25s,transform .25s var(--ease)}
+.way:hover{border-color:var(--lagoon);transform:translateY(-3px)}
+.way:hover .coast-img{transform:scale(1.05)}
+.way .art-top{border-radius:0;align-items:flex-start;justify-content:space-between}
+.way .art-top .tag{background:var(--paper)}
+.way h3{font-size:24px;font-weight:500;margin-top:8px;letter-spacing:-.01em}
+.way dl{margin:18px 0 0;display:flex;flex-direction:column}
+.way dt{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);padding-top:14px;border-top:1px dashed var(--line)}
+.way dd{margin:6px 0 14px;color:var(--ink);font-size:15px;line-height:1.55}
+.way .start{margin-top:auto;padding-top:6px}
+.way .start .ref{display:block;margin-bottom:10px}
+.frac{margin-top:clamp(18px,2vw,24px);display:flex;gap:18px;align-items:center;border-radius:var(--r-lg);padding:20px 24px;background:var(--t-tint)}
+.frac p{color:var(--navy);font-size:17px;line-height:1.5}
+.frac p b{font-weight:500}
+@media (prefers-reduced-motion:reduce){.way:hover{transform:none}}
+
+/* Leadership workshop */
+.ws{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:clamp(32px,5vw,72px);align-items:center}
+.ws .body{margin-top:20px;max-width:520px}
+.ws-art{padding:clamp(18px,3vw,40px);border-radius:var(--r-xl)}
+.session{background:var(--paper);border-radius:var(--r-lg);padding:clamp(22px,2.6vw,30px)}
+.session .top{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center}
+.session h3{font-size:clamp(24px,2.4vw,30px);font-weight:500;margin:14px 0 10px;letter-spacing:-.015em}
+.session>p{color:var(--ink);font-size:15px}
+.session .ticks{margin-top:16px}
+.session .ticks li::before{--dot:var(--coral)}
+
+/* Writing and the case */
+.pub .cover{aspect-ratio:3/2;border-radius:var(--r-sm);overflow:hidden;margin-bottom:18px;background:var(--foam);display:flex;align-items:flex-start;padding:12px}
+.pub .cover img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform .6s var(--ease)}
+.pub .cover:has(img){padding:0}
+.pub:hover .cover img{transform:scale(1.04)}
+.pub h3{font-size:22px;margin:10px 0 8px}
+.pub p{color:var(--ink);font-size:15px}
+.pub .go{display:inline-block;margin-top:14px}
+.pub .cover .tag{background:var(--paper)}
+.writing{grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1fr)}
+.writing .photo{min-height:420px}
+@media (max-width:980px){.writing{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}.writing .photo{grid-column:1/-1;min-height:0;height:240px}}
+/* Narrow phones: let the closing pills wrap instead of clipping */
+@media (max-width:560px){.final .alt a{flex-wrap:wrap;justify-content:center;text-align:center;border-radius:var(--r);gap:2px 10px}}
+</style>
+</head>
+<body data-page="transformation">
+<main id="main">
+
+<!-- 1. Hero -->
+<section class="page-hero t-hero coast has-contours" data-coast="transformation-hero-lagoon" data-palette="technical" data-size="hero" data-scene="headland" data-glints>
+  <canvas class="contours" data-contours="white" aria-hidden="true"></canvas>
+  <i class="tick tick-tl" aria-hidden="true"></i><i class="tick tick-tr" aria-hidden="true"></i><i class="tick tick-bl" aria-hidden="true"></i><i class="tick tick-br" aria-hidden="true"></i>
+  <div class="title-block" aria-hidden="true" style="top:24px;right:clamp(20px,4vw,48px)"><p>OceanCrest AI · A division of OceanCrest Ventures</p><p>Chart OC-02a — The partnership</p><p>Assessment · Implementation · Amplification</p></div>
+  <div class="wrap" style="width:100%">
+    <span class="half">Transformation</span>
+    <div class="eyebrow" style="margin-top:14px">AI Transformation Partner <span class="chart-ref" style="margin-left:10px;color:var(--deep)">OC-02a / Soundings</span></div>
+    <h1 class="h1">What we're really selling is a <span class="stroke">process</span>.</h1>
+    <p class="lede">Three pieces, walked in order: inside your operation, with your people, and never further than the assessment justifies. Each piece ends in something you hold.</p>
+    <div class="btns">
+      <a class="btn primary" href="book.html">Book now <span class="arr" aria-hidden="true">&rarr;</span></a>
+      <a class="btn" href="https://ocv-ai-assessment.netlify.app/" target="_blank" rel="noopener" style="background:var(--paper)">Score your readiness <span aria-hidden="true">&nearr;</span></a>
+    </div>
+  </div>
+  <div class="wrap holds">
+    <ol aria-label="What each piece leaves you holding">
+      <li><a href="#phases" data-phase="a"><span class="pebble sm">1</span><span><span class="ref">Assessment</span><b>A score</b></span></a></li>
+      <li><a href="#phases" data-phase="b"><span class="pebble sm">2</span><span><span class="ref">Implementation</span><b>A running system</b></span></a></li>
+      <li><a href="#phases" data-phase="c"><span class="pebble sm">3</span><span><span class="ref">Amplification</span><b>A number</b></span></a></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 2. The three phases -->
+<section class="lane-host section" id="phases">
+  <div class="course-lane" aria-hidden="true"><span class="course-waypoint"></span><span class="course-rule"></span><span class="course-bearing">CO 171°</span></div>
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <div class="eyebrow">The partnership, in order</div>
+      <h2 class="h2">Assess, build, <span class="stroke">amplify</span>.</h2>
+      <p class="lede">We sit inside the business, grade every workflow, and build only what the assessment justifies. Stop at any handoff and keep everything that was built.</p>
+    </div>
+
+    <div class="phase-switch">
+      <div class="switch" data-switch="phase" data-on="a" role="tablist" aria-label="The three phases">
+        <button type="button" role="tab" data-val="a" aria-selected="true" aria-controls="phase-a"><i></i>Assessment</button>
+        <button type="button" role="tab" data-val="b" aria-selected="false" aria-controls="phase-b"><i></i>Implementation</button>
+        <button type="button" role="tab" data-val="c" aria-selected="false" aria-controls="phase-c"><i></i>Amplification</button>
+      </div>
+    </div>
+
+    <div class="phase" id="phase-a" role="tabpanel" data-panel="phase:a">
+      <div class="art coast" data-coast="phase-assessment-shallows" data-palette="technical" data-size="tall" data-scene="cove" data-glints>
+        <span class="pebble" style="--peb:var(--shallows)">1</span>
+        <div class="you"><span class="ref">You hold</span><b>A score, and a ranked plan.</b></div>
+      </div>
+      <div class="txt">
+        <span class="ref">Phase 01 of 03</span>
+        <h3 class="h3">Assessment.</h3>
+        <p class="lede">We read the business before we touch it.</p>
+        <div class="items">
+          <div><b>Readiness score</b><p>0 to 100, a baseline for the leadership team.</p></div>
+          <div><b>Process mapping</b><p>We sit inside the business and chart how the work actually happens.</p></div>
+          <div><b>Workflow grading</b><p>Every workflow marked manual, hybrid, or automated.</p></div>
+          <div><b>Ranked build plan</b><p>Where AI moves the P&amp;L first, reported to leadership.</p></div>
+        </div>
+        <div class="go"><a class="btn sm" href="https://ocv-ai-assessment.netlify.app/" target="_blank" rel="noopener">Score your readiness <span aria-hidden="true">&nearr;</span></a><span class="ref">Free · about three minutes · 0 to 100</span></div>
+      </div>
+    </div>
+
+    <div class="phase" id="phase-b" role="tabpanel" data-panel="phase:b" hidden>
+      <div class="art coast" data-coast="phase-implementation-lagoon" data-palette="technical" data-size="tall" data-scene="headland" data-glints>
+        <span class="pebble" style="--peb:var(--lagoon)">2</span>
+        <div class="you"><span class="ref">You hold</span><b>A running system you own.</b></div>
+      </div>
+      <div class="txt">
+        <span class="ref">Phase 02 of 03</span>
+        <h3 class="h3">Implementation.</h3>
+        <p class="lede">Only what the assessment justified gets built.</p>
+        <div class="items">
+          <div><b>Scoped build</b><p>Only what the assessment justifies, priced to scope.</p></div>
+          <div><b>Dashboard, clients and pipeline</b><p>The whole business on one live screen.</p></div>
+          <div><b>Automation and AI agents</b><p>The repetitive work runs itself.</p></div>
+          <div><b>Owned infrastructure</b><p>It's yours: an asset, not a subscription.</p></div>
+        </div>
+        <div class="go"><a class="link" href="https://oceancrest.ai/case-001/" target="_blank" rel="noopener">See a demonstration engagement ↗</a></div>
+      </div>
+    </div>
+
+    <div class="phase" id="phase-c" role="tabpanel" data-panel="phase:c" hidden>
+      <div class="art coast" data-coast="phase-amplification-open" data-palette="hero" data-size="tall" data-scene="open" data-glints>
+        <span class="pebble" style="--peb:var(--sage)">3</span>
+        <div class="you"><span class="ref">You hold</span><b>A number that proves it.</b></div>
+      </div>
+      <div class="txt">
+        <span class="ref">Phase 03 of 03</span>
+        <h3 class="h3">Amplification.</h3>
+        <p class="lede">What it returned, put back to work.</p>
+        <div class="items">
+          <div><b>Documented ROI</b><p>What changed, and what it's worth.</p></div>
+          <div><b>Savings redeployed</b><p>Into deeper automation, training, growth.</p></div>
+          <div><b>Fractional partnership</b><p>We stay on the team, month over month.</p></div>
+          <div><b>Next process, next department</b><p>The build compounds.</p></div>
+        </div>
+        <div class="go"><a class="btn primary sm" href="book.html">Book now <span class="arr" aria-hidden="true">&rarr;</span></a><a class="link" href="#options">Ways to start</a></div>
+      </div>
+    </div>
+
+    <p class="phases-foot">Each piece ends in something you hold: a score, a running system, a number.</p>
+  </div>
+</section>
+
+<!-- 3. The capability gap: live geometry from home OC-01c (svg.gap-chart), recoloured pastel -->
+<section class="lane-host section tinted has-contours">
+  <canvas class="contours" data-contours="sea" aria-hidden="true"></canvas>
+  <div class="course-lane" aria-hidden="true"><span class="course-waypoint"></span><span class="course-rule"></span><span class="course-bearing">CO 170°</span></div>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><div class="eyebrow">The opening <span class="chart-ref" style="margin-left:10px">OC-01c / The capability gap</span></div><h2 class="h2">What models can do. What businesses actually <span class="stroke warm">use</span>.</h2></div>
+      <p class="lede">Capability compounds faster than adoption. The distance between the two curves is the work, and it is the work we do.</p>
+    </div>
+    <div class="gap-panel">
+      <figure class="gapduo reveal">
+        <svg class="gap-chart" viewBox="0 0 900 440" role="img" aria-label="A chart whose vertical axis is capability. Two curves rise across an illustrative time axis from 2023 through today to 2030. What models can do climbs steeply; what businesses actually use climbs gently. The hatched area between them widens year on year, and a bracket at the right measures it: that gap is the opportunity. The axes carry no numbers.">
+          <defs>
+            <pattern id="oc-gap-hatch" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+              <rect width="9" height="9" fill="#a8dde3" fill-opacity=".22"/>
+              <line x1="0" y1="0" x2="0" y2="9" stroke="#7fc4d8" stroke-width="1.6" stroke-opacity=".6"/>
+            </pattern>
+          </defs>
+          <g class="gc-grid" aria-hidden="true"><line x1="80" y1="60" x2="660" y2="60"/><line x1="80" y1="145" x2="660" y2="145"/><line x1="80" y1="230" x2="660" y2="230"/><line x1="80" y1="315" x2="660" y2="315"/></g>
+          <line class="gc-now" x1="370" y1="45" x2="370" y2="400"/>
+          <line class="gc-axis" x1="80" y1="40" x2="80" y2="400"/>
+          <polygon class="gc-axis-h" points="80,30 75.5,42 84.5,42"/>
+          <text class="gc-axis-lbl" x="80" y="20">Capability</text>
+          <line class="gc-axis" x1="80" y1="400" x2="672" y2="400"/>
+          <g class="gc-tick"><text x="80" y="422">2023</text><text x="370" y="422" text-anchor="middle">Today</text><text x="660" y="422" text-anchor="end">2030</text></g>
+          <path class="gc-wedge late" fill="url(#oc-gap-hatch)" d="M 80 398 C 340 396, 520 300, 660 60 L 660 330 C 480 372, 300 392, 80 398 Z"/>
+          <g class="late" aria-hidden="true">
+            <circle class="sp" cx="600" cy="230" r="3"/><circle class="sp" cx="540" cy="300" r="2.4" style="animation-delay:1.1s"/>
+            <circle class="sp" cx="630" cy="150" r="2.8" style="animation-delay:2s"/><circle class="sp" cx="470" cy="345" r="2.2" style="animation-delay:2.7s"/>
+          </g>
+          <path class="gc-use ln" pathLength="1" d="M 80 398 C 300 392, 480 372, 660 330"/>
+          <path class="gc-cap ln" pathLength="1" d="M 80 398 C 340 396, 520 300, 660 60"/>
+          <circle class="gc-end-cap late" cx="660" cy="60" r="6"/><circle class="gc-end-use late" cx="660" cy="330" r="6"/>
+          <g class="late" aria-hidden="true">
+            <path class="gc-brk" d="M 674 60 H 686 M 680 60 V 330 M 674 330 H 686"/>
+            <text class="gc-note" x="696" y="200">The gap</text>
+          </g>
+          <g class="gc-conn gc-conn--cap late"><path d="M 1010 110 L 952 110 C 900 60, 800 60, 698 60"/><polygon points="0,-6 10,0 0,6" transform="translate(698,60) rotate(180)"/></g>
+          <g class="gc-conn gc-conn--use late"><path d="M 1010 290 L 952 290 C 900 330, 800 330, 698 330"/><polygon points="0,-6 10,0 0,6" transform="translate(698,330) rotate(180)"/></g>
+        </svg>
+        <div class="gapcalls">
+          <div class="gapbox gapbox--cap"><p class="gb-head"><span class="gb-key" aria-hidden="true"></span>What models can actually do</p>
+            <ul><li>Automate workflows</li><li>Think for themselves</li><li>Customize applications</li></ul></div>
+          <div class="gapbox gapbox--use"><p class="gb-head"><span class="gb-key" aria-hidden="true"></span>What businesses actually use</p>
+            <ul><li>For email</li><li>For high-level research</li><li>For really simple use cases</li></ul></div>
+        </div>
+        <figcaption class="sources">Illustrative. The axes carry no claimed numbers. The shape is the argument: capability compounds faster than adoption, and the distance between the two curves is the work.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<div class="wrap" style="padding-top:28px"><div class="notch" aria-hidden="true"><svg viewBox="0 0 1200 28" preserveAspectRatio="none"><path d="M0 10 H452 L480 18 H1200" fill="none" stroke="#b3b8bf" stroke-width="1" vector-effect="non-scaling-stroke"/></svg><i></i></div></div>
+
+<!-- 4. Engagement options -->
+<section class="lane-host section" id="options">
+  <div class="course-lane" aria-hidden="true"><span class="course-waypoint"></span><span class="course-rule"></span><span class="course-bearing">CO 169°</span></div>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><div class="eyebrow">Engagement options</div><h2 class="h2">Start where you <span class="stroke">are</span>.</h2></div>
+      <p class="lede">Three ways in, each one finished on its own. A business can stop at any handoff and keep everything that was built.</p>
+    </div>
+    <div class="ways">
+      <article class="card way reveal">
+        <div class="art-top coast" data-coast="option-learn-dawn" data-palette="mindset" data-size="card" data-scene="beach" data-glints><span class="half e">Education</span><span class="pebble sm" style="--peb:var(--blush)">1</span></div>
+        <span class="ref">Learn</span>
+        <h3>The learning solution.</h3>
+        <dl>
+          <dt>For</dt><dd>Companies whose people have to learn it first.</dd>
+          <dt>What happens</dt><dd>The whole company completes the course: 3 stages, 10 modules, 5 hours. Completion is assigned, deadlined, and on file.</dd>
+          <dt>You leave with</dt><dd>A certificate of completion for every person, and a team that shares one vocabulary.</dd>
+        </dl>
+        <div class="start"><span class="ref">Start with</span><a class="btn sm" href="education.html">Explore the learning solution <span class="arr" aria-hidden="true">&rarr;</span></a></div>
+      </article>
+      <article class="card way reveal">
+        <div class="art-top coast" data-coast="option-diagnose-shallows" data-palette="technical" data-size="card" data-scene="cove" data-glints><span class="half">Transformation</span><span class="pebble sm" style="--peb:var(--shallows)">2</span></div>
+        <span class="ref">Diagnose</span>
+        <h3>The assessment.</h3>
+        <dl>
+          <dt>For</dt><dd>Leadership teams that need to know where AI pays before they spend on it.</dd>
+          <dt>What happens</dt><dd>We sit inside the business and chart how the work actually happens, then grade every workflow manual, hybrid, or automated.</dd>
+          <dt>You leave with</dt><dd>A readiness score from 0 to 100 and a ranked build plan, reported to leadership.</dd>
+        </dl>
+        <div class="start"><span class="ref">Start with</span><a class="btn sm" href="https://ocv-ai-assessment.netlify.app/" target="_blank" rel="noopener">The free readiness assessment <span aria-hidden="true">&nearr;</span></a></div>
+      </article>
+      <article class="card way reveal">
+        <div class="art-top coast" data-coast="option-build-headland" data-palette="hero" data-size="card" data-scene="headland" data-glints><span class="half">Transformation</span><span class="pebble sm" style="--peb:var(--lagoon)">3</span></div>
+        <span class="ref">Build</span>
+        <h3>The transformation partner.</h3>
+        <dl>
+          <dt>For</dt><dd>Companies ready to change how the work runs.</dd>
+          <dt>What happens</dt><dd>Only what the assessment justified gets built: the dashboard, automation and AI agents, on infrastructure you own.</dd>
+          <dt>You leave with</dt><dd>Systems that are yours, an asset rather than a subscription, and documented ROI.</dd>
+        </dl>
+        <div class="start"><span class="ref">Start with</span><a class="btn primary sm" href="book.html">Book now <span class="arr" aria-hidden="true">&rarr;</span></a></div>
+      </article>
+    </div>
+    <div class="frac reveal">
+      <span class="pebble sm" style="--peb:var(--sage)" aria-hidden="true">+</span>
+      <p>After any of the three, one option stays open: <b>fractional AI leadership</b>. Advisory, governance, a roadmap, and iteration on what is already live. Month to month, and yours to end.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Leadership workshop -->
+<section class="lane-host section tinted e">
+  <div class="course-lane" aria-hidden="true"><span class="course-waypoint"></span><span class="course-rule"></span><span class="course-bearing">CO 168°</span></div>
+  <div class="wrap ws">
+    <div class="reveal">
+      <span class="half e">Education · Workshops</span>
+      <h2 class="h2" style="margin-top:18px">Leaders first, then the whole <span class="stroke warm">company</span>.</h2>
+      <p class="body">Leaders are the foundation of an AI rollout, so we start with them. Strategy sessions with leadership, then the whole team: what AI is and isn't, what your policy allows, and where the wins are. The people who run the work are the people who will run the system.</p>
+      <div class="btns" style="margin-top:28px"><a class="btn" href="education.html#workshops" style="background:var(--paper)">See the workshops <span class="arr" aria-hidden="true">&rarr;</span></a></div>
+    </div>
+    <div class="ws-art coast reveal" data-coast="workshop-leaders-dawn" data-palette="mindset" data-size="wide" data-scene="cove" data-glints>
+      <article class="session">
+        <div class="top"><span class="ref">For the leadership team</span><span class="tag sun">90 minutes</span></div>
+        <h3>Leading your company through AI.</h3>
+        <p>For the CEO, owner or COO; an operations lead is a welcome plus-one. A working session on where AI makes sense in your business, and what your people need to hear before it arrives. Not a vendor pitch.</p>
+        <ul class="ticks">
+          <li><span>Your AI readiness, scored.</span></li>
+          <li><span>The story your people need to hear.</span></li>
+          <li><span>A charted course from pilot to payoff.</span></li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="wrap" style="padding-top:28px"><div class="notch" aria-hidden="true"><svg viewBox="0 0 1200 28" preserveAspectRatio="none"><path d="M0 10 H452 L480 18 H1200" fill="none" stroke="#b3b8bf" stroke-width="1" vector-effect="non-scaling-stroke"/></svg><i></i></div></div>
+
+<!-- 6. How an engagement runs, in writing -->
+<section class="lane-host section has-contours">
+  <canvas class="contours" data-contours="navy" aria-hidden="true"></canvas>
+  <div class="course-lane" aria-hidden="true"><span class="course-waypoint"></span><span class="course-rule"></span><span class="course-bearing">CO 167°</span></div>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><div class="eyebrow">Before you book</div><h2 class="h2">How an engagement runs, in <span class="stroke">writing</span>.</h2></div>
+      <p class="lede">Read the model, then see it played out on a demonstration engagement. Neither asks for a call.</p>
+    </div>
+    <div class="grid writing">
+      <figure class="photo reveal"><img src="assets/img/photos/oc-05-zigzag-stairs-tall.jpg" alt="A zigzagging concrete stair structure against a pale sky, stepping up in even stages. Generated image." loading="lazy"><figcaption>In order, one stage at a time</figcaption></figure>
+      <a class="card pub reveal" href="https://oceancrest.ai/resources/engagement-model/" target="_blank" rel="noopener">
+        <div class="cover"><img src="assets/img/covers/cover-engagement-model.jpg" alt="Cover sheet of the white paper The engagement model, in four phases" loading="lazy"></div>
+        <span class="ref">Paper · OC-401 · 4 sheets · Free</span>
+        <h3>The engagement model, in four phases.</h3>
+        <p>How an engagement runs, from the first record we ask for to the day the build team steps back, and what stays behind. Collect the record, educate and align, implement and build, then the Office of AI, with what each phase asks of you.</p>
+        <span class="link go">Read the paper ↗</span>
+      </a>
+      <a class="card pub reveal" href="https://oceancrest.ai/case-001/" target="_blank" rel="noopener">
+        <div class="cover coast" data-coast="demo-case-planning-engine" data-palette="technical" data-size="card" data-scene="open" data-glints><span class="tag line">Demonstration</span></div>
+        <span class="ref">Case · OC-100 · Five chapters</span>
+        <h3>The planning engine.</h3>
+        <p>A documented engagement, chapter by chapter: discovery, set-up, the team's own views, what runs under the hood, and the outcomes. A composite engagement with a fictional client, marked as a demonstration throughout.</p>
+        <span class="link go">Open the demonstration case ↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Final call -->
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="final coast has-contours" data-coast="transformation-final-dusk" data-palette="dusk" data-size="wide" data-scene="headland" data-glints>
+      <canvas class="contours" data-contours="white" aria-hidden="true"></canvas>
+      <i class="tick tick-tl" aria-hidden="true"></i><i class="tick tick-tr" aria-hidden="true"></i><i class="tick tick-bl" aria-hidden="true"></i><i class="tick tick-br" aria-hidden="true"></i>
+      <div class="eyebrow" style="color:var(--deep)">Begin</div>
+      <h2 class="h2" style="margin-top:14px">Will AI scale across your company, or stall in another <span class="stroke">pilot</span>?</h2>
+      <p class="lede">Book a 30-minute meeting on Teams about transforming the operation. If you're not ready, we'll tell you, and tell you what to fix first. Or start with your team's knowledge: take the diagnostic.</p>
+      <div class="btns"><a class="btn primary" href="book.html" data-sound="chime" data-sparkle>Book now <span class="arr" aria-hidden="true">&rarr;</span></a><a class="btn" href="diagnostic.html" style="background:var(--paper)">Take the diagnostic</a></div>
+      <div class="alt">
+        <a href="https://ocv-ai-assessment.netlify.app/" target="_blank" rel="noopener"><span class="ref">Not ready for a call</span>Score your AI readiness, 0 to 100 ↗</a>
+        <a href="resources.html"><span class="ref">Reading first</span>Browse the resources &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  // The three "you hold" links in the hero open the matching phase tab.
+  var sw = document.querySelector('[data-switch="phase"]');
+  document.querySelectorAll("[data-phase]").forEach(function (a) {
+    a.addEventListener("click", function () {
+      var b = sw && sw.querySelector('button[data-val="' + a.getAttribute("data-phase") + '"]');
+      if (b) b.click();
+    });
+  });
+});
+</script>
+</body>
+</html>
