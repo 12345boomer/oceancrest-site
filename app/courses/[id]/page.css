@@ -1,0 +1,56 @@
+/* course: page styles, scoped to main.page-course */
+.page-course .course-hero{padding-top:20px}
+.page-course .course-art{height:clamp(200px,24vw,300px);border-radius:var(--r-lg);display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:16px 18px;margin-bottom:clamp(28px,3vw,40px)}
+.page-course .course-art .tag,.page-course .course-art .half{background:var(--paper)}
+.page-course .course-art .tag{position:relative}
+.page-course .course-art .title-block{right:20px;bottom:18px;top:auto}
+.page-course .ch-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:28px clamp(32px,5vw,64px);align-items:end}
+.page-course .crumbs{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
+.page-course .crumbs a{border-bottom:1px solid var(--line);transition:border-color .2s}
+.page-course .crumbs a:hover{border-color:var(--blue)}
+.page-course .crumbs span[aria-hidden]{color:var(--silver)}
+.page-course .course-hero .h1{margin:16px 0 18px}
+.page-course .course-hero .lede{max-width:620px}
+.page-course .course-hero .btns{margin-top:28px}
+.page-course .facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden}
+.page-course .facts>div{padding:18px 20px;border-top:1px dashed var(--line)}
+.page-course .facts>div:nth-child(-n+2){border-top:0}
+.page-course .facts>div:nth-child(odd){border-right:1px dashed var(--line)}
+.page-course .facts b{display:block;font-family:var(--display);font-weight:500;font-size:18px;color:var(--navy);margin-top:6px}
+.page-course .course-body{display:flex;flex-wrap:wrap;gap:clamp(32px,5vw,56px);padding-block:clamp(40px,5vw,64px) clamp(56px,7vw,88px)}
+.page-course .main-col{flex:999 1 520px;min-width:0}
+.page-course .side-col{flex:1 1 280px;display:flex;flex-direction:column;gap:16px}
+.page-course .main-col h2{font-size:clamp(24px,2.4vw,30px);font-weight:500;letter-spacing:-.01em;margin-bottom:14px}
+.page-course .main-col .ticks{margin-bottom:clamp(36px,4vw,48px)}
+.page-course .main-col .ticks li{color:var(--slate)}
+.page-course .syllabus{list-style:none;padding:0;margin:0;border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden}
+.page-course .syllabus li{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:12px;align-items:baseline;padding:16px 20px;border-top:1px solid var(--line);transition:background .2s}
+.page-course .syllabus li:first-child{border-top:0}
+.page-course .syllabus li:hover{background:var(--t-tint)}
+.page-course.c-mindset .syllabus li:hover{background:var(--e-tint)}
+.page-course .syllabus .n{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.page-course .syllabus .t{font-size:16px;color:var(--navy)}
+.page-course .syllabus .t small{display:block;color:var(--slate);font-size:13px;margin-top:2px}
+.page-course .syllabus .d{font-family:var(--mono);font-size:12px;color:var(--slate);white-space:nowrap}
+.page-course .syllabus li.task{background:rgba(253,233,184,.35)}
+.page-course .box{border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;background:var(--paper)}
+.page-course .box p{margin-top:10px;font-size:14px;color:var(--ink)}
+.page-course .box.start{background:var(--t-tint);border-color:transparent}
+.page-course.c-mindset .box.start{background:var(--e-tint)}
+.page-course .box .lead{display:flex;gap:12px;align-items:center;margin-top:14px}
+.page-course .box .lead img{width:52px;height:52px;border-radius:50%;object-fit:cover;flex:0 0 auto}
+.page-course .box .lead b{display:block;font-weight:500;font-size:15px}
+.page-course .box .lead span{display:block;font-size:13px;color:var(--slate)}
+.page-course .draft{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;padding:16px 20px;border-radius:var(--r);background:rgba(253,233,184,.45);margin-bottom:clamp(28px,3vw,40px)}
+.page-course .draft p{flex:1 1 260px;font-size:15px;color:var(--navy)}
+.page-course .related{padding-bottom:clamp(56px,7vw,88px)}
+.page-course .sec-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px 16px;margin-bottom:18px}
+.page-course .sec-h h2{font-size:clamp(24px,2.4vw,30px);font-weight:500;letter-spacing:-.01em}
+
+/* Live-site chart furniture. Shared .has-contours>* sets position:relative at higher specificity,
+   so absolutely placed furniture is restated here. */
+.page-course .has-contours>.tick:not(.contours):not(.coast-layer),.page-course .has-contours>.title-block:not(.contours):not(.coast-layer),.page-course .has-contours>.course-lane:not(.contours):not(.coast-layer){position:absolute}
+.page-course .has-contours>.tick:not(.contours):not(.coast-layer){z-index:2}
+@media (max-width:900px){.page-course .course-art .title-block{display:none}}
+.page-course .final{min-height:380px}
+.page-course .final .btn:not(.primary){background:var(--paper)}

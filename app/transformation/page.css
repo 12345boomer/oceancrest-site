@@ -1,0 +1,141 @@
+/* transformation: page styles, scoped to main.page-transformation */
+/* Hero */
+.page-transformation .t-hero{min-height:min(820px,94vh);flex-direction:column}
+.page-transformation .t-hero .coast-img{object-position:50% 64%}
+.page-transformation .t-hero .half{margin-bottom:6px}
+.page-transformation .t-hero .h1{max-width:820px}
+.page-transformation .t-hero .lede{max-width:600px}
+.page-transformation .holds{margin-top:auto;padding-top:clamp(48px,8vw,110px);width:100%}
+.page-transformation .holds ol{list-style:none;margin:0;padding:8px;background:var(--paper);border-radius:var(--r-lg);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:4px}
+.page-transformation .holds a{display:flex;gap:14px;align-items:center;padding:14px 16px;border-radius:var(--r);transition:background .2s}
+.page-transformation .holds a:hover{background:var(--foam)}
+.page-transformation .holds b{display:block;font-weight:500;font-size:16px}
+.page-transformation .holds span.ref{display:block;margin-bottom:2px}
+.page-transformation .holds li:nth-child(1) .pebble{--peb:var(--shallows)} .page-transformation .holds li:nth-child(2) .pebble{--peb:var(--lagoon)} .page-transformation .holds li:nth-child(3) .pebble{--peb:var(--sage)}
+
+/* Phases: tabbed tour */
+.page-transformation .phase-switch{display:flex;justify-content:center;margin-bottom:32px}
+.page-transformation .phase-switch button[data-val="b"] i{background:var(--tide)}
+.page-transformation .phase-switch button[data-val="c"] i{background:var(--sage)}
+.page-transformation .phase{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(20px,3vw,40px);align-items:stretch;border:1px solid var(--line);border-radius:var(--r-xl);padding:clamp(12px,1.6vw,18px);background:var(--paper)}
+.page-transformation .phase .art{min-height:360px;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;padding:22px}
+.page-transformation .phase .art .pebble{width:76px;height:76px;font-size:34px;background:var(--paper)}
+.page-transformation .phase .art .you{background:var(--paper);border-radius:var(--r);padding:14px 18px;max-width:300px}
+.page-transformation .phase .art .you b{display:block;font-family:var(--display);font-weight:500;font-size:22px;line-height:1.15;margin-top:4px}
+.page-transformation .phase .txt{padding:clamp(8px,2vw,22px) clamp(4px,1.5vw,16px) clamp(8px,1.5vw,12px) 0;display:flex;flex-direction:column}
+.page-transformation .phase .txt .h3{margin-top:10px}
+.page-transformation .phase .txt>p.lede{margin-top:8px;font-size:18px}
+.page-transformation .items{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:24px}
+.page-transformation .items div{border-radius:var(--r);padding:16px 18px;background:var(--t-tint)}
+.page-transformation .items b{display:block;font-weight:500;color:var(--navy);margin-bottom:4px}
+.page-transformation .items p{color:var(--ink);font-size:15px;line-height:1.5}
+.page-transformation .phase .go{margin-top:22px;padding-top:18px;border-top:1px dashed var(--line);display:flex;flex-wrap:wrap;gap:12px 22px;align-items:center}
+.page-transformation .phases-foot{text-align:center;margin-top:24px;color:var(--ink)}
+@media (max-width:820px){
+  .page-transformation .phase{grid-template-columns:1fr}
+  .page-transformation .phase .art{min-height:260px}
+  .page-transformation .phase .txt{padding:6px 8px 10px}
+}
+@media (max-width:560px){
+  .page-transformation .phase-switch .switch{display:grid;grid-template-columns:repeat(3,1fr);width:100%;border-radius:var(--r-lg)}
+  .page-transformation .phase-switch .switch button{flex-direction:column;gap:6px;padding:10px 4px;font-size:13px;border-radius:var(--r)}
+  .page-transformation .items{grid-template-columns:1fr}
+}
+
+/* Capability gap: the live chart (home OC-01c, svg.gap-chart) recoloured pastel.
+   Callouts sit absolutely beside the chart; 25% and 65.91% are viewBox y=110 and y=290 over 440,
+   the two connector start points. Below 1100px they stack and the connectors go. */
+.page-transformation .gap-panel{background:var(--paper);border-radius:var(--r-xl);padding:clamp(18px,2.4vw,28px)}
+.page-transformation .gapduo{display:grid;grid-template-columns:1.35fr .9fr;gap:clamp(20px,2.6vw,44px);align-items:stretch;margin:0}
+.page-transformation .gapduo figcaption{grid-column:1/-1;max-width:72ch}
+.page-transformation .gap-chart{width:100%;height:auto;overflow:visible;display:block}
+.page-transformation .gap-chart .gc-grid{stroke:var(--line);stroke-width:1;stroke-dasharray:2 5}
+.page-transformation .gap-chart .gc-axis{stroke:var(--silver);stroke-width:1}
+.page-transformation .gap-chart .gc-axis-h{fill:var(--silver)}
+.page-transformation .gap-chart .gc-now{stroke:var(--silver);stroke-width:1;stroke-dasharray:3 4}
+.page-transformation .gap-chart .gc-tick{font-family:var(--mono);font-size:14px;letter-spacing:.14em;text-transform:uppercase;fill:var(--muted)}
+.page-transformation .gap-chart .gc-axis-lbl{font-family:var(--mono);font-size:14px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;fill:var(--slate)}
+.page-transformation .gap-chart .gc-cap,.page-transformation .gap-chart .gc-use{fill:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.page-transformation .gap-chart .gc-cap{stroke:#4a8fb8}
+.page-transformation .gap-chart .gc-use{stroke:#f2a990}
+.page-transformation .gap-chart .gc-brk{stroke:var(--navy);stroke-width:1.5;fill:none}
+.page-transformation .gap-chart .gc-note{font-family:var(--mono);font-size:14px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;fill:var(--navy)}
+.page-transformation .gap-chart .gc-conn path{fill:none;stroke-width:1.6;stroke-linecap:round;stroke-dasharray:5 4}
+.page-transformation .gap-chart .gc-conn--cap path{stroke:#4a8fb8}.page-transformation .gap-chart .gc-conn--cap polygon{fill:#4a8fb8}
+.page-transformation .gap-chart .gc-conn--use path{stroke:#f2a990}.page-transformation .gap-chart .gc-conn--use polygon{fill:#f2a990}
+.page-transformation .gap-chart .gc-end-cap{fill:#4a8fb8}.page-transformation .gap-chart .gc-end-use{fill:#f2a990}
+.page-transformation .gap-chart .sp{fill:#fff;opacity:0;animation:glint 3.6s ease-in-out infinite}
+/* draw-in, once the figure is revealed */
+.page-transformation .gapduo .ln{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.8s var(--ease)}
+.page-transformation .gapduo .gc-use.ln{transition-delay:.25s}
+.page-transformation .gapduo .late{opacity:0;transition:opacity .8s var(--ease) 1.2s}
+.page-transformation .gapduo.in .ln{stroke-dashoffset:0}
+.page-transformation .gapduo.in .late{opacity:1}
+.page-transformation .gapcalls{position:relative}
+.page-transformation .gapbox{position:absolute;left:0;width:100%;transform:translateY(-50%);z-index:2;border:1px solid var(--line);border-radius:var(--r);padding:10px 16px;background:var(--paper)}
+.page-transformation .gapbox--cap{top:25%}.page-transformation .gapbox--use{top:65.91%}
+.page-transformation .gb-head{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:500;font-size:clamp(15px,1.3vw,18px);line-height:1.25;color:var(--navy)}
+.page-transformation .gb-key{flex:none;width:18px;height:5px;border-radius:999px;background:#4a8fb8}
+.page-transformation .gapbox--use .gb-key{background:#f2a990}
+.page-transformation .gapbox ul{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:2px}
+.page-transformation .gapbox li{position:relative;padding-left:16px;font-size:14px;line-height:1.4;color:var(--ink)}
+.page-transformation .gapbox li::before{content:"";position:absolute;left:0;top:.5em;width:6px;height:6px;border-radius:50%;background:var(--shallows)}
+.page-transformation .gapbox--use li::before{background:var(--blush)}
+@media (max-width:1099px){
+  .page-transformation .gapduo{grid-template-columns:1fr}
+  .page-transformation .gapcalls{display:grid;gap:14px}
+  .page-transformation .gapbox{position:static;transform:none}
+  .page-transformation .gc-conn{display:none}
+  .page-transformation .gap-chart .gc-tick,.page-transformation .gap-chart .gc-note,.page-transformation .gap-chart .gc-axis-lbl{font-size:12px}
+}
+@media (max-width:700px){.page-transformation .gap-chart .gc-tick,.page-transformation .gap-chart .gc-note,.page-transformation .gap-chart .gc-axis-lbl{font-size:18px}}
+@media (max-width:480px){.page-transformation .gap-chart .gc-tick,.page-transformation .gap-chart .gc-note,.page-transformation .gap-chart .gc-axis-lbl{font-size:24px}}
+@media (prefers-reduced-motion:reduce){
+  .page-transformation .gapduo .ln{stroke-dashoffset:0;transition:none}
+  .page-transformation .gapduo .late{opacity:1;transition:none}
+  .page-transformation .gap-chart .sp{animation:none;opacity:.6}
+}
+
+/* Engagement options */
+.page-transformation .ways{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(16px,2vw,24px)}
+.page-transformation .way{display:flex;flex-direction:column;transition:border-color .25s,transform .25s var(--ease)}
+.page-transformation .way:hover{border-color:var(--lagoon);transform:translateY(-3px)}
+.page-transformation .way:hover .coast-img{transform:scale(1.05)}
+.page-transformation .way .art-top{border-radius:0;align-items:flex-start;justify-content:space-between}
+.page-transformation .way .art-top .tag{background:var(--paper)}
+.page-transformation .way h3{font-size:24px;font-weight:500;margin-top:8px;letter-spacing:-.01em}
+.page-transformation .way dl{margin:18px 0 0;display:flex;flex-direction:column}
+.page-transformation .way dt{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);padding-top:14px;border-top:1px dashed var(--line)}
+.page-transformation .way dd{margin:6px 0 14px;color:var(--ink);font-size:15px;line-height:1.55}
+.page-transformation .way .start{margin-top:auto;padding-top:6px}
+.page-transformation .way .start .ref{display:block;margin-bottom:10px}
+.page-transformation .frac{margin-top:clamp(18px,2vw,24px);display:flex;gap:18px;align-items:center;border-radius:var(--r-lg);padding:20px 24px;background:var(--t-tint)}
+.page-transformation .frac p{color:var(--navy);font-size:17px;line-height:1.5}
+.page-transformation .frac p b{font-weight:500}
+@media (prefers-reduced-motion:reduce){.page-transformation .way:hover{transform:none}}
+
+/* Leadership workshop */
+.page-transformation .ws{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:clamp(32px,5vw,72px);align-items:center}
+.page-transformation .ws .body{margin-top:20px;max-width:520px}
+.page-transformation .ws-art{padding:clamp(18px,3vw,40px);border-radius:var(--r-xl)}
+.page-transformation .session{background:var(--paper);border-radius:var(--r-lg);padding:clamp(22px,2.6vw,30px)}
+.page-transformation .session .top{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center}
+.page-transformation .session h3{font-size:clamp(24px,2.4vw,30px);font-weight:500;margin:14px 0 10px;letter-spacing:-.015em}
+.page-transformation .session>p{color:var(--ink);font-size:15px}
+.page-transformation .session .ticks{margin-top:16px}
+.page-transformation .session .ticks li::before{--dot:var(--coral)}
+
+/* Writing and the case */
+.page-transformation .pub .cover{aspect-ratio:3/2;border-radius:var(--r-sm);overflow:hidden;margin-bottom:18px;background:var(--foam);display:flex;align-items:flex-start;padding:12px}
+.page-transformation .pub .cover img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform .6s var(--ease)}
+.page-transformation .pub .cover:has(img){padding:0}
+.page-transformation .pub:hover .cover img{transform:scale(1.04)}
+.page-transformation .pub h3{font-size:22px;margin:10px 0 8px}
+.page-transformation .pub p{color:var(--ink);font-size:15px}
+.page-transformation .pub .go{display:inline-block;margin-top:14px}
+.page-transformation .pub .cover .tag{background:var(--paper)}
+.page-transformation .writing{grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1fr)}
+.page-transformation .writing .photo{min-height:420px}
+@media (max-width:980px){.page-transformation .writing{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}.page-transformation .writing .photo{grid-column:1/-1;min-height:0;height:240px}}
+/* Narrow phones: let the closing pills wrap instead of clipping */
+@media (max-width:560px){.page-transformation .final .alt a{flex-wrap:wrap;justify-content:center;text-align:center;border-radius:var(--r);gap:2px 10px}}

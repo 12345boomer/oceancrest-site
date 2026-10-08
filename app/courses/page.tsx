@@ -1,0 +1,116 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import Coast from "@/components/Coast";
+import Contours from "@/components/Contours";
+import { FinderPanel, FinderProvider, FinderResults } from "./finder";
+import "./page.css";
+
+export const metadata: Metadata = {
+  title: "Courses — OceanCrest AI",
+  description: "Every OceanCrest AI course in one place: two tracks, mindset and culture and technical skills, filtered by track, level and category."
+};
+
+export default function Page() {
+  return (
+    <main id="main" className="page-courses">
+      <FinderProvider>
+        <div className="wrap">
+          <Coast as="section" seed="courses-catalog-banner" palette="mindset" size="wide" scene="beach" glints className="cat-banner has-contours" aria-labelledby="cat-title">
+            <Contours ink="white" />
+            <i className="tick tick-tl" aria-hidden="true" />
+            <i className="tick tick-tr" aria-hidden="true" />
+            <i className="tick tick-bl" aria-hidden="true" />
+            <i className="tick tick-br" aria-hidden="true" />
+            <div className="title-block" aria-hidden="true">
+              <p>OceanCrest AI · Learning</p>
+              <p>Chart OC-02d — The full chart table</p>
+              <p>Two tracks · one library · Corrected 2026</p>
+            </div>
+            <div className="cat-head">
+              <span className="chart-ref">OC-02d / Catalogue</span>
+              <div className="eyebrow">Courses · two tracks</div>
+              <h1 className="h1" id="cat-title">
+                Every course, in one{" "}
+                <span className="stroke warm">place</span>
+                .
+              </h1>
+              <p className="lede">
+                Start with the foundations in each track, then pick the courses that fit your role. A seat unlocks every course.
+              </p>
+            </div>
+            <FinderPanel />
+          </Coast>
+        </div>
+        <section className="lane-host cat-results">
+          <div className="course-lane" aria-hidden="true">
+            <span className="course-waypoint" />
+            <span className="course-rule" />
+            <span className="course-bearing">CO 174°</span>
+          </div>
+          <div className="wrap">
+            <aside className="nudge" aria-label="The diagnostic">
+              <span className="pebble sm" aria-hidden="true">?</span>
+              <div>
+                <b>Not sure where to start?</b>
+                <p>
+                  Take the diagnostic: fifteen short questions, about five minutes. You get a level, a score in each area, and the courses that close your gaps.
+                </p>
+              </div>
+              <Link className="btn primary sm" href="/diagnostic">
+                Take the diagnostic{" "}
+                <span className="arr" aria-hidden="true">→</span>
+              </Link>
+            </aside>
+            <FinderResults />
+          </div>
+        </section>
+        <div className="wrap">
+          <div className="notch" aria-hidden="true">
+            <svg viewBox="0 0 1200 28" preserveAspectRatio="none">
+              <path d="M0 10 H452 L480 18 H1200" fill="none" stroke="#b3b8bf" strokeWidth="1" vectorEffect="non-scaling-stroke" />
+            </svg>
+            <i />
+          </div>
+        </div>
+        <section className="section" style={{ paddingTop: "clamp(40px,5vw,64px)" }}>
+          <div className="wrap">
+            <Coast seed="courses-final" palette="dusk" size="wide" scene="cove" glints className="final has-contours">
+              <Contours ink="white" />
+              <i className="tick tick-tl" aria-hidden="true" />
+              <i className="tick tick-tr" aria-hidden="true" />
+              <i className="tick tick-bl" aria-hidden="true" />
+              <i className="tick tick-br" aria-hidden="true" />
+              <div className="eyebrow" style={{ color: "var(--deep)" }}>Begin</div>
+              <h2 className="h2" style={{ marginTop: "14px" }}>
+                Teach the gaps, not the{" "}
+                <span className="stroke warm">basics</span>
+                .
+              </h2>
+              <p className="lede">
+                Every course, for everyone on the team. Find out what your people know first, or talk to us about putting the whole company on the platform.
+              </p>
+              <div className="btns">
+                <Link className="btn primary" href="/diagnostic" data-sound="chime" data-sparkle="">
+                  Take the diagnostic{" "}
+                  <span className="arr" aria-hidden="true">→</span>
+                </Link>
+                <Link className="btn" href="/book?about=learning">Talk to us about membership</Link>
+              </div>
+              <div className="alt">
+                <Link href="/education#membership">
+                  <span className="ref">Membership</span>
+                  What you get →
+                </Link>
+                {" "}
+                <Link href="/book">
+                  <span className="ref">Transformation</span>
+                  Book now →
+                </Link>
+              </div>
+            </Coast>
+          </div>
+        </section>
+      </FinderProvider>
+    </main>
+  );
+}

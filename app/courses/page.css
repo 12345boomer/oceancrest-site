@@ -1,0 +1,70 @@
+/* courses: page styles, scoped to main.page-courses */
+/* Painted banner with a floating white filter panel */
+.page-courses .cat-banner{margin-top:20px;border-radius:var(--r-lg);padding:clamp(48px,6vw,80px) clamp(14px,3vw,32px) clamp(14px,3vw,28px)}
+.page-courses .cat-banner .coast-img{object-position:50% 80%}
+.page-courses .cat-head{text-align:center;max-width:760px;margin:0 auto}
+.page-courses .cat-head .eyebrow{color:var(--deep);margin-top:10px}
+.page-courses .cat-head .h1{margin-top:14px}
+.page-courses .cat-head .lede{margin:18px auto 0}
+.page-courses .cat-head .chart-ref{color:var(--deep)}
+.page-courses .panel{background:var(--paper);border-radius:var(--r-lg);padding:clamp(16px,2.5vw,26px);margin-top:clamp(56px,10vw,150px);display:flex;flex-direction:column;gap:18px}
+.page-courses .searchrow{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center}
+.page-courses .search{flex:1 1 260px;display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:999px;padding:0 18px;min-height:48px;transition:border-color .2s}
+.page-courses .search:focus-within{border-color:var(--blue)}
+.page-courses .search svg{flex:0 0 auto;color:var(--slate)}
+.page-courses .search input{flex:1;min-width:0;border:0;outline:0;font:inherit;font-size:16px;color:var(--navy);background:none;min-height:44px}
+.page-courses .search input:focus-visible{outline:0}
+.page-courses #count{white-space:nowrap}
+/* Filters: two switches (track, level), then categories grouped by track */
+.page-courses .frow{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 20px}
+.page-courses .seg{display:flex;gap:2px;padding:4px;border:1px solid var(--line);border-radius:999px;background:var(--paper);max-width:100%;overflow-x:auto;scrollbar-width:none}
+.page-courses .seg::-webkit-scrollbar{display:none}
+.page-courses .seg button{flex:0 0 auto;display:inline-flex;align-items:center;gap:8px;border:0;background:none;border-radius:999px;padding:9px 14px;font-size:14px;font-weight:500;color:var(--slate);white-space:nowrap;transition:background .25s,color .25s}
+.page-courses .seg button:hover{color:var(--navy);background:var(--wash)}
+.page-courses .seg button[aria-pressed="true"]{background:var(--navy);color:#fff}
+.page-courses .seg button i{width:9px;height:9px;border-radius:50%;background:var(--lagoon)}
+.page-courses .seg button i.e{background:var(--coral)}
+.page-courses .seg .n{font-family:var(--mono);font-size:11px;font-weight:400;opacity:.6}
+.page-courses .cats{display:grid;gap:12px;padding-top:18px;border-top:1px dashed var(--silver)}
+.page-courses .catline{display:grid;grid-template-columns:150px 1fr 112px;align-items:center;gap:10px 14px}
+.page-courses .catline>.ref{display:flex;align-items:center;gap:8px;color:var(--slate)}
+.page-courses .catline>.ref::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--lagoon)}
+.page-courses .catline.e>.ref::before{background:var(--coral)}
+.page-courses .chips{display:flex;flex-wrap:wrap;gap:6px}
+.page-courses .chips button{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:6px 12px 6px 10px;font-size:13px;color:var(--navy);transition:border-color .2s,background .2s,color .2s,transform .2s var(--ease)}
+.page-courses .chips button i{width:9px;height:9px;border-radius:50%;background:var(--tag)}
+.page-courses .chips button:hover{border-color:var(--lagoon);transform:translateY(-1px)}
+.page-courses .chips button[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+.page-courses .chips button .n{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.page-courses .chips button[aria-pressed="true"] .n{color:rgba(255,255,255,.65)}
+.page-courses .seg button[disabled],.page-courses .chips button[disabled]{opacity:.4;cursor:default}
+.page-courses .chips button[disabled]:hover{border-color:var(--line);transform:none}
+.page-courses .clear{justify-self:end;border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:6px 14px;font:inherit;font-size:13px;color:var(--navy);white-space:nowrap;transition:border-color .2s}
+.page-courses .clear:hover{border-color:var(--lagoon)}
+@media (max-width:640px){.page-courses .catline{grid-template-columns:1fr}.page-courses .clear{justify-self:start}.page-courses .seg{width:100%}}
+
+/* Results */
+.page-courses .cat-results{padding-block:clamp(32px,4vw,48px) clamp(64px,8vw,96px)}
+.page-courses .nudge{display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px;border-radius:var(--r-lg);background:var(--e-tint);padding:clamp(16px,2.4vw,22px) clamp(18px,2.6vw,26px);margin-bottom:clamp(36px,4vw,52px)}
+.page-courses .nudge .pebble{--peb:var(--blush)}
+.page-courses .nudge div{flex:1 1 300px}
+.page-courses .nudge b{display:block;font-family:var(--display);font-weight:500;font-size:20px;color:var(--navy)}
+.page-courses .nudge p{color:var(--ink);font-size:15px;margin-top:4px}
+.page-courses .group{margin-bottom:clamp(40px,5vw,56px)}
+.page-courses .group-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px 20px;margin-bottom:18px;padding-bottom:12px;border-bottom:1px dashed var(--silver)}
+.page-courses .group-h h2{display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-size:clamp(22px,2.2vw,26px);font-weight:500;letter-spacing:-.01em}
+.page-courses .group-h h2::before{content:"";width:14px;height:14px;border-radius:50%;background:var(--tag,var(--shallows))}
+.page-courses .group-h p{font-size:14px;color:var(--slate)}
+.page-courses .flag .cc-art .tag{background:var(--paper)}
+.page-courses .flag .cards{grid-template-columns:repeat(auto-fill,minmax(min(100%,200px),1fr))}
+.page-courses .flag .cc h3 .pa{font-size:9px}
+.page-courses .empty{padding:48px 0;color:var(--slate);display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+.page-courses .legend{margin-top:-8px}
+
+/* Live-site chart furniture. Shared .has-contours>* sets position:relative at higher specificity,
+   so absolutely placed furniture is restated here. */
+.page-courses .has-contours>.tick:not(.contours):not(.coast-layer),.page-courses .has-contours>.title-block:not(.contours):not(.coast-layer),.page-courses .has-contours>.course-lane:not(.contours):not(.coast-layer){position:absolute}
+.page-courses .has-contours>.tick:not(.contours):not(.coast-layer){z-index:2}
+.page-courses .cat-banner .title-block{top:22px;left:clamp(20px,3vw,32px)}
+@media (max-width:1180px){.page-courses .cat-banner .title-block{display:none}}
+.page-courses .final .btn:not(.primary){background:var(--paper)}
