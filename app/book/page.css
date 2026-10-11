@@ -3,8 +3,6 @@
 .page-book .bk-hero{min-height:0;padding-block:clamp(56px,8vw,96px) clamp(150px,16vw,200px)}
 .page-book .bk-hero .wrap{width:100%}
 .page-book .bk-hero .h1{max-width:720px}
-.page-book .bk-hero .title-block{top:24px;right:clamp(20px,4vw,48px)}
-@media (max-width:1100px){.page-book .bk-hero .title-block{display:none}}
 .page-book .topic{margin-top:18px}
 .page-book .ways{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:12px;margin-top:30px;max-width:900px}
 .page-book .way{background:var(--paper);border-radius:var(--r-lg);padding:18px 20px;display:flex;flex-direction:column;gap:6px;border:1px solid transparent;position:relative;overflow:hidden}

@@ -69,14 +69,9 @@ export default function Page() {
   return (
     <main id="main" className="page-home">
       {/* 1. Hero: the promise, the two halves as two doors */}
-      <Coast as="section" seed="oceancrest-home-v2" palette="hero" size="hero" scene="cove" water className="hero has-contours">
+      <Coast as="section" seed="oceancrest-home-v2" video="/assets/video/home-hero.mp4" palette="hero" size="hero" scene="cove" water className="hero has-contours">
         <i className="tick tick-tl" aria-hidden="true" />
         <i className="tick tick-tr" aria-hidden="true" />
-        <div className="title-block hero-tb" aria-hidden="true">
-          <p>OceanCrest AI · A division of OceanCrest Ventures</p>
-          <p>Chart OC-00 — First approach</p>
-          <p>Soundings in production systems · Corrected 2026</p>
-        </div>
         <div className="wrap hero-copy">
           <div className="eyebrow">AI transformation and education · for small and mid-sized businesses</div>
           <h1 className="display" aria-label="Your operation, transformed from the inside.">
@@ -657,7 +652,7 @@ export default function Page() {
       {/* 7. Final call */}
       <section className="section" style={{ paddingTop: "0" }}>
         <div className="wrap">
-          <Coast seed="final-call" palette="dusk" size="wide" scene="cove" water className="final has-contours">
+          <Coast seed="final-call" video="/assets/video/home-final.mp4" palette="dusk" size="wide" scene="cove" water className="final has-contours">
             <i className="tick tick-tl" aria-hidden="true" />
             <i className="tick tick-tr" aria-hidden="true" />
             <i className="tick tick-bl" aria-hidden="true" />

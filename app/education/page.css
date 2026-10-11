@@ -1,6 +1,6 @@
 /* education: page styles, scoped to main.page-education */
 /* Hero */
-.page-education .edu-hero{min-height:min(780px,94vh)}
+.page-education .edu-hero{min-height:calc(100svh - 73px)}
 .page-education .edu-hero .wrap{width:100%}
 .page-education .edu-hero .half{background:var(--paper)}
 .page-education .edu-hero .eyebrow{margin-top:20px}
@@ -225,9 +225,7 @@
    so absolutely placed furniture is restated here. */
 .page-education .has-contours>.tick:not(.contours):not(.coast-layer),.page-education .has-contours>.title-block:not(.contours):not(.coast-layer),.page-education .has-contours>.course-lane:not(.contours):not(.coast-layer){position:absolute}
 .page-education .has-contours>.tick:not(.contours):not(.coast-layer){z-index:2}
-.page-education .edu-hero .title-block{max-width:300px}
 .page-education .hero-ref{margin-left:10px;color:var(--deep)}
-@media (max-width:1100px){.page-education .edu-hero .title-block{display:none}}
 .page-education .sess-photo{margin:calc(-1 * clamp(22px,2.6vw,30px));margin-bottom:10px;aspect-ratio:2/1;border-radius:0}
 .page-education .strip{margin-top:clamp(24px,3vw,36px);height:clamp(180px,22vw,260px)}
 .page-education .strip img{object-position:50% 78%}

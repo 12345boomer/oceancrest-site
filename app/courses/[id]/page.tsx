@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Coast from "@/components/Coast";
-import Contours from "@/components/Contours";
 import CourseCard from "@/components/CourseCard";
 import { COURSES, TRACKS, categoryById, courseById } from "@/lib/courses";
+import { isPreview, lessonsFor } from "@/lib/lessons";
+import CourseAccess from "@/components/CourseAccess";
 import "./page.css";
 
 /*
@@ -36,9 +37,7 @@ export default async function Page({ params }: Props) {
 
   const format = isTemplate ? "Download + prompts" : mind ? "Reading + reflection" : "Video + hands-on practice";
   const firstCourse = courseById(mind ? "m-without-fear" : "ai-fundamentals");
-  const outline = isTemplate
-    ? ["The template file", "A prompt for every slide", "Example: a finished deck", "How to adapt it to your business"]
-    : ["[Lesson title]", "[Lesson title]", "[Lesson title]", "[Lesson title]", "[Lesson title]"];
+  const lessons = lessonsFor(c);
 
   // Up to three more: the same category first, then the rest of the track.
   let related = COURSES.filter((x) => x.category === c.category && x.id !== c.id);
@@ -51,18 +50,12 @@ export default async function Page({ params }: Props) {
       <section className="course-hero">
         <div className="wrap">
           <Coast className="course-art has-contours" seed={c.id} palette={c.track} size="wide" scene={mind ? "beach" : "headland"} glints>
-            <Contours ink="white" />
             <i className="tick tick-tl" aria-hidden="true" />
             <i className="tick tick-tr" aria-hidden="true" />
             <i className="tick tick-bl" aria-hidden="true" />
             <i className="tick tick-br" aria-hidden="true" />
             <span className={`tag cat-${c.category}`}>{cat.name}</span>
             <span className={`half${mind ? " e" : ""}`}>{tr.name}</span>
-            <div className="title-block" aria-hidden="true">
-              <p>OceanCrest AI · Learning</p>
-              <p>Chart OC-02d — {cat.name}</p>
-              <p>Course {c.id} · Corrected 2026</p>
-            </div>
           </Coast>
           <div className="ch-grid">
             <div>
@@ -75,10 +68,7 @@ export default async function Page({ params }: Props) {
               </nav>
               <h1 className="h1">{c.title}{c.draft && <span className="pa">PA</span>}</h1>
               <p className="lede">{c.blurb}</p>
-              <div className="btns">
-                <Link className="btn primary" href="/diagnostic">Take the diagnostic <Arr /></Link>
-                <Link className="btn" href="/book?about=learning">Book a call to get access</Link>
-              </div>
+              <CourseAccess id={c.id} />
             </div>
             <div className="facts">
               <div><span className="ref">Level</span><b>{c.level}</b></div>
@@ -112,23 +102,16 @@ export default async function Page({ params }: Props) {
             </ul>
             <h2>{isTemplate ? "What is inside." : "Course outline."}</h2>
             <ol className="syllabus">
-              {outline.map((t, i) => (
-                <li key={i}>
-                  <span className="n">{pad(i + 1)}</span>
-                  <span className="t">{t}{!isTemplate && <small>[One-line summary]</small>}</span>
-                  <span className="d">{isTemplate ? "" : "[X] min"}</span>
+              {/* Each lesson opens its page; lesson 1 is the preview, the rest need the access code. */}
+              {lessons.map((l) => (
+                <li key={l.n} className={l.task ? "task" : undefined}>
+                  <Link className="lesson-row" href={`/courses/${c.id}/lessons/${l.n}`}>
+                    <span className="n">{pad(l.n)}</span>
+                    <span className="t">{l.title}{isPreview(l.n) && <em className="pv">Preview</em>}{l.summary && <small>{l.summary}</small>}</span>
+                    <span className="d">{l.minutes || ""}</span>
+                  </Link>
                 </li>
               ))}
-              {!isTemplate && (
-                <li className="task">
-                  <span className="n">{pad(outline.length + 1)}</span>
-                  <span className="t">
-                    {mind ? "Team discussion and reflection" : "Course task: build it for your job"}
-                    <small>{mind ? "Bring what you learned to your next team meeting." : "Apply the course to a real task and save the result to your playbook."}</small>
-                  </span>
-                  <span className="d">[X] min</span>
-                </li>
-              )}
             </ol>
           </div>
           <aside className="side-col" aria-label="About this course">
@@ -184,7 +167,6 @@ export default async function Page({ params }: Props) {
       <section className="section" style={{ paddingTop: "clamp(40px,5vw,64px)" }}>
         <div className="wrap">
           <Coast className="final has-contours" seed={`course-final-${c.track}`} palette="dusk" size="wide" scene="cove" glints>
-            <Contours ink="white" />
             <div className="eyebrow" style={{ color: "var(--deep)" }}>Not sure this is the one</div>
             <h2 className="h2" style={{ marginTop: "14px" }}>Find out what you know before we <span className="stroke warm">teach</span> it.</h2>
             <p className="lede">Fifteen short questions, about five minutes. You get a level, a score in each area, and the courses that close your gaps.</p>

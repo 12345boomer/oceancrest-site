@@ -6,6 +6,9 @@
   Glints add the animated "light in the water" layer on top of the painting.
   Water makes the sea itself move: its brushwork is painted as seamless strips that drift
   at three speeds (slow at the horizon, faster up close), under the land and the sun's reflection.
+  Alive splits the painting into layers so its parts can move: sky, sun (sinks as you scroll),
+  the scene (islands, sea, land), and the sailboat (drifts); the painted gulls are left out
+  because a flock flies across instead. Ripples follow the cursor over the water.
   Every layer is rendered once to an image; only CSS transforms move.
 
   Keep the RNG call order exactly as it is: the paintings are identical to the static site's.
@@ -34,9 +37,29 @@ export interface Painting {
   refl?: string;
   front?: string;
   hy?: number;
+  /** Only with alive: the painting split into moving layers, plus where things are. */
+  alive?: AliveLayers;
 }
 
+export interface AliveLayers {
+  sky: string;
+  sun: string;
+  scene: string;
+  boat?: string;
+  /** Sun centre and radius, in painting units. */
+  sunPos: { x: number; y: number; r: number };
+  boatPos?: { x: number; y: number; size: number };
+  /** Land and sand outlines (SVG path data), so ripples stay on the water. */
+  land: string[];
+  /** Which side the land is on; the boat drifts away from it. */
+  landSide: -1 | 0 | 1;
+  hy: number;
+}
+
+export interface AliveUrls { sky: string; sun: string; scene: string; boat?: string }
+
 export interface Art extends Painting {
+  aliveUrls?: AliveUrls;
   url: string;
   waveUrls?: string[];
   reflUrl?: string;
@@ -109,7 +132,7 @@ function isScene(v: string): v is Scene { return (SCENES as string[]).indexOf(v)
  * Paint one scene. Unknown palette falls back to hero, unknown size to card, and an
  * empty or unknown scene is picked by the seed. The raw names still feed the seed, as before.
  */
-export function paint(seed: string, paletteName: Palette | string, sizeName: Size | string, sceneName: Scene | string = "", water = false): Painting {
+export function paint(seed: string, paletteName: Palette | string, sizeName: Size | string, sceneName: Scene | string = "", water = false, alive = false): Painting {
   const P = isPalette(paletteName) ? PALETTES[paletteName] : PALETTES.hero;
   const S = isSize(sizeName) ? SIZES[sizeName] : SIZES.card;
   const W = S[0], H = S[1], k = Math.sqrt((W * H) / (1600 * 900));
@@ -123,6 +146,10 @@ export function paint(seed: string, paletteName: Palette | string, sizeName: Siz
   const hy = H * (sizeName === "hero" ? between(0.56, 0.62) : sizeName === "tall" ? between(0.46, 0.52) : between(0.36, 0.58));
   const sx = W * between(0.18, 0.82), sr = Math.min(W, H) * between(0.045, 0.09), sy = hy - H * between(0.08, 0.26);
   const out: string[] = [], sea: string[] = [], refl: string[] = [], front: string[] = [], glints: Glint[] = [];
+  // For alive: where the sky ends and the scene starts in `out`, and which `front` entry is the boat.
+  // The full painting is unchanged; the layers are sliced from it.
+  const land: string[] = [];
+  let skyEnd = 0, sceneStart = 0, boatAt = -1, boatPos: AliveLayers["boatPos"], landSide: -1 | 0 | 1 = 0;
 
   // Sky: a pale wash, then loose horizontal brushwork.
   out.push('<rect width="' + W + '" height="' + H + '" fill="' + P.sky[0] + '"/>');
@@ -130,6 +157,7 @@ export function paint(seed: string, paletteName: Palette | string, sizeName: Siz
     const y = between(-H * 0.03, hy * 0.97);
     out.push(stroke(between(-W * 0.3, W * 0.8), y, between(W * 0.12, W * 0.6), between(6, 26) * k, between(H * 0.012, H * 0.05), pick(P.sky.slice(1).concat([P.sun])), between(0.35, 0.85)));
   }
+  skyEnd = out.length;
   // Sun with a soft halo.
   out.push('<circle cx="' + f(sx) + '" cy="' + f(sy) + '" r="' + f(sr * 2.4) + '" fill="' + P.sun + '" opacity=".35"/>');
   out.push('<circle cx="' + f(sx) + '" cy="' + f(sy) + '" r="' + f(sr) + '" fill="' + P.sun + '"/>');
@@ -138,6 +166,7 @@ export function paint(seed: string, paletteName: Palette | string, sizeName: Siz
     const bx = between(W * 0.1, W * 0.9), by = between(H * 0.06, hy * 0.6), bs = between(6, 12) * k;
     out.push('<path d="M' + f(bx - bs) + " " + f(by) + "q" + f(bs / 2) + " " + f(-bs / 2) + " " + f(bs) + " 0q" + f(bs / 2) + " " + f(-bs / 2) + " " + f(bs) + ' 0" stroke="' + P.deep + '" stroke-width="' + f(1.6 * k + 0.6) + '" fill="none" stroke-linecap="round" opacity=".55"/>');
   }
+  sceneStart = out.length;
   // Distant islands along the horizon.
   const nIsl = 1 + Math.floor(r() * 3);
   for (let j = 0; j < nIsl; j++) {
@@ -172,6 +201,8 @@ export function paint(seed: string, paletteName: Palette | string, sizeName: Siz
     const pts: Pt[] = [[x0, hy - H * top], [x0 + (x1 - x0) * 0.45, hy - H * top * 0.55], [x1, hy + (H - hy) * 0.35], [x0 + (x1 - x0) * 0.8, H * low], [x0 + (x1 - x0) * 0.6, H + 40], [x0, H + 40]];
     const sand: Pt[] = pts.map((p): Pt => [p[0] + (x1 - x0) * 0.06, p[1] + H * 0.02]);
     sand[0] = [x0, hy - H * top * 0.6]; sand[sand.length - 1] = [x0, H + 40];
+    land.push(blob(sand), blob(pts));
+    landSide = landSide === 0 || landSide === side ? side : 0;
     front.push('<path d="' + blob(sand) + '" fill="' + pick(P.sand) + '"/>');
     front.push('<path d="' + blob(pts) + '" fill="' + P.land[0] + '"/>');
     for (let m = 0; m < Math.round(40 * k + 12); m++) {
@@ -192,11 +223,13 @@ export function paint(seed: string, paletteName: Palette | string, sizeName: Siz
     for (let bx2 = 1; bx2 <= 6; bx2++) pts.push([W * bx2 / 6, by0 + between(-H * 0.035, H * 0.03)]);
     pts.push([W + 40, H + 40], [-40, H + 40]);
     front.push('<path d="' + blob(pts) + '" fill="' + pick(P.sand) + '"/>');
+    land.push(blob(pts));
     for (let fl = 0; fl < 10; fl++) front.push(stroke(between(-20, W), by0 - between(2, 10) * k, between(60, 220) * k, 3 * k, between(2.5, 5) * k, P.foam, 0.85));
     if (scene === "beach") {
       const dx = r() < 0.5 ? -1 : 1;
       const dPts: Pt[] = dx < 0 ? [[-40, H * 0.66], [W * 0.18, H * 0.74], [W * 0.3, H + 40], [-40, H + 40]] : [[W + 40, H * 0.68], [W * 0.8, H * 0.75], [W * 0.68, H + 40], [W + 40, H + 40]];
       front.push('<path d="' + blob(dPts) + '" fill="' + P.land[0] + '"/>');
+      land.push(blob(dPts));
       for (let gr = 0; gr < Math.round(30 * k + 10); gr++) {
         const gx2 = dx < 0 ? between(0, W * 0.24) : between(W * 0.76, W), gy2 = between(H * 0.74, H);
         front.push('<path d="M' + f(gx2) + " " + f(gy2) + "q" + f(between(-6, 6) * k) + " " + f(-between(14, 34) * k) + " " + f(between(-10, 10) * k) + " " + f(-between(24, 50) * k) + '" stroke="' + pick(P.land.slice(1)) + '" stroke-width="' + f(between(1.5, 3.5) * k) + '" fill="none" stroke-linecap="round"/>');
@@ -206,6 +239,7 @@ export function paint(seed: string, paletteName: Palette | string, sizeName: Siz
   // Sometimes a small sailboat.
   if (r() < 0.55) {
     const bx3 = between(W * 0.15, W * 0.85), by3 = hy + (H - hy) * between(0.08, 0.3), bsz = between(14, 24) * k + 4;
+    boatPos = { x: bx3, y: by3, size: bsz }; boatAt = front.length;
     front.push('<path d="M' + f(bx3 - bsz * 0.7) + " " + f(by3) + "h" + f(bsz * 1.4) + "l" + f(-bsz * 0.25) + " " + f(bsz * 0.28) + "h" + f(-bsz * 0.9) + 'z" fill="' + P.deep + '"/>' +
       '<path d="M' + f(bx3) + " " + f(by3 - 2) + "v" + f(-bsz * 1.3) + "l" + f(bsz * 0.7) + " " + f(bsz * 1.2) + 'z" fill="#ffffff"/>' +
       '<path d="M' + f(bx3 - 2) + " " + f(by3 - 3) + "v" + f(-bsz) + "l" + f(-bsz * 0.45) + " " + f(bsz * 0.95) + 'z" fill="' + P.accent + '"/>');
@@ -232,6 +266,15 @@ export function paint(seed: string, paletteName: Palette | string, sizeName: Siz
   }
   const svg = svgOf(water ? out : out.concat(sea, refl, front), id, nseed);
   const res: Painting = { svg, glints, W, H };
+  if (alive) {
+    res.alive = {
+      sky: svgOf(out.slice(0, skyEnd), id + "k", nseed),
+      sun: svgOf(out.slice(skyEnd, skyEnd + 2), id + "s", nseed + 5),
+      scene: svgOf(out.slice(sceneStart).concat(sea, refl, front.filter((_, i) => i !== boatAt)), id + "c", nseed),
+      boat: boatAt >= 0 ? svgOf([front[boatAt]], id + "b", nseed + 9) : undefined,
+      sunPos: { x: sx, y: sy, r: sr }, boatPos, land, landSide, hy
+    };
+  }
   if (water) {
     // Moving sea: three bands of brushwork, each drawn wrapped around x so it tiles horizontally.
     const wr = seeded(seed + "|water"), BANDS: [number, number, number][] = [[0, 0.3, 0.5], [0.22, 0.62, 0.36], [0.55, 1, 0.3]];
@@ -257,17 +300,20 @@ export function paint(seed: string, paletteName: Palette | string, sizeName: Siz
 const cache = new Map<string, Art>();
 function dataUrl(svg: string): string { return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg); }
 
-/** paint() plus data URLs for every layer, cached per seed/palette/size/scene/water. */
-export function art(seed: string, palette: Palette | string, size: Size | string, scene: Scene | string = "", water = false): Art {
-  const key = [seed, palette, size, scene, water ? "w" : ""].join("|");
+/** paint() plus data URLs for every layer, cached per seed/palette/size/scene/water/alive. */
+export function art(seed: string, palette: Palette | string, size: Size | string, scene: Scene | string = "", water = false, alive = false): Art {
+  const key = [seed, palette, size, scene, water ? "w" : "", alive ? "a" : ""].join("|");
   let a = cache.get(key);
   if (!a) {
-    const p = paint(seed, palette, size, scene, water);
+    const p = paint(seed, palette, size, scene, water, alive);
     a = { ...p, url: dataUrl(p.svg) };
     if (water && p.waves && p.refl && p.front) {
       a.waveUrls = p.waves.map(dataUrl);
       a.reflUrl = dataUrl(p.refl);
       a.frontUrl = dataUrl(p.front);
+    }
+    if (p.alive) {
+      a.aliveUrls = { sky: dataUrl(p.alive.sky), sun: dataUrl(p.alive.sun), scene: dataUrl(p.alive.scene), boat: p.alive.boat ? dataUrl(p.alive.boat) : undefined };
     }
     cache.set(key, a);
   }

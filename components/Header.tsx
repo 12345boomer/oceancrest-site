@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { LOGIN_URL, MENUS, isExternal, type MenuItem } from "@/lib/site";
+import { ACCOUNT_URL, LOGIN_URL, MENUS, isExternal, type MenuItem } from "@/lib/site";
+import { readAccess } from "@/components/CourseAccess";
 
 const Chev = () => (
   <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true"><path d="M3 4.5l3 3 3-3" /></svg>
@@ -21,11 +22,17 @@ export default function Header() {
   const [open, setOpen] = useState<string | null>(null);
   const [mobile, setMobile] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [signedIn, setSignedIn] = useState(false);
   const nav = useRef<HTMLElement>(null);
   const canHover = () => matchMedia("(hover:hover)").matches;
+  // Hover menus close after a short grace period, so a pointer that drifts off on its way to the panel doesn't lose it.
+  const closeTimer = useRef<number | undefined>(undefined);
+  const hoverOpen = (label: string) => { window.clearTimeout(closeTimer.current); if (canHover()) setOpen(label); };
+  const hoverClose = () => { window.clearTimeout(closeTimer.current); if (canHover()) closeTimer.current = window.setTimeout(() => setOpen(null), 220); };
 
   // A new page closes whatever was open.
-  useEffect(() => { setOpen(null); setMobile(false); }, [path]);
+  useEffect(() => { setOpen(null); setMobile(false); setSignedIn(readAccess() !== "anon"); }, [path]);
+  useEffect(() => () => window.clearTimeout(closeTimer.current), []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -60,10 +67,14 @@ export default function Header() {
             const cur = m.paths.some((p) => path === p || path.startsWith(p + "/"));
             return (
               <div key={m.label} className={"dd" + (cur ? " cur" : "") + (isOpen ? " open" : "")}
-                onMouseEnter={() => { if (canHover()) setOpen(m.label); }}
-                onMouseLeave={() => { if (canHover()) setOpen(null); }}>
+                onMouseEnter={() => hoverOpen(m.label)}
+                onMouseLeave={hoverClose}>
                 <button type="button" aria-expanded={isOpen} aria-haspopup="true"
-                  onClick={(e) => { e.stopPropagation(); setOpen(isOpen ? null : m.label); }}>
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    // With a mouse, hovering already opened it: a click keeps it open instead of toggling it shut.
+                    setOpen(isOpen && !(canHover() && e.detail > 0) ? null : m.label);
+                  }}>
                   {m.label} <Chev />
                 </button>
                 <div className="dd-panel">
@@ -78,7 +89,7 @@ export default function Header() {
           })}
         </nav>
         <div className="head-actions">
-          <a className="login" href={LOGIN_URL}>Log in</a>
+          <Link className="login" href={signedIn ? ACCOUNT_URL : LOGIN_URL}>{signedIn ? "My account" : "Log in"}</Link>
           <Link className="btn ghost sm" href="/diagnostic">Take the diagnostic</Link>
           <Link className="btn primary sm" href="/book">Book now</Link>
           <button type="button" className="menu-btn" aria-expanded={mobile} aria-controls="mobile-nav" aria-label="Menu" onClick={() => setMobile(!mobile)}>
@@ -93,7 +104,7 @@ export default function Header() {
             {m.items.map((it) => <ItemLink key={it.title} item={it} className="sub">{it.title}</ItemLink>)}
           </div>
         ))}
-        <a href={LOGIN_URL}>Log in</a>
+        <Link href={signedIn ? ACCOUNT_URL : LOGIN_URL}>{signedIn ? "My account" : "Log in"}</Link>
         <div className="btns">
           <Link className="btn primary" href="/book">Book now</Link>
           <Link className="btn" href="/diagnostic">Take the diagnostic</Link>

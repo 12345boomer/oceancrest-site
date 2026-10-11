@@ -1,10 +1,9 @@
 /* home: page styles, scoped to main.page-home */
 /* Hero */
-.page-home .hero{min-height:min(980px,100vh);padding-block:clamp(56px,8vw,96px) clamp(24px,3vw,40px);display:flex;flex-direction:column}
+.page-home .hero{min-height:calc(100svh - 73px);padding-block:clamp(56px,8vw,96px) clamp(24px,3vw,40px);display:flex;flex-direction:column}
 .page-home .nw{white-space:nowrap}
-.page-home .hero-tb{right:clamp(20px,4vw,48px);bottom:18px}
 @media (min-width:761px){.page-home .hero{padding-bottom:132px}}
-.page-home .hero .coast-img{object-position:50% 72%}
+.page-home .hero :is(.coast-img,.coast-video){object-position:50% 72%}
 .page-home .hero-copy{text-align:center;max-width:1160px;margin:0 auto}
 .page-home .hero-copy .eyebrow{color:var(--deep)}
 .page-home .hero-copy .display{margin-top:18px}

@@ -18,7 +18,6 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import type { ChangeEvent, FormEvent, KeyboardEvent } from "react";
 import Coast from "@/components/Coast";
-import Contours from "@/components/Contours";
 import { playSound, sparkle } from "@/lib/sea";
 import { READINESS } from "@/lib/site";
 
@@ -441,7 +440,6 @@ export function BookPanel({ about }: { about: AboutKey }) {
   return (
     <div className={"bk-panel" + (demo ? " demo" : "")} id="panel" ref={panelRef}>
       <Coast as="aside" seed="book-side-berth" palette="hero" size="tall" scene="cove" glints className="bk-side has-contours">
-        <Contours ink="white" />
         <div className="side-card">
           <span className="ref">The meeting</span>
           <b>30 minutes, on Microsoft Teams.</b>

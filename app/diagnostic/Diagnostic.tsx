@@ -14,7 +14,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { KeyboardEvent, ReactNode } from "react";
 import Link from "next/link";
 import Coast from "@/components/Coast";
-import Contours from "@/components/Contours";
 import CourseCard from "@/components/CourseCard";
 import { PROGRAMS, courseById } from "@/lib/courses";
 import type { Course, Program } from "@/lib/courses";
@@ -345,7 +344,6 @@ function Results({ answers, profile, at, demo, quiet, focus, onRetake, onShown }
   return (
     <>
       <Coast seed={"diagnostic-result-" + lv.id} palette="dusk" size="wide" scene="cove" glints className="res-banner has-contours">
-        <Contours ink="white" />
         <div className="badge" id="badge" ref={badgeRef} style={{ "--lv": lv.c }}>
           <span className="ref">Your level</span><b>{lv.name}</b><span className="ref">{sc.total} of {Q.length} right</span>
         </div>

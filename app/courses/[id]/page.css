@@ -3,7 +3,6 @@
 .page-course .course-art{height:clamp(200px,24vw,300px);border-radius:var(--r-lg);display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:16px 18px;margin-bottom:clamp(28px,3vw,40px)}
 .page-course .course-art .tag,.page-course .course-art .half{background:var(--paper)}
 .page-course .course-art .tag{position:relative}
-.page-course .course-art .title-block{right:20px;bottom:18px;top:auto}
 .page-course .ch-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:28px clamp(32px,5vw,64px);align-items:end}
 .page-course .crumbs{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
 .page-course .crumbs a{border-bottom:1px solid var(--line);transition:border-color .2s}
@@ -24,7 +23,9 @@
 .page-course .main-col .ticks{margin-bottom:clamp(36px,4vw,48px)}
 .page-course .main-col .ticks li{color:var(--slate)}
 .page-course .syllabus{list-style:none;padding:0;margin:0;border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden}
-.page-course .syllabus li{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:12px;align-items:baseline;padding:16px 20px;border-top:1px solid var(--line);transition:background .2s}
+.page-course .syllabus li{border-top:1px solid var(--line);transition:background .2s}
+.page-course .syllabus .lesson-row{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:12px;align-items:baseline;padding:16px 20px;color:inherit}
+.page-course .syllabus .pv{margin-left:10px;font-style:normal;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}
 .page-course .syllabus li:first-child{border-top:0}
 .page-course .syllabus li:hover{background:var(--t-tint)}
 .page-course.c-mindset .syllabus li:hover{background:var(--e-tint)}
@@ -51,6 +52,5 @@
    so absolutely placed furniture is restated here. */
 .page-course .has-contours>.tick:not(.contours):not(.coast-layer),.page-course .has-contours>.title-block:not(.contours):not(.coast-layer),.page-course .has-contours>.course-lane:not(.contours):not(.coast-layer){position:absolute}
 .page-course .has-contours>.tick:not(.contours):not(.coast-layer){z-index:2}
-@media (max-width:900px){.page-course .course-art .title-block{display:none}}
 .page-course .final{min-height:380px}
 .page-course .final .btn:not(.primary){background:var(--paper)}

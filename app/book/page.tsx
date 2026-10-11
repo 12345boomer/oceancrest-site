@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
 import Coast from "@/components/Coast";
-import Contours from "@/components/Contours";
 import { READINESS } from "@/lib/site";
 import { BookPanel, BookPanelFromQuery, BookWays, BookWaysFromQuery } from "./Booking";
 import "./page.css";
@@ -18,15 +17,9 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <main id="main" className="page-book">
-      <Coast as="section" seed="book-safe-water" palette="technical" size="hero" scene="headland" glints className="page-hero has-contours bk-hero">
-        <Contours ink="white" />
+      <Coast as="section" seed="book-safe-water" video="/assets/video/book-hero.mp4" palette="technical" size="hero" scene="headland" className="page-hero has-contours bk-hero">
         <i className="tick tick-tl" aria-hidden="true" />
         <i className="tick tick-tr" aria-hidden="true" />
-        <div className="title-block" aria-hidden="true">
-          <p>OceanCrest AI · A division of OceanCrest Ventures</p>
-          <p>Chart OC-06a — Safe water</p>
-          <p>The berth · 30 minutes on Teams</p>
-        </div>
         <div className="wrap">
           <div className="eyebrow">Book now</div>
           <h1 className="h1">

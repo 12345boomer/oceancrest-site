@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Coast from "@/components/Coast";
-import Contours from "@/components/Contours";
 import { FinderPanel, FinderProvider, FinderResults } from "./finder";
 import "./page.css";
 
@@ -15,17 +14,11 @@ export default function Page() {
     <main id="main" className="page-courses">
       <FinderProvider>
         <div className="wrap">
-          <Coast as="section" seed="courses-catalog-banner" palette="mindset" size="wide" scene="beach" glints className="cat-banner has-contours" aria-labelledby="cat-title">
-            <Contours ink="white" />
+          <Coast as="section" seed="courses-catalog-banner" image="/assets/img/heroes/courses.jpg" video="/assets/video/sub-courses.mp4" palette="mindset" size="wide" scene="beach" className="cat-banner has-contours" aria-labelledby="cat-title">
             <i className="tick tick-tl" aria-hidden="true" />
             <i className="tick tick-tr" aria-hidden="true" />
             <i className="tick tick-bl" aria-hidden="true" />
             <i className="tick tick-br" aria-hidden="true" />
-            <div className="title-block" aria-hidden="true">
-              <p>OceanCrest AI · Learning</p>
-              <p>Chart OC-02d — The full chart table</p>
-              <p>Two tracks · one library · Corrected 2026</p>
-            </div>
             <div className="cat-head">
               <span className="chart-ref">OC-02d / Catalogue</span>
               <div className="eyebrow">Courses · two tracks</div>
@@ -75,7 +68,6 @@ export default function Page() {
         <section className="section" style={{ paddingTop: "clamp(40px,5vw,64px)" }}>
           <div className="wrap">
             <Coast seed="courses-final" palette="dusk" size="wide" scene="cove" glints className="final has-contours">
-              <Contours ink="white" />
               <i className="tick tick-tl" aria-hidden="true" />
               <i className="tick tick-tr" aria-hidden="true" />
               <i className="tick tick-bl" aria-hidden="true" />

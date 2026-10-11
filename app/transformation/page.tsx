@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Coast from "@/components/Coast";
-import Contours from "@/components/Contours";
-import PhaseLink from "./phase-link";
+import { LeadersSection, PhaseImplementation, WritingSection } from "./sections";
 import "./page.css";
+import { ServiceRoute, PlanPeek } from "@/components/ServiceHero";
 
 export const metadata: Metadata = {
   title: "AI Transformation Partner — OceanCrest AI",
@@ -14,73 +14,43 @@ export default function Page() {
   return (
     <main id="main" className="page-transformation">
       {/* 1. Hero */}
-      <Coast as="section" seed="transformation-hero-lagoon" palette="technical" size="hero" scene="headland" glints className="page-hero t-hero has-contours">
-        <Contours ink="white" />
+      <Coast as="section" seed="transformation-hero-lagoon" video="/assets/video/transformation-hero.mp4" palette="technical" size="hero" scene="headland" alive className="page-hero t-hero has-contours">
         <i className="tick tick-tl" aria-hidden="true" />
         <i className="tick tick-tr" aria-hidden="true" />
         <i className="tick tick-bl" aria-hidden="true" />
         <i className="tick tick-br" aria-hidden="true" />
-        <div className="title-block" aria-hidden="true" style={{ top: "24px", right: "clamp(20px,4vw,48px)" }}>
-          <p>OceanCrest AI · A division of OceanCrest Ventures</p>
-          <p>Chart OC-02a — The partnership</p>
-          <p>Assessment · Implementation · Amplification</p>
-        </div>
         <div className="wrap" style={{ width: "100%" }}>
-          <span className="half">Transformation</span>
-          <div className="eyebrow" style={{ marginTop: "14px" }}>
-            AI Transformation Partner{" "}
-            <span className="chart-ref" style={{ marginLeft: "10px", color: "var(--deep)" }}>OC-02a / Soundings</span>
+          <div className="ph-grid">
+            <div className="ph-copy">
+              <div className="eyebrow">
+                AI Transformation Partner{" "}
+                <span className="chart-ref" style={{ marginLeft: "10px", color: "var(--deep)" }}>OC-02a / Soundings</span>
+              </div>
+              <h1 className="h1">
+                What we're really selling is a{" "}
+                <span className="stroke">process</span>
+                .
+              </h1>
+              <p className="lede">
+                Three pieces, walked in order: inside your operation, with your people, and never further than the assessment justifies. Each piece ends in something you hold.
+              </p>
+              <div className="btns">
+                <Link className="btn primary" href="/book">
+                  Book now{" "}
+                  <span className="arr" aria-hidden="true">→</span>
+                </Link>
+                {" "}
+                <a className="btn" href="https://ocv-ai-assessment.netlify.app/" target="_blank" rel="noopener" style={{ background: "var(--paper)" }}>
+                  Score your readiness{" "}
+                  <span aria-hidden="true">↗</span>
+                </a>
+              </div>
+            </div>
+            <aside className="ph-aside">
+              <ServiceRoute current="planning" />
+              <PlanPeek />
+            </aside>
           </div>
-          <h1 className="h1">
-            What we're really selling is a{" "}
-            <span className="stroke">process</span>
-            .
-          </h1>
-          <p className="lede">
-            Three pieces, walked in order: inside your operation, with your people, and never further than the assessment justifies. Each piece ends in something you hold.
-          </p>
-          <div className="btns">
-            <Link className="btn primary" href="/book">
-              Book now{" "}
-              <span className="arr" aria-hidden="true">→</span>
-            </Link>
-            {" "}
-            <a className="btn" href="https://ocv-ai-assessment.netlify.app/" target="_blank" rel="noopener" style={{ background: "var(--paper)" }}>
-              Score your readiness{" "}
-              <span aria-hidden="true">↗</span>
-            </a>
-          </div>
-        </div>
-        <div className="wrap holds">
-          <ol aria-label="What each piece leaves you holding">
-            <li>
-              <PhaseLink phase="a">
-                <span className="pebble sm">1</span>
-                <span>
-                  <span className="ref">Assessment</span>
-                  <b>A score</b>
-                </span>
-              </PhaseLink>
-            </li>
-            <li>
-              <PhaseLink phase="b">
-                <span className="pebble sm">2</span>
-                <span>
-                  <span className="ref">Implementation</span>
-                  <b>A running system</b>
-                </span>
-              </PhaseLink>
-            </li>
-            <li>
-              <PhaseLink phase="c">
-                <span className="pebble sm">3</span>
-                <span>
-                  <span className="ref">Amplification</span>
-                  <b>A number</b>
-                </span>
-              </PhaseLink>
-            </li>
-          </ol>
         </div>
       </Coast>
       {/* 2. The three phases */}
@@ -159,41 +129,7 @@ export default function Page() {
               </div>
             </div>
           </div>
-          <div className="phase" id="phase-b" role="tabpanel" data-panel="phase:b" hidden>
-            <Coast seed="phase-implementation-lagoon" palette="technical" size="tall" scene="headland" glints className="art">
-              <span className="pebble" style={{ "--peb": "var(--lagoon)" }}>2</span>
-              <div className="you">
-                <span className="ref">You hold</span>
-                <b>A running system you own.</b>
-              </div>
-            </Coast>
-            <div className="txt">
-              <span className="ref">Phase 02 of 03</span>
-              <h3 className="h3">Implementation.</h3>
-              <p className="lede">Only what the assessment justified gets built.</p>
-              <div className="items">
-                <div>
-                  <b>Scoped build</b>
-                  <p>Only what the assessment justifies, priced to scope.</p>
-                </div>
-                <div>
-                  <b>Dashboard, clients and pipeline</b>
-                  <p>The whole business on one live screen.</p>
-                </div>
-                <div>
-                  <b>Automation and AI agents</b>
-                  <p>The repetitive work runs itself.</p>
-                </div>
-                <div>
-                  <b>Owned infrastructure</b>
-                  <p>It's yours: an asset, not a subscription.</p>
-                </div>
-              </div>
-              <div className="go">
-                <a className="link" href="https://oceancrest.ai/case-001/" target="_blank" rel="noopener">See a demonstration engagement ↗</a>
-              </div>
-            </div>
-          </div>
+          <PhaseImplementation />
           <div className="phase" id="phase-c" role="tabpanel" data-panel="phase:c" hidden>
             <Coast seed="phase-amplification-open" palette="hero" size="tall" scene="open" glints className="art">
               <span className="pebble" style={{ "--peb": "var(--sage)" }}>3</span>
@@ -238,7 +174,6 @@ export default function Page() {
       </section>
       {/* 3. The capability gap: live geometry from home OC-01c (svg.gap-chart), recoloured pastel */}
       <section className="lane-host section tinted has-contours">
-        <Contours ink="sea" />
         <div className="course-lane" aria-hidden="true">
           <span className="course-waypoint" />
           <span className="course-rule" />
@@ -458,49 +393,7 @@ export default function Page() {
         </div>
       </section>
       {/* 5. Leadership workshop */}
-      <section className="lane-host section tinted e">
-        <div className="course-lane" aria-hidden="true">
-          <span className="course-waypoint" />
-          <span className="course-rule" />
-          <span className="course-bearing">CO 168°</span>
-        </div>
-        <div className="wrap ws">
-          <div className="reveal">
-            <span className="half e">Education · Workshops</span>
-            <h2 className="h2" style={{ marginTop: "18px" }}>
-              Leaders first, then the whole{" "}
-              <span className="stroke warm">company</span>
-              .
-            </h2>
-            <p className="body">
-              Leaders are the foundation of an AI rollout, so we start with them. Strategy sessions with leadership, then the whole team: what AI is and isn't, what your policy allows, and where the wins are. The people who run the work are the people who will run the system.
-            </p>
-            <div className="btns" style={{ marginTop: "28px" }}>
-              <Link className="btn" href="/education#workshops" style={{ background: "var(--paper)" }}>
-                See the workshops{" "}
-                <span className="arr" aria-hidden="true">→</span>
-              </Link>
-            </div>
-          </div>
-          <Coast seed="workshop-leaders-dawn" palette="mindset" size="wide" scene="cove" glints className="ws-art reveal">
-            <article className="session">
-              <div className="top">
-                <span className="ref">For the leadership team</span>
-                <span className="tag sun">90 minutes</span>
-              </div>
-              <h3>Leading your company through AI.</h3>
-              <p>
-                For the CEO, owner or COO; an operations lead is a welcome plus-one. A working session on where AI makes sense in your business, and what your people need to hear before it arrives. Not a vendor pitch.
-              </p>
-              <ul className="ticks">
-                <li><span>Your AI readiness, scored.</span></li>
-                <li><span>The story your people need to hear.</span></li>
-                <li><span>A charted course from pilot to payoff.</span></li>
-              </ul>
-            </article>
-          </Coast>
-        </div>
-      </section>
+      <LeadersSection />
       <div className="wrap" style={{ paddingTop: "28px" }}>
         <div className="notch" aria-hidden="true">
           <svg viewBox="0 0 1200 28" preserveAspectRatio="none">
@@ -510,61 +403,11 @@ export default function Page() {
         </div>
       </div>
       {/* 6. How an engagement runs, in writing */}
-      <section className="lane-host section has-contours" id="engagement">
-        <Contours ink="navy" />
-        <div className="course-lane" aria-hidden="true">
-          <span className="course-waypoint" />
-          <span className="course-rule" />
-          <span className="course-bearing">CO 167°</span>
-        </div>
-        <div className="wrap">
-          <div className="sec-head reveal">
-            <div>
-              <div className="eyebrow">Before you book</div>
-              <h2 className="h2">
-                How an engagement runs, in{" "}
-                <span className="stroke">writing</span>
-                .
-              </h2>
-            </div>
-            <p className="lede">
-              Read the model, then see it played out on a demonstration engagement. Neither asks for a call.
-            </p>
-          </div>
-          <div className="grid writing">
-            <figure className="photo reveal">
-              <img src="/assets/img/photos/oc-05-zigzag-stairs-tall.jpg" alt="A zigzagging concrete stair structure against a pale sky, stepping up in even stages. Generated image." loading="lazy" />
-              <figcaption>In order, one stage at a time</figcaption>
-            </figure>
-            <a className="card pub reveal" href="https://oceancrest.ai/resources/engagement-model/" target="_blank" rel="noopener">
-              <div className="cover">
-                <img src="/assets/img/covers/cover-engagement-model.jpg" alt="Cover sheet of the white paper The engagement model, in four phases" loading="lazy" />
-              </div>
-              <span className="ref">Paper · OC-401 · 4 sheets · Free</span>
-              <h3>The engagement model, in four phases.</h3>
-              <p>
-                How an engagement runs, from the first record we ask for to the day the build team steps back, and what stays behind. Collect the record, educate and align, implement and build, then the Office of AI, with what each phase asks of you.
-              </p>
-              <span className="link go">Read the paper ↗</span>
-            </a>
-            {" "}
-            <a className="card pub reveal" href="https://oceancrest.ai/case-001/" target="_blank" rel="noopener">
-              <Coast seed="demo-case-planning-engine" palette="technical" size="card" scene="open" glints className="cover"><span className="tag line">Demonstration</span></Coast>
-              <span className="ref">Case · OC-100 · Five chapters</span>
-              <h3>The planning engine.</h3>
-              <p>
-                A documented engagement, chapter by chapter: discovery, set-up, the team's own views, what runs under the hood, and the outcomes. A composite engagement with a fictional client, marked as a demonstration throughout.
-              </p>
-              <span className="link go">Open the demonstration case ↗</span>
-            </a>
-          </div>
-        </div>
-      </section>
+      <WritingSection />
       {/* 7. Final call */}
       <section className="section" style={{ paddingTop: "0" }}>
         <div className="wrap">
-          <Coast seed="transformation-final-dusk" palette="dusk" size="wide" scene="headland" glints className="final has-contours">
-            <Contours ink="white" />
+          <Coast seed="transformation-final-dusk" video="/assets/video/transformation-final.mp4" palette="dusk" size="wide" scene="headland" className="final has-contours">
             <i className="tick tick-tl" aria-hidden="true" />
             <i className="tick tick-tr" aria-hidden="true" />
             <i className="tick tick-bl" aria-hidden="true" />

@@ -4,10 +4,8 @@
 .page-diagnostic .dg-hero .wrap{width:100%}
 .page-diagnostic .dg-hero .h1{max-width:760px}
 .page-diagnostic .dg-hero .lede{max-width:640px}
-.page-diagnostic .dg-hero .title-block{top:24px;right:clamp(20px,4vw,48px)}
 .page-diagnostic .facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
 .page-diagnostic .facts .tag{background:var(--paper)}
-@media (max-width:1100px){.page-diagnostic .dg-hero .title-block{display:none}}
 
 /* Stage: the white rounded panel the quiz runs in */
 .page-diagnostic .stage-wrap{margin-top:calc(-1 * clamp(130px,14vw,180px));position:relative;z-index:3;padding-bottom:clamp(56px,8vw,96px)}

@@ -1,0 +1,6 @@
+/* workflows and automation: page styles, scoped to main.page-services-workflows */
+/* Tools strip (as on the home page) */
+.page-services-workflows .tools{padding-block:36px}
+.page-services-workflows .tools p{text-align:center;margin-bottom:18px}
+/* In order */
+.page-services-workflows .order-foot{margin-top:clamp(28px,3vw,40px);justify-content:center;align-items:center}

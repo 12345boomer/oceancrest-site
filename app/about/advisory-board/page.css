@@ -1,0 +1,3 @@
+/* about/advisory-board: page styles, scoped to main.page-advisory. Section styles come from ../page.css (.page-about). */
+/* The lineage section follows the board here, so give it the same breathing room it has on /about. */
+.page-advisory #lineage{margin-top:28px}

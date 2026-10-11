@@ -189,6 +189,21 @@ function CurBody({ p }: { p: Program }) {
   return <ol className="mods two">{mods.map((m, mi) => <Mod key={mi} n={mi + 1} t={m.t} f="30 min · 3 lessons" />)}</ol>;
 }
 
+function CurInner({ p }: { p: Program }) {
+  return (
+    <>
+      <Coast className="cur-head" seed={`education-cur-${p.id}`} palette={p.palette} size="wide" scene="open">
+        <div>
+          <span className="ref">{p.audience}</span>
+          <h3><Title p={p} /></h3>
+          <span className="facts-line">{CUR_FACTS[p.id]}</span>
+        </div>
+      </Coast>
+      <div className="cur-body"><CurBody p={p} /></div>
+    </>
+  );
+}
+
 export function CurPanels() {
   return (
     <>
@@ -196,19 +211,17 @@ export function CurPanels() {
         const p = prog(id);
         return (
           <div key={id} className="cur" data-panel={`cur:${p.id}`} role="tabpanel" hidden={i > 0}>
-            <Coast className="cur-head" seed={`education-cur-${p.id}`} palette={p.palette} size="wide" scene="open">
-              <div>
-                <span className="ref">{p.audience}</span>
-                <h3><Title p={p} /></h3>
-                <span className="facts-line">{CUR_FACTS[p.id]}</span>
-              </div>
-            </Coast>
-            <div className="cur-body"><CurBody p={p} /></div>
+            <CurInner p={p} />
           </div>
         );
       })}
     </>
   );
+}
+
+/** One course's module-by-module block on its own (no tabs), for pages outside /education. */
+export function CurCourse({ id }: { id: string }) {
+  return <div className="cur reveal"><CurInner p={prog(id)} /></div>;
 }
 
 // ---- Platform sample data (fictional company: Brasswell Manufacturing Co.) ----
