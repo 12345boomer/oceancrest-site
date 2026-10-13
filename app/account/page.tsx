@@ -33,7 +33,7 @@ export default async function Page({ searchParams }: Props) {
               <>
                 <p className="acc-fine" style={{ marginTop: 18 }}>Have an access code from OceanCrest AI? Enter it to unlock every course.</p>
                 <CodeForm next={next} />
-                <p className="acc-fine">No code yet? <Link className="link" href="/book?about=learning">Talk to us about access</Link>.</p>
+                <p className="acc-fine">No code yet? <Link className="link" href="/book">Talk to us about access</Link>.</p>
               </>
             )}
             <form action={signOut} className="acc-out"><button className="link" type="submit">Sign out</button></form>

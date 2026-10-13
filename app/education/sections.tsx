@@ -6,12 +6,12 @@
 import Link from "next/link";
 import Coast from "@/components/Coast";
 import { Funnel, Skill, TeamRows } from "./parts";
+import Count from "@/components/Count";
 
 const Lane = ({ bearing }: { bearing: string }) => (
   <div className="course-lane" aria-hidden="true">
     <span className="course-waypoint" />
     <span className="course-rule" />
-    <span className="course-bearing">{bearing}</span>
   </div>
 );
 
@@ -96,22 +96,22 @@ export function PlatformSection({ tinted = true }: { tinted?: boolean }) {
               <div className="kp4">
                 <div>
                   <span className="ref">Enrolled</span>
-                  <b data-count="18">0</b>
+                  <b><Count to={18} /></b>
                   <small>of 20 seats</small>
                 </div>
                 <div>
                   <span className="ref">Started</span>
-                  <b data-count="15">0</b>
+                  <b><Count to={15} /></b>
                   <small>opened a lesson</small>
                 </div>
                 <div>
                   <span className="ref">Completed</span>
-                  <b data-count="7">0</b>
+                  <b><Count to={7} /></b>
                   <small>all 30 lessons</small>
                 </div>
                 <div>
                   <span className="ref">Completion rate</span>
-                  <b data-count="39" data-suffix="%">0%</b>
+                  <b><Count to={39} suffix="%" /></b>
                   <small>of those enrolled</small>
                 </div>
               </div>
@@ -453,11 +453,11 @@ export function WorkshopsSection() {
         <FounderQuote />
         <div className="btns" style={{ marginTop: "32px" }}>
           <Link className="btn primary" href="/diagnostic">
-            Take the diagnostic{" "}
+            Check your AI skills{" "}
             <span className="arr" aria-hidden="true">→</span>
           </Link>
           {" "}
-          <Link className="btn" href="/book?about=learning">Plan a workshop</Link>
+          <Link className="btn" href="/book">Plan a workshop</Link>
         </div>
       </div>
     </section>
@@ -556,11 +556,11 @@ export function MembershipSection() {
         </div>
         <div className="mem-cta">
           <Link className="btn primary" href="/diagnostic">
-            Take the diagnostic{" "}
+            Check your AI skills{" "}
             <span className="arr" aria-hidden="true">→</span>
           </Link>
           {" "}
-          <Link className="btn" href="/book?about=learning" style={{ background: "var(--paper)" }}>Talk to us about membership</Link>
+          <Link className="btn" href="/book" style={{ background: "var(--paper)" }}>Talk to us about membership</Link>
         </div>
       </div>
     </section>

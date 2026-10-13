@@ -5,14 +5,13 @@
 */
 import { useState } from "react";
 import type { FormEvent } from "react";
-import { playSound, sparkle } from "@/lib/sea";
+import { sparkle } from "@/lib/sea";
 
 export default function SubscribeForm() {
   const [sent, setSent] = useState(false);
   function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const btn = e.currentTarget.querySelector('button[type="submit"]');
-    playSound("chime");
     if (btn) sparkle(btn);
     setSent(true);
   }
@@ -27,7 +26,7 @@ export default function SubscribeForm() {
           Name, optional
           <input type="text" name="name" autoComplete="name" placeholder="Your name" />
         </label>
-        <button type="submit" className="btn primary" data-sound="none">Tell me when the next one ships</button>
+        <button type="submit" className="btn primary">Tell me when the next one ships</button>
         <p className="fine">We use this for that one email and nothing else.</p>
       </form>
       <div className="thanks" id="sub-thanks" role="status" aria-live="polite" hidden={!sent}>

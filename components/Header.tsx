@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { ACCOUNT_URL, LOGIN_URL, MENUS, isExternal, type MenuItem } from "@/lib/site";
+import { ACCOUNT_URL, ASSESS_LABEL, LOGIN_URL, MENUS, READINESS, isExternal, type MenuItem } from "@/lib/site";
 import { readAccess } from "@/components/CourseAccess";
 
 const Chev = () => (
@@ -90,8 +90,8 @@ export default function Header() {
         </nav>
         <div className="head-actions">
           <Link className="login" href={signedIn ? ACCOUNT_URL : LOGIN_URL}>{signedIn ? "My account" : "Log in"}</Link>
-          <Link className="btn ghost sm" href="/diagnostic">Take the diagnostic</Link>
-          <Link className="btn primary sm" href="/book">Book now</Link>
+          <a className="btn ghost sm" href={READINESS} target="_blank" rel="noopener">{ASSESS_LABEL}</a>
+          <Link className="btn primary sm" href="/book">Book a meeting</Link>
           <button type="button" className="menu-btn" aria-expanded={mobile} aria-controls="mobile-nav" aria-label="Menu" onClick={() => setMobile(!mobile)}>
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true"><path d="M2 5h14M2 9h14M2 13h14" /></svg>
           </button>
@@ -106,8 +106,8 @@ export default function Header() {
         ))}
         <Link href={signedIn ? ACCOUNT_URL : LOGIN_URL}>{signedIn ? "My account" : "Log in"}</Link>
         <div className="btns">
-          <Link className="btn primary" href="/book">Book now</Link>
-          <Link className="btn" href="/diagnostic">Take the diagnostic</Link>
+          <Link className="btn primary" href="/book">Book a meeting</Link>
+          <a className="btn" href={READINESS} target="_blank" rel="noopener">{ASSESS_LABEL} ↗</a>
         </div>
       </nav>
     </header>

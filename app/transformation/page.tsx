@@ -1,20 +1,22 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import ClosingCall from "@/components/ClosingCall";
 import Coast from "@/components/Coast";
 import { LeadersSection, PhaseImplementation, WritingSection } from "./sections";
 import "./page.css";
 import { ServiceRoute, PlanPeek } from "@/components/ServiceHero";
+import { READINESS } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "AI Transformation Partner — OceanCrest AI",
-  description: "What we're really selling is a process. Assessment, implementation and amplification, walked in order inside your operation, with your people, and never further than the assessment justifies."
+  description: "What we're really selling is a process. Assess, build and measure what changed, in order inside your operation, with your people, and never further than the assessment justifies."
 };
 
 export default function Page() {
   return (
     <main id="main" className="page-transformation">
       {/* 1. Hero */}
-      <Coast as="section" seed="transformation-hero-lagoon" video="/assets/video/transformation-hero.mp4" palette="technical" size="hero" scene="headland" alive className="page-hero t-hero has-contours">
+      <Coast as="section" seed="transformation-hero-lagoon" image="/assets/img/heroes/transformation-crest.jpg" video="/assets/video/transformation-crest.mp4" palette="technical" size="hero" scene="headland" className="page-hero ph-photo t-hero has-contours">
         <i className="tick tick-tl" aria-hidden="true" />
         <i className="tick tick-tr" aria-hidden="true" />
         <i className="tick tick-bl" aria-hidden="true" />
@@ -23,8 +25,7 @@ export default function Page() {
           <div className="ph-grid">
             <div className="ph-copy">
               <div className="eyebrow">
-                AI Transformation Partner{" "}
-                <span className="chart-ref" style={{ marginLeft: "10px", color: "var(--deep)" }}>OC-02a / Soundings</span>
+                AI Transformation Partner
               </div>
               <h1 className="h1">
                 What we're really selling is a{" "}
@@ -36,12 +37,12 @@ export default function Page() {
               </p>
               <div className="btns">
                 <Link className="btn primary" href="/book">
-                  Book now{" "}
+                  Book a meeting{" "}
                   <span className="arr" aria-hidden="true">→</span>
                 </Link>
                 {" "}
                 <a className="btn" href="https://ocv-ai-assessment.netlify.app/" target="_blank" rel="noopener" style={{ background: "var(--paper)" }}>
-                  Score your readiness{" "}
+                  Assess your business{" "}
                   <span aria-hidden="true">↗</span>
                 </a>
               </div>
@@ -58,14 +59,13 @@ export default function Page() {
         <div className="course-lane" aria-hidden="true">
           <span className="course-waypoint" />
           <span className="course-rule" />
-          <span className="course-bearing">CO 171°</span>
         </div>
         <div className="wrap">
           <div className="sec-head center reveal">
             <div className="eyebrow">The partnership, in order</div>
             <h2 className="h2">
               Assess, build,{" "}
-              <span className="stroke">amplify</span>
+              <span className="stroke">measure</span>
               .
             </h2>
             <p className="lede">
@@ -86,12 +86,12 @@ export default function Page() {
               {" "}
               <button type="button" role="tab" data-val="c" aria-selected="false" aria-controls="phase-c">
                 <i />
-                Amplification
+                Measure and grow
               </button>
             </div>
           </div>
           <div className="phase" id="phase-a" role="tabpanel" data-panel="phase:a">
-            <Coast seed="phase-assessment-shallows" palette="technical" size="tall" scene="cove" glints className="art">
+            <Coast seed="phase-assessment-shallows" image="/assets/img/sea/depth-gradient.jpg" palette="technical" size="tall" scene="cove" className="art">
               <span className="pebble" style={{ "--peb": "var(--shallows)" }}>1</span>
               <div className="you">
                 <span className="ref">You hold</span>
@@ -117,12 +117,12 @@ export default function Page() {
                 </div>
                 <div>
                   <b>Ranked build plan</b>
-                  <p>Where AI moves the P&L first, reported to leadership.</p>
+                  <p>Where AI saves the most time or money first, reported to leadership.</p>
                 </div>
               </div>
               <div className="go">
                 <a className="btn sm" href="https://ocv-ai-assessment.netlify.app/" target="_blank" rel="noopener">
-                  Score your readiness{" "}
+                  Assess your business{" "}
                   <span aria-hidden="true">↗</span>
                 </a>
                 <span className="ref">Free · about three minutes · 0 to 100</span>
@@ -131,7 +131,7 @@ export default function Page() {
           </div>
           <PhaseImplementation />
           <div className="phase" id="phase-c" role="tabpanel" data-panel="phase:c" hidden>
-            <Coast seed="phase-amplification-open" palette="hero" size="tall" scene="open" glints className="art">
+            <Coast seed="phase-amplification-open" image="/assets/img/sea/open-swell.jpg" palette="hero" size="tall" scene="open" className="art">
               <span className="pebble" style={{ "--peb": "var(--sage)" }}>3</span>
               <div className="you">
                 <span className="ref">You hold</span>
@@ -140,7 +140,7 @@ export default function Page() {
             </Coast>
             <div className="txt">
               <span className="ref">Phase 03 of 03</span>
-              <h3 className="h3">Amplification.</h3>
+              <h3 className="h3">Measure and grow.</h3>
               <p className="lede">What it returned, put back to work.</p>
               <div className="items">
                 <div>
@@ -152,7 +152,7 @@ export default function Page() {
                   <p>Into deeper automation, training, growth.</p>
                 </div>
                 <div>
-                  <b>Fractional partnership</b>
+                  <b>Ongoing support</b>
                   <p>We stay on the team, month over month.</p>
                 </div>
                 <div>
@@ -162,7 +162,7 @@ export default function Page() {
               </div>
               <div className="go">
                 <Link className="btn primary sm" href="/book">
-                  Book now{" "}
+                  Book a meeting{" "}
                   <span className="arr" aria-hidden="true">→</span>
                 </Link>
                 <a className="link" href="#options">Ways to start</a>
@@ -172,19 +172,52 @@ export default function Page() {
           <p className="phases-foot">Each piece ends in something you hold: a score, a running system, a number.</p>
         </div>
       </section>
+      {/* 2b. The assessment: the free readiness check vs the full business assessment */}
+      <section className="section tight" id="assessment">
+        <div className="wrap">
+          <div className="sec-head">
+            <div>
+              <div className="eyebrow">Where it starts</div>
+              <h2 className="h2">What we deliver in a business <span className="stroke">assessment</span>.</h2>
+            </div>
+            <p className="lede">Two ways to find out where AI could help. Start with the free check, or go deeper with a full assessment.</p>
+          </div>
+          <div className="assess-pair">
+            <article className="ap-card">
+              <span className="ref">Free · about three minutes</span>
+              <h3>Free readiness check</h3>
+              <p>A short online quiz that gives your business an initial readiness score out of 100. A useful first look, on your own.</p>
+              <div className="ap-cta">
+                <a className="btn" href={READINESS} target="_blank" rel="noopener">Take the free readiness check <span aria-hidden="true">↗</span></a>
+              </div>
+            </article>
+            <article className="ap-card full">
+              <span className="ref">Done with you</span>
+              <h3>Full business assessment</h3>
+              <p>We work with you to understand how your processes really run. You receive:</p>
+              <ol>
+                <li><b>A readiness score</b>, so you know where you stand.</li>
+                <li><b>A map of your workflows</b>, each task marked manual, partly automated or automated.</li>
+                <li><b>A ranked improvement plan</b>: what to fix first, and why.</li>
+              </ol>
+              <div className="ap-cta">
+                <Link className="btn primary" href="/book">Book a meeting to discuss it <span className="arr" aria-hidden="true">→</span></Link>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
       {/* 3. The capability gap: live geometry from home OC-01c (svg.gap-chart), recoloured pastel */}
       <section className="lane-host section tinted has-contours">
         <div className="course-lane" aria-hidden="true">
           <span className="course-waypoint" />
           <span className="course-rule" />
-          <span className="course-bearing">CO 170°</span>
         </div>
         <div className="wrap">
           <div className="sec-head reveal">
             <div>
               <div className="eyebrow">
-                The opening{" "}
-                <span className="chart-ref" style={{ marginLeft: "10px" }}>OC-01c / The capability gap</span>
+                The opening
               </div>
               <h2 className="h2">
                 What models can do. What businesses actually{" "}
@@ -253,7 +286,7 @@ export default function Page() {
                   </p>
                   <ul>
                     <li>Automate workflows</li>
-                    <li>Think for themselves</li>
+                    <li>Handle multi-step tasks</li>
                     <li>Customize applications</li>
                   </ul>
                 </div>
@@ -289,7 +322,6 @@ export default function Page() {
         <div className="course-lane" aria-hidden="true">
           <span className="course-waypoint" />
           <span className="course-rule" />
-          <span className="course-bearing">CO 169°</span>
         </div>
         <div className="wrap">
           <div className="sec-head reveal">
@@ -307,7 +339,7 @@ export default function Page() {
           </div>
           <div className="ways">
             <article className="card way reveal">
-              <Coast seed="option-learn-dawn" palette="mindset" size="card" scene="beach" glints className="art-top">
+              <Coast seed="option-learn-dawn" image="/assets/img/sea/sunrise-foam.jpg" palette="mindset" size="card" scene="beach" className="art-top">
                 <span className="half e">Education</span>
                 <span className="pebble sm" style={{ "--peb": "var(--blush)" }}>1</span>
               </Coast>
@@ -332,7 +364,7 @@ export default function Page() {
               </div>
             </article>
             <article className="card way reveal">
-              <Coast seed="option-diagnose-shallows" palette="technical" size="card" scene="cove" glints className="art-top">
+              <Coast seed="option-diagnose-shallows" image="/assets/img/sea/lagoon.jpg" palette="technical" size="card" scene="cove" className="art-top">
                 <span className="half">Transformation</span>
                 <span className="pebble sm" style={{ "--peb": "var(--shallows)" }}>2</span>
               </Coast>
@@ -357,7 +389,7 @@ export default function Page() {
               </div>
             </article>
             <article className="card way reveal">
-              <Coast seed="option-build-headland" palette="hero" size="card" scene="headland" glints className="art-top">
+              <Coast seed="option-build-headland" image="/assets/img/sea/underwater-light.jpg" palette="hero" size="card" scene="headland" className="art-top">
                 <span className="half">Transformation</span>
                 <span className="pebble sm" style={{ "--peb": "var(--lagoon)" }}>3</span>
               </Coast>
@@ -368,7 +400,7 @@ export default function Page() {
                 <dd>Companies ready to change how the work runs.</dd>
                 <dt>What happens</dt>
                 <dd>
-                  Only what the assessment justified gets built: the dashboard, automation and AI agents, on infrastructure you own.
+                  Only what the assessment justified gets built: the dashboard, automation and AI agents, on systems you control.
                 </dd>
                 <dt>You leave with</dt>
                 <dd>Systems that are yours, an asset rather than a subscription, and documented ROI.</dd>
@@ -376,7 +408,7 @@ export default function Page() {
               <div className="start">
                 <span className="ref">Start with</span>
                 <Link className="btn primary sm" href="/book">
-                  Book now{" "}
+                  Book a meeting{" "}
                   <span className="arr" aria-hidden="true">→</span>
                 </Link>
               </div>
@@ -386,7 +418,7 @@ export default function Page() {
             <span className="pebble sm" style={{ "--peb": "var(--sage)" }} aria-hidden="true">+</span>
             <p>
               After any of the three, one option stays open:{" "}
-              <b>fractional AI leadership</b>
+              <b>ongoing support</b>
               . Advisory, governance, a roadmap, and iteration on what is already live. Month to month, and yours to end.
             </p>
           </div>
@@ -405,43 +437,7 @@ export default function Page() {
       {/* 6. How an engagement runs, in writing */}
       <WritingSection />
       {/* 7. Final call */}
-      <section className="section" style={{ paddingTop: "0" }}>
-        <div className="wrap">
-          <Coast seed="transformation-final-dusk" video="/assets/video/transformation-final.mp4" palette="dusk" size="wide" scene="headland" className="final has-contours">
-            <i className="tick tick-tl" aria-hidden="true" />
-            <i className="tick tick-tr" aria-hidden="true" />
-            <i className="tick tick-bl" aria-hidden="true" />
-            <i className="tick tick-br" aria-hidden="true" />
-            <div className="eyebrow" style={{ color: "var(--deep)" }}>Begin</div>
-            <h2 className="h2" style={{ marginTop: "14px" }}>
-              Will AI scale across your company, or stall in another{" "}
-              <span className="stroke">pilot</span>
-              ?
-            </h2>
-            <p className="lede">
-              Book a 30-minute meeting on Teams about transforming the operation. If you're not ready, we'll tell you, and tell you what to fix first. Or start with your team's knowledge: take the diagnostic.
-            </p>
-            <div className="btns">
-              <Link className="btn primary" href="/book" data-sound="chime" data-sparkle="">
-                Book now{" "}
-                <span className="arr" aria-hidden="true">→</span>
-              </Link>
-              <Link className="btn" href="/diagnostic" style={{ background: "var(--paper)" }}>Take the diagnostic</Link>
-            </div>
-            <div className="alt">
-              <a href="https://ocv-ai-assessment.netlify.app/" target="_blank" rel="noopener">
-                <span className="ref">Not ready for a call</span>
-                Score your AI readiness, 0 to 100 ↗
-              </a>
-              {" "}
-              <Link href="/resources">
-                <span className="ref">Reading first</span>
-                Browse the resources →
-              </Link>
-            </div>
-          </Coast>
-        </div>
-      </section>
+      <ClosingCall seed="transformation-final-dusk" image="/assets/img/sea/dusk-wave.jpg" video="/assets/video/sea-dusk-wave.mp4" />
     </main>
   );
 }

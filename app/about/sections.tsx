@@ -5,10 +5,12 @@
 */
 import Coast from "@/components/Coast";
 
-/** The crew. The originals differ in framing, so each photo carries its own object-position. */
+/** The crew. The originals differ in framing, so each photo carries its own object-position.
+ *  `helps`: one plain line on what each person helps a client do (the home page's team strip). */
 export const TEAM = [
   {
     name: "Chris Kuselias",
+    helps: "Helps owners lead the change, from three decades of getting people to work differently.",
     role: "Founder & Chairman",
     img: "/assets/img/team/chris-kuselias.webp",
     pos: "50% 0%",
@@ -16,6 +18,7 @@ export const TEAM = [
   },
   {
     name: "Eliyahu Cohen",
+    helps: "Builds the systems, so the software you end up with is yours to keep.",
     role: "Head of AI & Build",
     img: "/assets/img/team/eliyahu-cohen-tall2.jpg",
     pos: "50% 0%",
@@ -23,6 +26,7 @@ export const TEAM = [
   },
   {
     name: "Ben Eydlin",
+    helps: "Shapes the courses, so your team knows how to use what gets built.",
     role: "Head of Growth & Learning",
     img: "/assets/img/team/ben-eydlin.jpg",
     pos: "50% 30%",
@@ -30,6 +34,7 @@ export const TEAM = [
   },
   {
     name: "David Taiwo",
+    helps: "Maps how your work really runs, and ranks where AI would save the most.",
     role: "Engineering & Delivery Lead",
     img: "/assets/img/team/david-taiwo.jpg",
     pos: "50% 30%",
@@ -37,6 +42,7 @@ export const TEAM = [
   },
   {
     name: "Cheryl Rykowski",
+    helps: "Brings your people along: leaders aligned, champions found, training that sticks.",
     role: "Cultural AI Strategy Lead",
     img: "/assets/img/team/cheryl-rykowski.jpg",
     pos: "50% 30%",
@@ -44,6 +50,7 @@ export const TEAM = [
   },
   {
     name: "Alana Kuselias",
+    helps: "Runs what we publish, from the Making Waves book and course to the guides.",
     role: "Head of Marketing",
     img: "/assets/img/team/alana-kuselias.jpg",
     pos: "50% 25%",
@@ -74,7 +81,6 @@ function Lane({ bearing }: { bearing: string }) {
     <div className="course-lane" aria-hidden="true">
       <span className="course-waypoint" />
       <span className="course-rule" />
-      <span className="course-bearing">{bearing}</span>
     </div>
   );
 }
@@ -88,8 +94,7 @@ export function TeamSection({ bearing = "CO 172°" }: { bearing?: string }) {
         <div className="sec-head reveal">
           <div>
             <div className="eyebrow">
-              Our team{" "}
-              <span className="chart-ref" style={{ marginLeft: "10px" }}>OC-05b / Crew list</span>
+              Our team
             </div>
             <h2 className="h2">
               Our{" "}
@@ -189,8 +194,7 @@ export function AdvisorySection({ bearing = "CO 181°" }: { bearing?: string }) 
             <div className="sec-head reveal">
               <div>
                 <div className="eyebrow">
-                  Advisory board{" "}
-                  <span className="chart-ref" style={{ marginLeft: "10px" }}>OC-05a / The advisory board</span>
+                  Advisory board
                 </div>
                 <h2 className="h2">
                   The OceanCrest AI advisory{" "}

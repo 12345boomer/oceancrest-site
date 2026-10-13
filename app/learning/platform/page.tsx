@@ -18,15 +18,14 @@ export default function Page() {
       <PageHero image="/assets/img/heroes/platform.jpg" video="/assets/video/sub-platform.mp4"
         seed="learning-platform-hero-open"
         palette="technical"
-        scene="open"
-        eyebrow={<>The platform <span className="chart-ref" style={{ marginLeft: "10px", color: "var(--deep)" }}>OC-02 / Education</span></>}
+        eyebrow={<>The platform</>}
         title={<>What leadership <span className="stroke">sees</span>.</>}
         lede="Leadership sees who finished, how their skills moved, the hours people say they got back, and where people stall. A learner with no activity in 14 days is marked stalled, so nobody quietly drops out."
       >
         <Link className="btn primary" href="/diagnostic">
-          Take the diagnostic <span className="arr" aria-hidden="true">→</span>
+          Check your AI skills <span className="arr" aria-hidden="true">→</span>
         </Link>
-        <Link className="btn" href="/book?about=learning" style={{ background: "var(--paper)" }}>Talk to us about membership</Link>
+        <Link className="btn" href="/book" style={{ background: "var(--paper)" }}>Talk to us about membership</Link>
       </PageHero>
       <PlatformSection tinted={false} />
       <MembershipSection />

@@ -15,7 +15,6 @@ const Lane = ({ bearing }: { bearing: string }) => (
   <div className="course-lane" aria-hidden="true">
     <span className="course-waypoint" />
     <span className="course-rule" />
-    <span className="course-bearing">{bearing}</span>
   </div>
 );
 
@@ -27,12 +26,11 @@ export default function Page() {
       <PageHero image="/assets/img/heroes/learning-workshops.jpg" video="/assets/video/sub-learning-workshops.mp4"
         seed="learning-workshops-hero-beach"
         palette="mindset"
-        scene="beach"
-        eyebrow={<>Workshops <span className="chart-ref" style={{ marginLeft: "10px", color: "var(--deep)" }}>OC-02 / Education</span></>}
+        eyebrow={<>Workshops</>}
         title={<>The whole-<span className="stroke warm">team</span> session.</>}
         lede="What AI is and isn't, what your policy allows, and where the wins are, for everyone who will use it. It runs after the leadership session, so the room hears one message."
       >
-        <Link className="btn primary" href="/book?about=learning">
+        <Link className="btn primary" href="/book">
           Plan a workshop <span className="arr" aria-hidden="true">→</span>
         </Link>
         <Link className="btn" href="/services/leadership-workshops" style={{ background: "var(--paper)" }}>For the leadership team</Link>
@@ -61,7 +59,7 @@ export default function Page() {
           <div className="grid g2">
             <TeamSessionCard>
               <div className="btns" style={{ marginTop: "auto", paddingTop: "8px" }}>
-                <Link className="btn primary sm" href="/book?about=learning">
+                <Link className="btn primary sm" href="/book">
                   Plan a workshop <span className="arr" aria-hidden="true">→</span>
                 </Link>
               </div>

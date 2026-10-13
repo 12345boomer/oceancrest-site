@@ -7,7 +7,6 @@
 */
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { playSound } from "@/lib/sea";
 
 type Cleanup = () => void;
 const REVEAL = ".reveal, [data-count], .bar[data-to]";
@@ -20,14 +19,16 @@ function reveal(reduce: boolean): Cleanup {
   function show(el: Element) {
     el.classList.add("in");
     if (el.hasAttribute("data-count")) {
+      // components/Count: only the aria-hidden .ct copy animates; the final figure stays in the HTML.
       const to = parseFloat(el.getAttribute("data-count") || "0"), pre = el.getAttribute("data-prefix") || "", suf = el.getAttribute("data-suffix") || "";
       const dec = (String(to).split(".")[1] || "").length;
-      if (reduce) { el.textContent = pre + to.toFixed(dec) + suf; return; }
-      const t0 = performance.now(), dur = 1400;
+      const out = el.querySelector(".ct") || el;
+      if (reduce) { out.textContent = pre + to.toFixed(dec) + suf; return; }
+      const t0 = performance.now(), dur = 800;
       const tick = (t: number) => {
         if (!alive) return;
         const p = Math.min(1, (t - t0) / dur), v = to * (1 - Math.pow(1 - p, 3));
-        el.textContent = pre + v.toFixed(dec) + suf;
+        out.textContent = pre + v.toFixed(dec) + suf;
         if (p < 1) requestAnimationFrame(tick);
       };
       tick(t0);
@@ -40,11 +41,16 @@ function reveal(reduce: boolean): Cleanup {
   if ("IntersectionObserver" in window) {
     io = new IntersectionObserver((entries) => {
       entries.forEach((e) => { if (e.isIntersecting) { show(e.target); io?.unobserve(e.target); } });
-    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.12 });
+    }, { rootMargin: "0px 0px 15% 0px", threshold: 0 });
   }
   function watch(el: Element) {
     if (seen.has(el)) return;
     seen.add(el);
+    // Counters start from zero on screen only (the hidden copy keeps the real figure for screen readers).
+    if (!reduce && io && el.hasAttribute("data-count")) {
+      const out = el.querySelector(".ct");
+      if (out) out.textContent = (el.getAttribute("data-prefix") || "") + "0" + (el.getAttribute("data-suffix") || "");
+    }
     if (io) io.observe(el); else show(el);
   }
   document.querySelectorAll(REVEAL).forEach(watch);
@@ -135,7 +141,6 @@ function rotator(reduce: boolean): Cleanup {
     slot.textContent = words[i]; rot.style.width = widths[i] + "px";
     const d = delay(i);
     if (d > 180 && slot.animate) slot.animate([{ opacity: 0, transform: "translateY(0.25em)" }, { opacity: 1, transform: "none" }], { duration: Math.min(160, d - 20), easing: "cubic-bezier(0.23,1,0.32,1)" });
-    if (d > 200) playSound("blip");
     i++;
     if (i < words.length) later(swap, d); else later(finish, 900);
   }

@@ -138,3 +138,55 @@
 .page-home .track .start{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin-top:4px;padding:14px 16px;border-radius:var(--r);background:var(--t-tint);color:var(--navy);font-weight:500}
 .page-home .track.e .start{background:var(--e-tint)}
 .page-home .track .more{margin-top:auto}
+
+/* The people you'd work with: a compact team strip */
+.page-home .ts-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.page-home .ts-grid{list-style:none;padding:0;margin:28px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px 28px}
+.page-home .ts-grid li{display:flex;gap:16px;align-items:flex-start}
+.page-home .ts-grid img{flex:none;width:72px;height:72px;border-radius:50%;object-fit:cover;background:var(--foam)}
+.page-home .ts-grid b{display:block;font-weight:500;color:var(--navy);font-size:16px}
+.page-home .ts-grid .ref{display:block;margin-top:2px}
+.page-home .ts-grid p{margin-top:6px;font-size:14.5px;line-height:1.5;color:var(--ink)}
+@media (max-width:980px){.page-home .ts-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.page-home .ts-grid{grid-template-columns:1fr}}
+
+/* The illustrative quote example: one pale panel, copy beside a small Request → Sent picture */
+.page-home .qx-panel{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(28px,5vw,72px);align-items:center;background:var(--t-tint);border:1px solid rgba(74,143,184,.18);border-radius:var(--r-lg);padding:clamp(28px,5vw,64px)}
+.page-home .qx-copy .h2{margin-top:12px;color:var(--navy)}
+.page-home .qx-lede{margin-top:16px;font-size:clamp(17px,1.4vw,19px);line-height:1.6;color:var(--navy);max-width:460px}
+.page-home .qx-line{margin-top:14px;font-size:16px;color:var(--ink)}
+.page-home .qx-copy .link{display:inline-block;margin-top:22px}
+.page-home .qx-flow{list-style:none;margin:0;padding:0;position:relative}
+.page-home .qx-flow::before{content:"";position:absolute;left:17px;top:18px;bottom:18px;border-left:1px solid rgba(74,143,184,.35)}
+.page-home .qf-step{display:flex;gap:16px;align-items:flex-start;padding:10px 0;position:relative}
+.page-home .qf-ic{flex:none;width:36px;height:36px;border-radius:50%;background:var(--paper);border:1px solid rgba(74,143,184,.35);display:grid;place-items:center;color:var(--deep);position:relative;z-index:1}
+.page-home .qf-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px;padding-top:7px}
+.page-home .qf-body>b{font-weight:500;font-size:15.5px;color:var(--navy)}
+.page-home .qf-card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 14px;display:flex;flex-direction:column;gap:6px;max-width:380px}
+.page-home .qf-meta{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--slate)}
+.page-home .qf-text{font-size:14px;line-height:1.45;color:var(--ink)}
+.page-home .qf-row{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.page-home .qf-row.total{border-top:1px solid var(--line);padding-top:6px;font-size:13px;font-weight:500;color:var(--navy)}
+.page-home .qf-bar{display:block;height:7px;border-radius:4px;background:#e3e8ee}
+.page-home .qf-note{font-size:14px;line-height:1.45;color:var(--ink)}
+.page-home .qf-step.key .qf-ic{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 0 0 5px rgba(37,99,235,.14)}
+.page-home .qf-step.key .qf-body{background:var(--paper);border:1.5px solid var(--blue);border-radius:12px;padding:12px 16px;max-width:380px}
+.page-home .qf-step.key .qf-body>b{color:var(--blue)}
+.page-home .qf-actions{display:flex;gap:8px;margin-top:4px}
+.page-home .qf-btn{font-size:13px;padding:5px 12px;border-radius:999px;border:1px solid var(--line);color:var(--ink)}
+.page-home .qf-btn.on{background:var(--blue);border-color:var(--blue);color:#fff}
+@media (max-width:860px){.page-home .qx-panel{grid-template-columns:1fr}}
+
+/* Two ways we can help: two plain option cards */
+.page-home .ways{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:34px}
+.page-home .way{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;display:flex;flex-direction:column}
+.page-home .way-art{height:150px}
+.page-home .way-body{padding:clamp(22px,3vw,32px);display:flex;flex-direction:column;gap:12px;flex:1}
+.page-home .way-body .half{align-self:flex-start}
+.page-home .way h3{font-family:var(--display);font-weight:500;font-size:clamp(22px,2vw,26px);line-height:1.2;color:var(--navy)}
+.page-home .way p{font-size:16.5px;line-height:1.55;color:var(--navy)}
+.page-home .way .ticks{margin-top:4px}
+.page-home .way .ticks li{font-size:15px;line-height:1.5;color:var(--ink)}
+.page-home .way .ticks b{font-weight:500;color:var(--navy)}
+.page-home .way-cta{margin-top:auto;padding-top:14px;display:flex;flex-wrap:wrap;align-items:center;gap:18px}
+@media (max-width:860px){.page-home .ways{grid-template-columns:1fr}}

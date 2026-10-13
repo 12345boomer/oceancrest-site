@@ -4,18 +4,18 @@ import Diagnostic from "./Diagnostic";
 import "./page.css";
 
 export const metadata: Metadata = {
-  title: "The AI diagnostic — OceanCrest AI",
+  title: "Check your AI skills — OceanCrest AI",
   description: "Find out what you know about AI, and what you don't yet. Fifteen short questions, about five minutes. You get a level, a score in each area, and the courses that close your gaps. Free, no sign-up, results stay in your browser."
 };
 
 export default function Page() {
   return (
     <main id="main" className="page-diagnostic">
-      <Coast as="section" seed="diagnostic-hero" video="/assets/video/diagnostic-hero.mp4" palette="mindset" size="hero" scene="beach" className="page-hero has-contours dg-hero">
+      <Coast as="section" seed="diagnostic-hero" image="/assets/img/heroes/diagnostic-waterline.jpg" video="/assets/video/diagnostic-waterline.mp4" palette="mindset" size="hero" className="page-hero ph-photo has-contours dg-hero">
         <i className="tick tick-tl" aria-hidden="true" />
         <i className="tick tick-tr" aria-hidden="true" />
         <div className="wrap">
-          <div className="eyebrow">The AI diagnostic · Education</div>
+          <div className="eyebrow">Check your AI skills · Education</div>
           <h1 className="h1">
             Find out what you know about AI, and what you don't{" "}
             <span className="stroke warm">yet</span>

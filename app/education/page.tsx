@@ -8,14 +8,14 @@ import "./page.css";
 
 export const metadata: Metadata = {
   title: "Education — OceanCrest AI",
-  description: "The OceanCrest AI learning solution: a diagnostic first, leaders first, then a course the whole company completes, with a platform that shows leadership the proof."
+  description: "The OceanCrest AI learning solution: an AI skills check first, leaders first, then a course the whole company completes, with a platform that shows leadership the proof."
 };
 
 export default function Page() {
   return (
     <main id="main" className="page-education">
       {/* 1. Hero */}
-      <Coast as="section" seed="education-hero-v2" video="/assets/video/education-hero.mp4" palette="mindset" size="hero" scene="beach" className="page-hero edu-hero has-contours">
+      <Coast as="section" seed="education-hero-v2" image="/assets/img/heroes/education-dawn.jpg" video="/assets/video/education-dawn.mp4" palette="mindset" size="hero" className="page-hero ph-photo edu-hero has-contours">
         <i className="tick tick-tl" aria-hidden="true" />
         <i className="tick tick-tr" aria-hidden="true" />
         <i className="tick tick-bl" aria-hidden="true" />
@@ -23,7 +23,6 @@ export default function Page() {
         <div className="wrap">
           <span className="half e">Education</span>
           {" "}
-          <span className="chart-ref hero-ref">OC-02 / Education</span>
           <div className="eyebrow">AI Learning Solution · what we're really selling is a product</div>
           <h1 className="h1">
             Every course, for everyone on the{" "}
@@ -31,15 +30,15 @@ export default function Page() {
             .
           </h1>
           <p className="lede">
-            A learning system the whole company completes, not a seat licence handed to whoever asks. It starts with a diagnostic, so we teach the gaps, not the basics people already have.
+            A learning system the whole company completes, not a seat licence handed to whoever asks. It starts with a quick AI skills check, so we teach the gaps, not the basics people already have.
           </p>
           <div className="btns">
             <Link className="btn primary" href="/diagnostic">
-              Take the diagnostic{" "}
+              Check your AI skills{" "}
               <span className="arr" aria-hidden="true">→</span>
             </Link>
             {" "}
-            <Link className="btn" href="/book?about=learning">Talk to us about membership</Link>
+            <Link className="btn" href="/book">Talk to us about membership</Link>
           </div>
           <nav className="jump" aria-label="On this page">
             <a href="#how">How it works</a>
@@ -65,14 +64,13 @@ export default function Page() {
         <div className="course-lane" aria-hidden="true">
           <span className="course-waypoint" />
           <span className="course-rule" />
-          <span className="course-bearing">CO 168°</span>
         </div>
         <div className="wrap">
           <div className="sec-head reveal">
             <div>
               <div className="eyebrow">How it works</div>
               <h2 className="h2">
-                From the diagnostic to the{" "}
+                From the skills check to the{" "}
                 <span className="stroke warm">proof</span>
                 .
               </h2>
@@ -85,13 +83,13 @@ export default function Page() {
             <div className="step reveal">
               <span className="pebble">1</span>
               <span className="ref">Find the gaps</span>
-              <h3>Take the diagnostic.</h3>
+              <h3>Check your AI skills.</h3>
               <p>
                 Fifteen short questions, about five minutes. A level, a score in each area, and the courses that close your gaps.
               </p>
               <div className="go">
                 <span className="ref">Free · no sign-up</span>
-                <Link className="link" href="/diagnostic">Take the diagnostic</Link>
+                <Link className="link" href="/diagnostic">Check your AI skills</Link>
               </div>
             </div>
             <div className="step reveal">
@@ -142,7 +140,6 @@ export default function Page() {
         <div className="course-lane" aria-hidden="true">
           <span className="course-waypoint" />
           <span className="course-rule" />
-          <span className="course-bearing">CO 166°</span>
         </div>
         <div className="wrap">
           <div className="sec-head reveal">
@@ -267,7 +264,6 @@ export default function Page() {
         <div className="course-lane" aria-hidden="true">
           <span className="course-waypoint" />
           <span className="course-rule" />
-          <span className="course-bearing">CO 171°</span>
         </div>
         <div className="wrap">
           <div className="sec-head reveal">
@@ -300,7 +296,6 @@ export default function Page() {
         <div className="course-lane" aria-hidden="true">
           <span className="course-waypoint" />
           <span className="course-rule" />
-          <span className="course-bearing">CO 169°</span>
         </div>
         <div className="wrap">
           <div className="sec-head reveal">
@@ -327,7 +322,6 @@ export default function Page() {
         <div className="course-lane" aria-hidden="true">
           <span className="course-waypoint" />
           <span className="course-rule" />
-          <span className="course-bearing">CO 173°</span>
         </div>
         <div className="wrap">
           <div className="sec-head center reveal">
@@ -378,14 +372,14 @@ export default function Page() {
               Find out what your team knows before we teach it: fifteen short questions, about five minutes, and the courses that close your gaps. Or book a 30-minute meeting on Teams about transforming the operation.
             </p>
             <div className="btns">
-              <Link className="btn primary" href="/diagnostic" data-sound="chime" data-sparkle="">
-                Take the diagnostic{" "}
+              <Link className="btn primary" href="/diagnostic" data-sparkle="">
+                Check your AI skills{" "}
                 <span className="arr" aria-hidden="true">→</span>
               </Link>
-              <Link className="btn" href="/book">Book now</Link>
+              <Link className="btn" href="/book">Book a meeting</Link>
             </div>
             <div className="alt">
-              <Link href="/book?about=learning">
+              <Link href="/book">
                 <span className="ref">Membership</span>
                 Talk to us about membership →
               </Link>

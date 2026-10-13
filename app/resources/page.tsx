@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import ClosingCall from "@/components/ClosingCall";
 import Coast from "@/components/Coast";
 import { GuideSection, PapersSection, PreparationSection, SubscribeSection } from "./sections";
 import "./page.css";
@@ -15,13 +16,12 @@ export default function Page() {
   return (
     <main id="main" className="page-resources">
       {/* 1. Hero */}
-      <Coast as="section" seed="resources-hero-beach" video="/assets/video/resources-hero.mp4" palette="hero" size="hero" scene="beach" className="page-hero r-hero has-contours">
+      <Coast as="section" seed="resources-hero-beach" image="/assets/img/heroes/resources-sandbar.jpg" video="/assets/video/resources-sandbar.mp4" palette="hero" size="hero" className="page-hero ph-photo r-hero has-contours">
         <i className="tick tick-tl" aria-hidden="true" />
         <i className="tick tick-tr" aria-hidden="true" />
         <div className="wrap" style={{ width: "100%" }}>
           <div className="eyebrow">
-            Resources{" "}
-            <span className="chart-ref" style={{ marginLeft: "10px", color: "var(--deep)" }}>OC-400 / Publications</span>
+            Resources
           </div>
           <h1 className="h1">
             White papers and{" "}
@@ -76,43 +76,7 @@ export default function Page() {
       {/* 5. Subscribe */}
       <SubscribeSection />
       {/* 6. Final call */}
-      <section className="section" style={{ paddingTop: "0" }}>
-        <div className="wrap">
-          <Coast seed="resources-final-dusk" palette="dusk" size="wide" scene="cove" glints className="final has-contours">
-            <i className="tick tick-tl" aria-hidden="true" />
-            <i className="tick tick-tr" aria-hidden="true" />
-            <i className="tick tick-bl" aria-hidden="true" />
-            <i className="tick tick-br" aria-hidden="true" />
-            <div className="eyebrow" style={{ color: "var(--deep)" }}>Begin</div>
-            <h2 className="h2" style={{ marginTop: "14px" }}>
-              Read enough? Then let's talk about your{" "}
-              <span className="stroke">operation</span>
-              .
-            </h2>
-            <p className="lede">
-              Book a 30-minute meeting on Teams about transforming the operation. If you're not ready, we'll tell you, and tell you what to fix first. Or start with your team's knowledge: take the diagnostic.
-            </p>
-            <div className="btns">
-              <Link className="btn primary" href="/book" data-sound="chime" data-sparkle="">
-                Book now{" "}
-                <span className="arr" aria-hidden="true">→</span>
-              </Link>
-              <Link className="btn" href="/diagnostic" style={{ background: "var(--paper)" }}>Take the diagnostic</Link>
-            </div>
-            <div className="alt">
-              <a href="https://ocv-ai-assessment.netlify.app/" target="_blank" rel="noopener">
-                <span className="ref">Not ready for a call</span>
-                Score your AI readiness, 0 to 100 ↗
-              </a>
-              {" "}
-              <Link href="/transformation">
-                <span className="ref">How we work</span>
-                See the partnership →
-              </Link>
-            </div>
-          </Coast>
-        </div>
-      </section>
+      <ClosingCall seed="resources-final-dusk" title={<>Read enough? Then let's talk about your <span className="stroke">operation</span>.</>} />
     </main>
   );
 }

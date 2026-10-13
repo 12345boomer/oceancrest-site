@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import ClosingCall from "@/components/ClosingCall";
+import { READINESS } from "@/lib/site";
 import { LeadersSection } from "../../transformation/sections";
 import { CurCourse } from "../../education/parts";
 import { FounderQuote, Notch } from "../../education/sections";
@@ -18,7 +19,6 @@ const Lane = ({ bearing }: { bearing: string }) => (
   <div className="course-lane" aria-hidden="true">
     <span className="course-waypoint" />
     <span className="course-rule" />
-    <span className="course-bearing">{bearing}</span>
   </div>
 );
 
@@ -28,21 +28,20 @@ const Lane = ({ bearing }: { bearing: string }) => (
 export default function Page() {
   return (
     <main id="main" className="page-services-leadership">
-      <PageHero image="/assets/img/heroes/leadership-painted.jpg" video="/assets/video/sub-leadership-painted.mp4" painted className="ph-flip"
+      <PageHero image="/assets/img/heroes/leadership-lighthouse.jpg" video="/assets/video/leadership-lighthouse.mp4"
         seed="leadership-workshops-hero-193"
-        zoom={false}
-        alive
         aside={<><ServiceRoute current="leadership" /><AgendaPeek /></>}
         palette="hero"
-        scene="headland"
-        eyebrow={<>Leadership workshops and training <span className="chart-ref" style={{ marginLeft: "10px", color: "var(--deep)" }}>OC-02a / The partnership</span></>}
+        eyebrow={<>Leadership workshops and training</>}
         title={<>Leading your company through <span className="stroke">AI</span>.</>}
         lede="Leaders are the foundation of an AI rollout, so we start with them. A working session for the owner, the CEO or the COO. Not a vendor pitch."
       >
         <Link className="btn primary" href="/book">
-          Book now <span className="arr" aria-hidden="true">→</span>
+          Book a meeting <span className="arr" aria-hidden="true">→</span>
         </Link>
-        <Link className="btn" href="/book?about=learning" style={{ background: "var(--paper)" }}>Plan a workshop</Link>
+        <a className="btn" href={READINESS} target="_blank" rel="noopener" style={{ background: "var(--paper)" }}>
+          Assess your business <span aria-hidden="true">↗</span>
+        </a>
       </PageHero>
 
       {/* The 90-minute session (from /transformation) */}
@@ -79,7 +78,7 @@ export default function Page() {
         <Notch />
       </div>
 
-      <ClosingCall seed="services-leadership-final" />
+      <ClosingCall seed="services-leadership-final" image="/assets/img/sea/dusk-sail.jpg" video="/assets/video/sea-dusk-sail.mp4" />
     </main>
   );
 }

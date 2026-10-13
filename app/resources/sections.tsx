@@ -5,7 +5,7 @@
 */
 import Link from "next/link";
 import Coast from "@/components/Coast";
-import type { Palette, Scene } from "@/lib/coast";
+import type { Palette, Scene } from "@/lib/sea-photos";
 import SubscribeForm from "./subscribe-form";
 
 /** The quarterly Small Business Guide, cover and copy. */
@@ -15,7 +15,6 @@ export function GuideSection() {
       <div className="course-lane" aria-hidden="true">
         <span className="course-waypoint" />
         <span className="course-rule" />
-        <span className="course-bearing">CO 172°</span>
       </div>
       <div className="wrap guide">
         <Coast as="a" seed="resources-guide-frame" palette="technical" size="wide" scene="open" glints className="frame reveal" href="https://oceancrest.ai/guide/" target="_blank" rel="noopener">
@@ -51,7 +50,6 @@ export function PapersSection({ style }: { style?: React.CSSProperties }) {
       <div className="course-lane" aria-hidden="true">
         <span className="course-waypoint" />
         <span className="course-rule" />
-        <span className="course-bearing">CO 170°</span>
       </div>
       <div className="wrap">
         <div className="sec-head reveal">
@@ -107,7 +105,6 @@ export function PreparationSection() {
       <div className="course-lane" aria-hidden="true">
         <span className="course-waypoint" />
         <span className="course-rule" />
-        <span className="course-bearing">CO 168°</span>
       </div>
       <div className="wrap">
         <div className="sec-head reveal">
@@ -197,7 +194,6 @@ export function PointersSection({ eyebrow, title, lede, items }: { eyebrow: stri
       <div className="course-lane" aria-hidden="true">
         <span className="course-waypoint" />
         <span className="course-rule" />
-        <span className="course-bearing">CO 170°</span>
       </div>
       <div className="wrap">
         <div className="sec-head reveal">

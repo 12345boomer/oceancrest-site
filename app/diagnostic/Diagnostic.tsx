@@ -17,8 +17,8 @@ import Coast from "@/components/Coast";
 import CourseCard from "@/components/CourseCard";
 import { PROGRAMS, courseById } from "@/lib/courses";
 import type { Course, Program } from "@/lib/courses";
-import type { Palette, Scene } from "@/lib/coast";
-import { playSound, sparkle } from "@/lib/sea";
+import type { Palette, Scene } from "@/lib/sea-photos";
+import { sparkle } from "@/lib/sea";
 
 /* ---------------- content ---------------- */
 type AreaId = "basics" | "prompting" | "checking" | "data" | "automating";
@@ -313,7 +313,7 @@ function Sounding({ sc }: { sc: Score }) {
 /* ---------------- results ---------------- */
 interface ResultsProps { answers: Answers; profile: Profile; at: string | null; demo: boolean; quiet: boolean; focus: boolean; onRetake: () => void; onShown: () => void }
 
-// Remounted (by key) for every showing, so the bars, badge, sound and light play each time.
+// Remounted (by key) for every showing, so the bars, badge and light play each time.
 function Results({ answers, profile, at, demo, quiet, focus, onRetake, onShown }: ResultsProps) {
   const [barsOn, setBarsOn] = useState(false);
   const badgeRef = useRef<HTMLDivElement>(null);
@@ -325,7 +325,6 @@ function Results({ answers, profile, at, demo, quiet, focus, onRetake, onShown }
     const r1 = requestAnimationFrame(() => { r2 = requestAnimationFrame(() => setBarsOn(true)); });
     let t: ReturnType<typeof setTimeout> | undefined;
     if (!quiet) {
-      playSound("chime");
       t = setTimeout(() => { if (badgeRef.current) sparkle(badgeRef.current); }, 350);
     }
     onShown();
@@ -430,9 +429,9 @@ function Results({ answers, profile, at, demo, quiet, focus, onRetake, onShown }
         <div className="tx">
           <span className="half e">Your whole team</span>
           <h2 className="h2" style={{ marginTop: 16 }}>Now find out where your whole team <span className="stroke warm">stands</span>.</h2>
-          <p className="body">One result tells you where to start. The real value is the whole picture: who is ready to build, who needs the basics, and which gaps the team shares. We run the same diagnostic across your team, then teach to the gaps, not the basics people already have.</p>
+          <p className="body">One result tells you where to start. The real value is the whole picture: who is ready to build, who needs the basics, and which gaps the team shares. We run the same skills check across your team, then teach to the gaps, not the basics people already have.</p>
           <div className="btns">
-            <Link className="btn primary" href="/book?about=learning">Book now <span className="arr" aria-hidden="true">&rarr;</span></Link>
+            <Link className="btn primary" href="/book">Book a meeting <span className="arr" aria-hidden="true">&rarr;</span></Link>
             <Link className="btn" href="/courses">See the courses</Link>
           </div>
         </div>
@@ -456,7 +455,7 @@ function Results({ answers, profile, at, demo, quiet, focus, onRetake, onShown }
         </ol>
       </details>
       <div className="res-actions">
-        <button type="button" className="btn" data-act="retake" onClick={onRetake}>Retake the diagnostic</button>
+        <button type="button" className="btn" data-act="retake" onClick={onRetake}>Recheck your AI skills</button>
         <Link className="link" href="/education">How we teach a whole company</Link>
       </div>
       <p className="sources fine">This is a self-check, not a certification or a measure of how you do your job. Fifteen questions can&apos;t cover everything you know; use it to decide where to start. Your answers stay in this browser and are never sent to us.</p>
@@ -667,7 +666,7 @@ export default function Diagnostic() {
             {chips(DEPTS, "dept", "Your department")}
           </div>
           <div className="start-col">
-            <button type="button" className="btn primary big" data-act="start" onClick={() => start()}>Start the diagnostic <span className="arr" aria-hidden="true">&rarr;</span></button>
+            <button type="button" className="btn primary big" data-act="start" onClick={() => start()}>Start the skills check <span className="arr" aria-hidden="true">&rarr;</span></button>
             <span className="ref">Free · no sign-up · results stay in your browser</span>
           </div>
         </div>
@@ -721,7 +720,7 @@ export default function Diagnostic() {
                   <p className="fb-head"><span className="pebble sm" aria-hidden="true">{right ? "✓" : "–"}</span>{right ? "Right." : "Not quite."}</p>
                   <p className="body">{q.why}</p>
                   <div className="btns">
-                    <button type="button" className="btn primary" data-act="next" data-sound={last ? "chime" : undefined} onClick={next}>
+                    <button type="button" className="btn primary" data-act="next" onClick={next}>
                       {last ? "See your results" : "Next question"} <span className="arr" aria-hidden="true">&rarr;</span>
                     </button>
                   </div>
@@ -745,7 +744,7 @@ export default function Diagnostic() {
     <div className={"stage" + (S.demo ? " still" : "")} id="stage" aria-live="off" ref={stageRef} onKeyDown={onKeyDown}>
       {S.screen === "boot" ? (
         <noscript>
-          <p className="body">The diagnostic runs in your browser and needs JavaScript. Turn it on and reload the page, or <Link className="link" href="/courses">browse the courses</Link> instead.</p>
+          <p className="body">The skills check runs in your browser and needs JavaScript. Turn it on and reload the page, or <Link className="link" href="/courses">browse the courses</Link> instead.</p>
         </noscript>
       ) : (
         <div className={"screen " + cls} key={key}>{screen}</div>

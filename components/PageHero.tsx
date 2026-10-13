@@ -1,21 +1,14 @@
 import Coast from "@/components/Coast";
-import type { Palette, Scene } from "@/lib/coast";
+import type { Palette } from "@/lib/sea-photos";
 
 /**
- * The painted banner at the top of a page: eyebrow, h1, lede and optional buttons. `title` may carry one painted word: <span className="stroke">.
+ * The photo banner at the top of a page: eyebrow, h1, lede and optional buttons. `title` may carry one painted word: <span className="stroke">.
  */
-export default function PageHero({ seed, palette = "hero", scene = "cove", zoom = true, alive = false, image, painted = false, video, aside, eyebrow, title, lede, children, className }: {
+export default function PageHero({ seed, palette = "hero", image, video, aside, eyebrow, title, lede, children, className }: {
   seed: string;
   palette?: Palette;
-  scene?: Scene;
-  /** Frame the still closer (default). Off: the whole painting, framed like the transformation hero; pick a seed laid out like it. */
-  zoom?: boolean;
-  /** Move the painting lightly: drifting boat, gulls, sinking sun, cursor ripples. */
-  alive?: boolean;
-  /** A finished picture for the banner (e.g. a Higgsfield still under public/) in place of the painting. */
+  /** A finished picture for the banner (e.g. a Higgsfield still under public/) in place of the library pick. */
   image?: string;
-  /** The image is a painting (the service banners): framed like the transformation hero, with no white wash behind the copy. */
-  painted?: boolean;
   /** A looping clip of that picture; fades in over it once playing. */
   video?: string;
   /** Cards for the right half of the banner (the service pages' route card and peek). */
@@ -36,7 +29,7 @@ export default function PageHero({ seed, palette = "hero", scene = "cove", zoom 
     </>
   );
   return (
-    <Coast as="section" seed={seed} palette={palette} size="hero" scene={scene} alive={alive} image={image} video={video} className={"page-hero " + (image ? (painted ? "ph-paint" : "ph-photo") : zoom ? "ph-zoom" : "ph-frame") + " has-contours" + (className ? " " + className : "")}>
+    <Coast as="section" seed={seed} palette={palette} size="hero" image={image} video={video} className={"page-hero ph-photo has-contours" + (className ? " " + className : "")}>
       <i className="tick tick-tl" aria-hidden="true" />
       <i className="tick tick-tr" aria-hidden="true" />
       <i className="tick tick-bl" aria-hidden="true" />

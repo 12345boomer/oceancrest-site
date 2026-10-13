@@ -10,7 +10,7 @@ import { ServiceRoute, DashboardPeek } from "@/components/ServiceHero";
 
 export const metadata: Metadata = {
   title: "Workflows and automation — OceanCrest AI",
-  description: "Only what the assessment justified gets built: the dashboard, automation and AI agents, on infrastructure you own. An asset, not a subscription."
+  description: "Only what the assessment justified gets built: the dashboard, automation and AI agents, on systems you control. An asset, not a subscription."
 };
 
 // Tool logos, doubled so the marquee loops seamlessly (the second set is hidden from screen readers).
@@ -23,7 +23,6 @@ const Lane = ({ bearing }: { bearing: string }) => (
   <div className="course-lane" aria-hidden="true">
     <span className="course-waypoint" />
     <span className="course-rule" />
-    <span className="course-bearing">{bearing}</span>
   </div>
 );
 
@@ -33,18 +32,18 @@ const PIECES: { name: string; line: string; peb: string; items: [string, string]
     ["Readiness score", ", 0 to 100, a baseline for leadership."],
     ["Process mapping", " of how the work actually happens."],
     ["Workflow grading", ": manual, hybrid, or automated."],
-    ["A ranked build plan", " for where AI moves the P&L first."]
+    ["A ranked build plan", " for where AI saves the most time or money first."]
   ] },
   { name: "Implementation", line: "Only what the assessment justified gets built.", peb: "var(--lagoon)", items: [
     ["A scoped build", ", priced to scope."],
     ["Dashboard, clients and pipeline", " on one live screen."],
     ["Automation and AI agents", " for the repetitive work."],
-    ["Owned infrastructure", ": an asset, not a subscription."]
+    ["Systems you control", ": yours to keep, not a subscription."]
   ] },
-  { name: "Amplification", line: "What it returned, put back to work.", peb: "var(--sage)", items: [
+  { name: "Measure and grow", line: "What it returned, put back to work.", peb: "var(--sage)", items: [
     ["Documented ROI", ": what changed, and what it's worth."],
     ["Savings redeployed", " into deeper automation and growth."],
-    ["A fractional partnership", ", month over month."],
+    ["Ongoing support", ", month to month."],
     ["Next process, next department.", " The build compounds."]
   ] }
 ];
@@ -52,22 +51,19 @@ const PIECES: { name: string; line: string; peb: string; items: [string, string]
 export default function Page() {
   return (
     <main id="main" className="page-services-workflows page-transformation">
-      <PageHero image="/assets/img/heroes/workflows-painted.jpg" video="/assets/video/sub-workflows-painted.mp4" painted className="ph-flip"
+      <PageHero image="/assets/img/heroes/workflows-harbour.jpg" video="/assets/video/workflows-harbour.mp4"
         seed="workflows-automation-hero-559"
-        zoom={false}
-        alive
         aside={<><ServiceRoute current="workflows" /><DashboardPeek /></>}
         palette="technical"
-        scene="headland"
-        eyebrow={<>Workflows and automation <span className="chart-ref" style={{ marginLeft: "10px", color: "var(--deep)" }}>OC-02a / The partnership</span></>}
+        eyebrow={<>Workflows and automation</>}
         title={<>The repetitive work runs <span className="stroke">itself</span>.</>}
-        lede="Only what the assessment justified gets built: the dashboard, automation and AI agents, on infrastructure you own."
+        lede="Only what the assessment justified gets built: the dashboard, automation and AI agents, on systems you control."
       >
         <Link className="btn primary" href="/book">
-          Book now <span className="arr" aria-hidden="true">→</span>
+          Book a meeting <span className="arr" aria-hidden="true">→</span>
         </Link>
         <a className="btn" href={READINESS} target="_blank" rel="noopener" style={{ background: "var(--paper)" }}>
-          Score your readiness <span aria-hidden="true">↗</span>
+          Assess your business <span aria-hidden="true">↗</span>
         </a>
       </PageHero>
 
@@ -113,7 +109,7 @@ export default function Page() {
           <div className="sec-head center reveal">
             <div className="eyebrow">The partnership, in order</div>
             <h2 className="h2">
-              Assess, build, <span className="stroke">amplify</span>.
+              Assess, build, <span className="stroke">measure</span>.
             </h2>
             <p className="lede">
               Each piece ends in something you hold: a score, a running system, a number. Stop at any handoff and keep everything that was built.
@@ -133,7 +129,7 @@ export default function Page() {
           </div>
           <div className="btns order-foot">
             <Link className="btn primary" href="/book">
-              Book now <span className="arr" aria-hidden="true">→</span>
+              Book a meeting <span className="arr" aria-hidden="true">→</span>
             </Link>
             <Link className="link" href="/transformation">The partnership in full</Link>
           </div>
@@ -143,7 +139,7 @@ export default function Page() {
       {/* How an engagement runs, in writing (from /transformation) */}
       <WritingSection />
 
-      <ClosingCall seed="services-workflows-final" />
+      <ClosingCall seed="services-workflows-final" image="/assets/img/sea/dusk-sail.jpg" video="/assets/video/sea-dusk-sail.mp4" />
     </main>
   );
 }

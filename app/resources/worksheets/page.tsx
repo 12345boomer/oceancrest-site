@@ -7,7 +7,7 @@ import "../page.css";
 
 export const metadata: Metadata = {
   title: "Worksheets — OceanCrest AI",
-  description: "Worksheets are in preparation. Subscribe for one email when the first one ships, and use the templates or take the AI diagnostic in the meantime."
+  description: "Worksheets are in preparation. Subscribe for one email when the first one ships, and use the templates or check your AI skills in the meantime."
 };
 
 export default function Page() {
@@ -17,7 +17,6 @@ export default function Page() {
       <PageHero image="/assets/img/heroes/worksheets.jpg" video="/assets/video/sub-worksheets.mp4"
         seed="worksheets-hero"
         palette="mindset"
-        scene="beach"
         eyebrow="Resources · Worksheets"
         title={<>Worksheets are in <span className="stroke sun">preparation</span>.</>}
         lede="None is published yet, and none has a date. Subscribe and we'll send one email when the first one ships."
@@ -41,10 +40,10 @@ export default function Page() {
             href: `/courses/${deck.id}`, cta: "See the template →"
           }] : []),
           {
-            seed: "worksheets-diagnostic", palette: "mindset", scene: "headland", tag: "Diagnostic",
-            title: "The AI diagnostic.",
+            seed: "worksheets-diagnostic", palette: "mindset", scene: "headland", tag: "Skills check",
+            title: "Check your AI skills.",
             text: "Find out what you know about AI, and what you don't yet. Fifteen short questions, about five minutes. Free, no sign-up.",
-            href: "/diagnostic", cta: "Take the diagnostic →"
+            href: "/diagnostic", cta: "Check your AI skills →"
           }
         ]}
       />

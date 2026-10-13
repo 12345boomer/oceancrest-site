@@ -78,7 +78,7 @@ export default async function Page({ params }: Props) {
                   {prev ? <Link className="btn" href={`/courses/${c.id}/lessons/${prev.n}`}>← Lesson {prev.n}</Link> : <span />}
                   {next
                     ? <Link className="btn primary" href={`/courses/${c.id}/lessons/${next.n}`}>Lesson {next.n} <span className="arr" aria-hidden="true">→</span></Link>
-                    : <Link className="btn primary" href="/courses" data-sound="chime" data-sparkle="">Finish the course <span className="arr" aria-hidden="true">→</span></Link>}
+                    : <Link className="btn primary" href="/courses" data-sparkle="">Finish the course <span className="arr" aria-hidden="true">→</span></Link>}
                 </div>
               </>
             ) : (
@@ -98,7 +98,7 @@ export default async function Page({ params }: Props) {
                     <b>This lesson is part of the full library.</b>
                     <p>You can open the first lesson of every course. Enter your access code to unlock every lesson.</p>
                     <CodeForm next={here} />
-                    <p className="acc-fine">No code yet? <Link className="link" href="/book?about=learning">Talk to us about access</Link>, or <Link className="link" href={`/courses/${c.id}/lessons/1`}>open the preview lesson</Link>.</p>
+                    <p className="acc-fine">No code yet? <Link className="link" href="/book">Talk to us about access</Link>, or <Link className="link" href={`/courses/${c.id}/lessons/1`}>open the preview lesson</Link>.</p>
                   </>
                 )}
               </div>

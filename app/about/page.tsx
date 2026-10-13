@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import ClosingCall from "@/components/ClosingCall";
 import Coast from "@/components/Coast";
 import { AdvisorySection, LineageSection, Notch, TeamSection } from "./sections";
 import "./page.css";
+import { MEETING } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About — OceanCrest AI",
@@ -13,15 +15,14 @@ export default function Page() {
   return (
     <main id="main" className="page-about">
       {/* 1. Hero */}
-      <Coast as="section" seed="about-hero-cove" video="/assets/video/about-hero.mp4" palette="hero" size="hero" scene="cove" className="page-hero a-hero has-contours">
+      <Coast as="section" seed="about-hero-cove" image="/assets/img/heroes/about-fleet.jpg" video="/assets/video/about-fleet.mp4" palette="hero" size="hero" className="page-hero ph-photo a-hero has-contours">
         <i className="tick tick-tl" aria-hidden="true" />
         <i className="tick tick-tr" aria-hidden="true" />
         <i className="tick tick-bl" aria-hidden="true" />
         <i className="tick tick-br" aria-hidden="true" />
         <div className="wrap" style={{ width: "100%" }}>
           <div className="eyebrow">
-            About{" "}
-            <span className="chart-ref" style={{ marginLeft: "10px", color: "var(--deep)" }}>OC-05b / Ship's company</span>
+            About
           </div>
           <h1 className="h1">
             The people in the{" "}
@@ -57,46 +58,7 @@ export default function Page() {
       {/* 4. Advisory board */}
       <AdvisorySection />
       {/* 5. Final call */}
-      <section className="section" style={{ paddingTop: "0" }}>
-        <div className="wrap close-row">
-          <figure className="photo lilac reveal">
-            <img src="/assets/img/photos/oc-03-spiral-tall.jpg" alt="A concrete ramp spiralling upward, seen from below. Generated image." loading="lazy" />
-          </figure>
-          <Coast seed="about-final-dusk" video="/assets/video/about-final.mp4" palette="dusk" size="wide" scene="beach" className="final has-contours">
-            <i className="tick tick-tl" aria-hidden="true" />
-            <i className="tick tick-tr" aria-hidden="true" />
-            <i className="tick tick-bl" aria-hidden="true" />
-            <i className="tick tick-br" aria-hidden="true" />
-            <div className="eyebrow" style={{ color: "var(--deep)" }}>Begin</div>
-            <h2 className="h2" style={{ marginTop: "14px" }}>
-              Will AI scale across your company, or stall in another{" "}
-              <span className="stroke">pilot</span>
-              ?
-            </h2>
-            <p className="lede">
-              Book a 30-minute meeting on Teams with the people on this page. If you're not ready, we'll tell you, and tell you what to fix first. Or start with your team's knowledge: take the diagnostic.
-            </p>
-            <div className="btns">
-              <Link className="btn primary" href="/book" data-sound="chime" data-sparkle="">
-                Book now{" "}
-                <span className="arr" aria-hidden="true">→</span>
-              </Link>
-              <Link className="btn" href="/diagnostic" style={{ background: "var(--paper)" }}>Take the diagnostic</Link>
-            </div>
-            <div className="alt">
-              <a href="https://ocv-ai-assessment.netlify.app/" target="_blank" rel="noopener">
-                <span className="ref">Not ready for a call</span>
-                Score your AI readiness, 0 to 100 ↗
-              </a>
-              {" "}
-              <Link href="/resources">
-                <span className="ref">Reading first</span>
-                Browse the resources →
-              </Link>
-            </div>
-          </Coast>
-        </div>
-      </section>
+      <ClosingCall seed="about-final-dusk" image="/assets/img/sea/dusk-sail.jpg" video="/assets/video/sea-dusk-sail.mp4" lede={`Talk to the people on this page about one task that eats your team's time: ${MEETING}, no overhaul required. If you're not ready, we'll tell you, and tell you what to fix first.`} />
     </main>
   );
 }

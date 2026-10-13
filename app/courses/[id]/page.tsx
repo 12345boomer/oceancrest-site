@@ -84,7 +84,6 @@ export default async function Page({ params }: Props) {
         <div className="course-lane" aria-hidden="true" style={{ top: "clamp(40px,5vw,64px)" }}>
           <span className="course-waypoint" />
           <span className="course-rule" />
-          <span className="course-bearing">CO {bearing}°</span>
         </div>
         <div className="wrap course-body">
           <div className="main-col">
@@ -123,7 +122,7 @@ export default async function Page({ params }: Props) {
             ) : firstCourse && (
               <div className="box">
                 <span className="eyebrow">Before you start</span>
-                <p>Take <Link className="link" href={`/courses/${firstCourse.id}`}>{firstCourse.title}</Link> first if you have not already. Or take the diagnostic, and we will tell you where to start.</p>
+                <p>Take <Link className="link" href={`/courses/${firstCourse.id}`}>{firstCourse.title}</Link> first if you have not already. Or check your AI skills, and we will tell you where to start.</p>
               </div>
             )}
             <div className="box">
@@ -171,7 +170,7 @@ export default async function Page({ params }: Props) {
             <h2 className="h2" style={{ marginTop: "14px" }}>Find out what you know before we <span className="stroke warm">teach</span> it.</h2>
             <p className="lede">Fifteen short questions, about five minutes. You get a level, a score in each area, and the courses that close your gaps.</p>
             <div className="btns">
-              <Link className="btn primary" href="/diagnostic" data-sound="chime" data-sparkle="">Take the diagnostic <Arr /></Link>
+              <Link className="btn primary" href="/diagnostic" data-sparkle="">Check your AI skills <Arr /></Link>
               <Link className="btn" href="/courses">See every course</Link>
             </div>
           </Coast>

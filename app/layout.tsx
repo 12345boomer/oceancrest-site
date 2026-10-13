@@ -7,7 +7,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "OceanCrest AI",
-  description: "OceanCrest AI is half transformation partner, half AI educator.",
+  description: "OceanCrest AI helps businesses simplify everyday work with AI, and teaches their teams how to use it confidently.",
   // Working draft beside the live site: keep it out of search until the team switches over.
   robots: { index: false, follow: false },
   icons: { icon: { url: "/assets/img/logos/oceancrest-ai-mark-primary-rgb-fullcolor.svg", type: "image/svg+xml" } }

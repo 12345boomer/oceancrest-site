@@ -40,7 +40,7 @@ export default function CourseAccess({ id }: { id: string }) {
   return (
     <div className="btns">
       <Link className="btn primary" href={`/login?next=${encodeURIComponent(first)}`}>Sign in to preview <Arr /></Link>
-      <Link className="btn" href="/diagnostic">Take the diagnostic</Link>
+      <Link className="btn" href="/diagnostic">Check your AI skills</Link>
     </div>
   );
 }

@@ -10,7 +10,6 @@ const Lane = ({ bearing }: { bearing: string }) => (
   <div className="course-lane" aria-hidden="true">
     <span className="course-waypoint" />
     <span className="course-rule" />
-    <span className="course-bearing">{bearing}</span>
   </div>
 );
 
@@ -22,7 +21,7 @@ export function PhaseImplementation({ standalone = false }: { standalone?: boole
   const panel = standalone ? {} : { id: "phase-b", role: "tabpanel", "data-panel": "phase:b", hidden: true };
   return (
     <div className="phase" {...panel}>
-      <Coast seed="phase-implementation-lagoon" image="/assets/img/art/dots-columns.jpg" video="/assets/video/art-dots-columns.mp4" palette="technical" size="tall" scene="headland" className="art dots-columns">
+      <Coast seed="phase-implementation-lagoon" image="/assets/img/sea/reef-break.jpg" palette="technical" size="tall" scene="headland" className="art">
         <span className="pebble" style={{ "--peb": "var(--lagoon)" }}>2</span>
         <div className="you">
           <span className="ref">You hold</span>
@@ -47,7 +46,7 @@ export function PhaseImplementation({ standalone = false }: { standalone?: boole
             <p>The repetitive work runs itself.</p>
           </div>
           <div>
-            <b>Owned infrastructure</b>
+            <b>Systems you control</b>
             <p>It's yours: an asset, not a subscription.</p>
           </div>
         </div>
@@ -144,7 +143,7 @@ export function WritingSection() {
           </a>
           {" "}
           <a className="card pub reveal" href="https://oceancrest.ai/case-001/" target="_blank" rel="noopener">
-            <Coast seed="demo-case-planning-engine" palette="technical" size="card" scene="open" glints className="cover"><span className="tag line">Demonstration</span></Coast>
+            <Coast seed="demo-case-planning-engine" image="/assets/img/sea/sunrise-shore.jpg" palette="technical" size="card" scene="open" className="cover"><span className="tag line">Demonstration</span></Coast>
             <span className="ref">Case · OC-100 · Five chapters</span>
             <h3>The planning engine.</h3>
             <p>

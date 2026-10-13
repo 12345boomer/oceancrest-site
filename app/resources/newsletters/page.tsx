@@ -16,7 +16,6 @@ export default function Page() {
       <PageHero image="/assets/img/heroes/newsletters.jpg" video="/assets/video/sub-newsletters.mp4"
         seed="newsletters-hero"
         palette="technical"
-        scene="open"
         eyebrow="Resources · Newsletters"
         title={<>One email when something <span className="stroke warm">ships</span>.</>}
         lede="We write when there is something new to read: a new white paper, or the next edition of the quarterly Small Business Guide to AI. Both are free."

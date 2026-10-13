@@ -15,7 +15,6 @@ export default function Page() {
       <PageHero image="/assets/img/heroes/playbooks.jpg" video="/assets/video/sub-playbooks.mp4"
         seed="playbooks-hero"
         palette="hero"
-        scene="headland"
         eyebrow="Resources · Playbooks"
         title={<>Playbooks are in <span className="stroke sun">preparation</span>.</>}
         lede="None is published yet, and none has a date. Subscribe and we'll send one email when the first one ships."

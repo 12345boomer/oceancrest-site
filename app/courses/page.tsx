@@ -20,7 +20,7 @@ export default function Page() {
             <i className="tick tick-bl" aria-hidden="true" />
             <i className="tick tick-br" aria-hidden="true" />
             <div className="cat-head">
-              <span className="chart-ref">OC-02d / Catalogue</span>
+             
               <div className="eyebrow">Courses · two tracks</div>
               <h1 className="h1" id="cat-title">
                 Every course, in one{" "}
@@ -38,7 +38,6 @@ export default function Page() {
           <div className="course-lane" aria-hidden="true">
             <span className="course-waypoint" />
             <span className="course-rule" />
-            <span className="course-bearing">CO 174°</span>
           </div>
           <div className="wrap">
             <aside className="nudge" aria-label="The diagnostic">
@@ -46,11 +45,11 @@ export default function Page() {
               <div>
                 <b>Not sure where to start?</b>
                 <p>
-                  Take the diagnostic: fifteen short questions, about five minutes. You get a level, a score in each area, and the courses that close your gaps.
+                  Check your AI skills: fifteen short questions, about five minutes. You get a level, a score in each area, and the courses that close your gaps.
                 </p>
               </div>
               <Link className="btn primary sm" href="/diagnostic">
-                Take the diagnostic{" "}
+                Check your AI skills{" "}
                 <span className="arr" aria-hidden="true">→</span>
               </Link>
             </aside>
@@ -82,11 +81,11 @@ export default function Page() {
                 Every course, for everyone on the team. Find out what your people know first, or talk to us about putting the whole company on the platform.
               </p>
               <div className="btns">
-                <Link className="btn primary" href="/diagnostic" data-sound="chime" data-sparkle="">
-                  Take the diagnostic{" "}
+                <Link className="btn primary" href="/diagnostic" data-sparkle="">
+                  Check your AI skills{" "}
                   <span className="arr" aria-hidden="true">→</span>
                 </Link>
-                <Link className="btn" href="/book?about=learning">Talk to us about membership</Link>
+                <Link className="btn" href="/book">Talk to us about membership</Link>
               </div>
               <div className="alt">
                 <Link href="/education#membership">
@@ -96,7 +95,7 @@ export default function Page() {
                 {" "}
                 <Link href="/book">
                   <span className="ref">Transformation</span>
-                  Book now →
+                  Book a meeting →
                 </Link>
               </div>
             </Coast>

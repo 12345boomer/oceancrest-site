@@ -17,9 +17,8 @@ export default function Page() {
       <PageHero image="/assets/img/heroes/advisory-board.jpg" video="/assets/video/sub-advisory-board.mp4"
         seed="about-advisory-hero-headland"
         palette="technical"
-        scene="headland"
         className="a-hero"
-        eyebrow={<>About <span className="chart-ref" style={{ marginLeft: "10px", color: "var(--deep)" }}>OC-05a / The advisory board</span></>}
+        eyebrow={<>About</>}
         title={<>Who we answer <span className="stroke">to</span>.</>}
         lede="Operators, investors and counsel who have built, sold and governed companies through several technology shifts. They advise the firm, not your project, but the judgement behind our work is theirs as much as ours."
       >

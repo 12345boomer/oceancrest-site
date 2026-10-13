@@ -16,7 +16,6 @@ export default function Page() {
       <PageHero image="/assets/img/heroes/white-papers.jpg" video="/assets/video/sub-white-papers.mp4"
         seed="white-papers-hero"
         palette="hero"
-        scene="beach"
         eyebrow="Resources · White papers"
         title={<>White <span className="stroke">papers</span>.</>}
         lede="What we would hand you in the room, published. Plain-language guidance on AI adoption for small and mid-sized businesses, in four letter sheets each. All of it is free."

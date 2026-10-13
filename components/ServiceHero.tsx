@@ -1,5 +1,6 @@
 import Link from "next/link";
 import DashRuns from "@/components/DashRuns";
+import Count from "@/components/Count";
 
 /*
   The right half of the three service banners: the route card (doubles as navigation between
@@ -10,18 +11,18 @@ import DashRuns from "@/components/DashRuns";
 export type ServiceId = "planning" | "workflows" | "leadership";
 
 const STOPS: { id: ServiceId; phase: string; title: string; href: string }[] = [
-  { id: "planning", phase: "Assessment", title: "AI Transformation Planning", href: "/transformation" },
-  { id: "workflows", phase: "Implementation", title: "Workflows and Automation", href: "/services/workflows-and-automation" },
-  { id: "leadership", phase: "Amplification", title: "Leadership Workshops and Training", href: "/services/leadership-workshops" }
+  { id: "planning", phase: "Assess", title: "AI Transformation Planning", href: "/transformation" },
+  { id: "workflows", phase: "Build", title: "Workflows and Automation", href: "/services/workflows-and-automation" },
+  { id: "leadership", phase: "Grow", title: "Leadership Workshops and Training", href: "/services/leadership-workshops" }
 ];
 
-/** Assessment → Implementation → Amplification as buoys on a dotted line, with "You are here".
+/** Assess → Build → Grow as buoys on a dotted line, with "You are here".
  *  On phones it shrinks to the three buoys and one "You are here" line, so the painting shows. */
 export function ServiceRoute({ current }: { current: ServiceId }) {
   const at = STOPS.find((s) => s.id === current);
   return (
     <nav className="svc-card svc-route" aria-label="The three services, in order">
-      <div className="svc-h"><span className="ref">The route</span><span className="ref">OC-02a</span></div>
+      <div className="svc-h"><span className="ref">The route</span></div>
       <ol>
         {STOPS.map((s, i) => {
           const here = s.id === current;
@@ -86,7 +87,7 @@ export function PlanPeek() {
     <figure className="svc-card svc-peek">
       <div className="svc-h"><span className="ref">What you hold</span><Sample /></div>
       <div className="plan-score">
-        <b><span data-count="62">0</span><small> / 100</small></b>
+        <b><Count to={62} /><small> / 100</small></b>
         <span className="ref">Readiness score</span>
         <span className="bar t" data-to="62" aria-hidden="true"><i style={{ width: 0 }} /></span>
       </div>

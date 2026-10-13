@@ -4,13 +4,13 @@
   tags, pebbles and soft tints only. Two halves of the business carry their own colour:
     Transformation = lagoon blues   (.half-t)
     Education      = dawn and coral  (.half-e)
-  Shared pieces: components/Coast paints the art, components/SeaLayer adds sounds, ripples and
+  Shared pieces: components/Coast paints the art, components/SeaLayer adds ripples and
   light, components/Header and Footer are the chrome, components/Enhancers runs small interactions.
   Page-specific styles live next to each page (app/<route>/page.css), scoped to main.page-<name>.
 */
 :root{
   --paper:#ffffff; --navy:#16202e; --blue:#2563eb; --silver:#b3b8bf;
-  --slate:#64748b; --ink:#414852; --muted:#71717a; --line:#e4e4e7;
+  --slate:#4a5568; --ink:#30363f; --muted:#555761; --line:#e4e4e7;
   --wash:rgba(37,99,235,.07);
   /* Art tier */
   --foam:#eef8f6; --shallows:#a8dde3; --lagoon:#7fc4d8; --tide:#4a8fb8; --deep:#1f4e70;
@@ -41,8 +41,8 @@ p{margin:0}
 .skip:focus{top:12px}
 
 /* ---------- type ---------- */
-.eyebrow{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--slate)}
-.ref{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.eyebrow{font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--slate)}
+.ref{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .display{font-size:clamp(44px,6.4vw,84px);font-weight:300;line-height:1;letter-spacing:-.03em}
 .h1{font-size:clamp(38px,5vw,64px);font-weight:300;line-height:1.03;letter-spacing:-.025em}
 .h2{font-size:clamp(32px,3.8vw,50px);font-weight:300;line-height:1.06;letter-spacing:-.02em}
@@ -70,14 +70,14 @@ p{margin:0}
 .center .btns{justify-content:center}
 .link{color:var(--navy);border-bottom:1px solid var(--silver);padding-bottom:1px;transition:border-color .2s}
 .link:hover{border-color:var(--blue)}
-.tag{display:inline-flex;align-items:center;gap:6px;background:var(--tag,var(--shallows));color:var(--navy);font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:6px 11px;border-radius:999px;white-space:nowrap}
+.tag{display:inline-flex;align-items:center;gap:6px;background:var(--tag,var(--shallows));color:var(--navy);font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:6px 11px;border-radius:999px;white-space:nowrap}
 .tag.t{--tag:var(--shallows)} .tag.e{--tag:var(--blush)} .tag.sun{--tag:var(--dawn)} .tag.sage{--tag:var(--sage)} .tag.lilac{--tag:var(--lilac)} .tag.sand{--tag:var(--sand)}
 .tag.line{background:var(--paper);border:1px solid var(--line);color:var(--slate)}
 .chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:14px;color:var(--navy);background:var(--paper);position:relative;overflow:hidden;transition:border-color .2s,transform .2s var(--ease)}
 .chip:hover{border-color:var(--lagoon);transform:translateY(-1px)}
 .chip i{width:10px;height:10px;border-radius:50%;display:inline-block}
 .pa{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--muted);vertical-align:super;margin-left:3px}
-.sources{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--muted);line-height:1.6}
+.sources{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--muted);line-height:1.6}
 .sources a{border-bottom:1px solid var(--line)}
 .sources a:hover{border-color:var(--blue)}
 sup.s{font-family:var(--mono);font-size:10px;color:var(--slate);letter-spacing:.04em;margin-left:2px}
@@ -131,45 +131,13 @@ sup.s{font-family:var(--mono);font-size:10px;color:var(--slate);letter-spacing:.
 .tinted.e{background:linear-gradient(var(--e-tint),var(--e-tint))}
 .rule{height:1px;background:var(--line);border:0;margin:0}
 
-/* ---------- painted coast layers (coast.js) ---------- */
+/* ---------- photo layers (components/Coast: a realistic ocean photo behind a box) ---------- */
 .coast{position:relative;overflow:hidden;isolation:isolate}
 .coast-layer{position:absolute;inset:0;z-index:-1;pointer-events:none}
 .coast-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.2s var(--ease)}
-/* Higgsfield clip of the painting (video prop): fades in over the still once it plays */
+/* Higgsfield clip of the photo (video prop): fades in over the still once it plays */
 .coast-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity 1.2s var(--ease)}
 .coast-video.on{opacity:1}
-.coast-glints{position:absolute;inset:0;width:100%;height:100%}
-.coast-glints .gl{fill:#fff;opacity:0;animation:glint 3.6s ease-in-out infinite}
-@keyframes glint{0%,100%{opacity:0}45%{opacity:.95}60%{opacity:.6}}
-.coast-glow{position:absolute;inset:0;opacity:0;transition:opacity .5s var(--ease);background:radial-gradient(circle at var(--mx,50%) var(--my,70%),rgba(255,255,255,.55),rgba(255,255,255,0) 22%);mix-blend-mode:soft-light}
-.coast.lit .coast-glow{opacity:1}
-/* Moving sea (data-water): coast.js sizes .coast-water to the painting's cover crop */
-.coast-water{position:absolute;overflow:hidden}
-.coast-water .wv,.coast-water img{position:absolute;inset:0;width:100%;height:100%}
-.wv-strip{position:absolute;top:0;left:0;width:200%;height:100%;background-repeat:repeat-x;background-size:50% 100%;will-change:transform;animation:drift 70s linear infinite}
-.wv2 .wv-strip{animation-duration:46s;animation-direction:reverse}
-.wv3 .wv-strip{animation-duration:28s}
-.wv2{animation:swell 5s ease-in-out infinite}
-.wv3{animation:swell 3.8s ease-in-out infinite reverse}
-.wv-refl{animation:shimmer-water 4.5s ease-in-out infinite}
-@keyframes drift{to{transform:translateX(-50%)}}
-@keyframes swell{0%,100%{transform:translateY(0)}50%{transform:translateY(1.1%)}}
-@keyframes shimmer-water{0%,100%{opacity:1}50%{opacity:.55}}
-/* Alive banners (Coast alive): layers sliced from the painting, moving lightly */
-.coast-alive{position:absolute;overflow:hidden}
-.coast-alive>img,.coast-alive>svg{position:absolute;inset:0;width:100%;height:100%;display:block}
-.al-sun{transform:translateY(calc(var(--sink,0) * var(--sink-max,0%)));will-change:transform}
-.al-boat{animation:boat-drift 90s ease-in-out infinite alternate,boat-rock 6s ease-in-out infinite}
-@keyframes boat-drift{from{translate:0 0}to{translate:var(--drift,-9%) 0}}
-@keyframes boat-rock{0%,100%{rotate:-1.2deg}50%{rotate:1.2deg}}
-.al-gulls{color:var(--tide);opacity:0;animation:gulls 52s linear 5s infinite}
-@keyframes gulls{0%{translate:-12% 0;opacity:0}3%{opacity:.7}48%{translate:104% -5%;opacity:.7}50%,100%{translate:112% -5%;opacity:0}}
-.al-gulls .gull{fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;transform-box:fill-box;transform-origin:50% 100%;animation:flap .8s ease-in-out infinite alternate}
-.al-gulls .gull:nth-child(2){animation-delay:-.3s}.al-gulls .gull:nth-child(3){animation-delay:-.55s}
-@keyframes flap{to{scale:1 .4}}
-.al-ripples .rp{fill:none;stroke:#fff;stroke-width:1.8;transform-box:fill-box;transform-origin:center;animation:ring 1.4s cubic-bezier(.23,1,.32,1) forwards}
-@keyframes ring{from{scale:.25;opacity:.85}to{scale:1;opacity:0}}
-.coast-alive.still .al-boat{animation:none}
 .art{border-radius:var(--r-lg)}
 
 /* ---------- motion helpers ---------- */
@@ -178,27 +146,22 @@ sup.s{font-family:var(--mono);font-size:10px;color:var(--slate);letter-spacing:.
 @keyframes ripple{to{transform:scale(1);opacity:0}}
 .spark{position:fixed;width:7px;height:7px;border-radius:50%;pointer-events:none;z-index:70;margin:-3px 0 0 -3px;animation:spark 1s var(--ease) forwards;box-shadow:0 0 6px rgba(255,255,255,.9)}
 @keyframes spark{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(.3);opacity:0}}
-.reveal{opacity:0;transform:translateY(14px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
-.reveal.in{opacity:1;transform:none}
+/* Content is never hidden while it waits to be revealed (Ben, 2026-10-13): it only rises a few pixels, quickly.
+   Small mono labels stay at 12px or more for readability. */
+.reveal{transform:translateY(6px);transition:transform .3s var(--ease)}
+.reveal.in{transform:none}
 .bar{height:8px;border-radius:999px;background:rgba(127,196,216,.22);position:relative;overflow:hidden}
 .bar>i{display:block;height:100%;border-radius:999px;background:var(--blue);position:relative;overflow:hidden;transition:width 1.2s var(--ease)}
 .bar.e>i{background:var(--coral)} .bar.t>i{background:var(--lagoon)} .bar.navy>i{background:var(--navy)}
 .bar>i::after{content:"";position:absolute;top:0;bottom:0;width:18px;left:-24px;background:rgba(255,255,255,.65);filter:blur(3px);animation:shimmer 3.4s ease-in-out infinite}
 @keyframes shimmer{0%{left:-24px}60%,100%{left:calc(100% + 24px)}}
 @media (prefers-reduced-motion:reduce){
-  .al-boat,.al-gulls,.al-ripples .rp{animation:none}.al-gulls{display:none}.al-sun{transform:none}
-  .coast-glints .gl{animation:none;opacity:.55}.wv-strip,.coast-water .wv,.wv-refl{animation:none}.coast-img{transition:none}
+  .coast-img{transition:none}
   .reveal{opacity:1;transform:none;transition:none}
   .bar>i::after{display:none}
   .btn:hover,.chip:hover,.card:hover{transform:none}
 }
 
-/* ---------- sound control (sea.js) ---------- */
-.soundbar{position:fixed;right:clamp(12px,2.5vw,24px);bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:40;display:flex;gap:4px;padding:4px;background:var(--paper);border:1px solid var(--line);border-radius:999px}
-.soundbar button{display:inline-flex;align-items:center;gap:6px;border:0;background:none;border-radius:999px;padding:7px 12px;font-size:13px;color:var(--slate);position:relative;overflow:hidden}
-.soundbar button:hover{color:var(--navy);background:rgba(127,196,216,.16)}
-.soundbar button[aria-pressed="true"]{color:var(--navy);background:rgba(127,196,216,.28)}
-@media (max-width:560px){.soundbar span{display:none}.soundbar button{padding:8px}}
 
 /* ---------- generic cards ---------- */
 .card{border:1px solid var(--line);border-radius:var(--r);background:var(--paper);padding:clamp(22px,2.6vw,30px);position:relative;overflow:hidden;transition:border-color .25s,transform .25s var(--ease)}
@@ -238,18 +201,11 @@ a.card:hover .coast-img{transform:scale(1.05)}
 /* Same height as the home and transformation heroes: the painting fills the first screen. Book and diagnostic override it to sit their tools higher. */
 .page-hero{padding-block:clamp(64px,9vw,120px) clamp(40px,6vw,72px);min-height:calc(100svh - 73px);display:flex;flex-direction:column;align-items:flex-start}
 .page-hero :is(.coast-img,.coast-video){object-position:50% 70%}
-/* PageHero banners have no video clip, so the still is framed closer, like the clips on home and transformation */
-.page-hero.ph-zoom .coast-img{transform:scale(1.45);transform-origin:50% 66%}
-.page-hero.ph-frame .coast-img{object-position:50% 64%}
 /* Higgsfield stills and their clips: shown whole, centred (the picture is composed with room for the copy) */
 .page-hero.ph-photo :is(.coast-img,.coast-video){object-position:50% 50%;transform:none}
-/* Painted Higgsfield stills on the service banners: the same framing as the transformation hero, no wash */
-.page-hero.ph-paint :is(.coast-img,.coast-video){transform:none}
-/* Mirrored (Workflows, Leadership): puts the pier and the lighthouse in the open lower-left instead of under the cards */
-.page-hero.ph-paint.ph-flip :is(.coast-img,.coast-video){transform:scaleX(-1);object-position:50% 30%}
-/* Phones: framed with the service cards further down (search --art-x) */
-/* Dot graphics reused off the banners: keep the columns in a tall card, the band centred behind the subscribe panel */
-.dots-columns :is(.coast-img,.coast-video){object-position:82% 70%}
+/* Phones: the service banners are framed with the service cards further down (search --art-x) */
+/* Home hero: realistic aerial photo (the boat and wake from the Making Waves cover); a soft white glow keeps the centred copy readable */
+.page-home .hero.sea-photo .coast-layer::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 58% 52% at 50% 34%,rgba(255,255,255,.62) 0%,rgba(255,255,255,.46) 34%,rgba(255,255,255,.2) 62%,rgba(255,255,255,0) 100%)}
 /* The two aerial beach photos, moved off the service banners into section art (leaders' session, advisory board) */
 .caustic-shallows :is(.coast-img,.coast-video){object-position:70% 50%}
 .swell-lines :is(.coast-img,.coast-video){object-position:60% 50%}
@@ -264,7 +220,7 @@ a.card:hover .coast-img{transform:scale(1.05)}
 .page-hero.center .btns{justify-content:center}
 
 /* Half badges: which side of the business a thing belongs to */
-.half{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);padding:6px 12px 6px 8px;border-radius:999px;background:var(--paper)}
+.half{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);padding:6px 12px 6px 8px;border-radius:999px;background:var(--paper)}
 .half::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--lagoon)}
 .half.e::before{background:var(--coral)}
 
@@ -440,11 +396,12 @@ a.card:hover .coast-img{transform:scale(1.05)}
   .svc-peek .dash-kpis .ref .sm{display:inline}
   .page-hero:has(.ph-aside) .coast-layer{transform:scale(var(--art-zoom,1.35));transform-origin:var(--art-origin,50%) 0}
   .page-hero:has(.ph-aside) :is(.coast-img,.coast-video){object-position:var(--art-x,50%) 50%}
-  .page-transformation .t-hero{--art-x:80%}
-  .page-services-workflows .page-hero{--art-x:75%;--art-zoom:1.12}
-  /* Mirrored: the lighthouse (88% across the original) lands about a fifth in from the left after the flip */
-  .page-services-leadership .page-hero{--art-x:90%;--art-origin:20%;--art-zoom:1.12}
-  .page-hero.ph-paint.ph-flip :is(.coast-img,.coast-video){object-position:var(--art-x) 50%}
+  /* the white wash sits behind the copy only, so the photo below the cards shows at full strength */
+  .page-hero.ph-photo:has(.ph-aside) .coast-layer::after{background:linear-gradient(to bottom,rgba(255,255,255,.6) 0%,rgba(255,255,255,.45) 38%,rgba(255,255,255,0) 62%)}
+  .page-transformation .t-hero{--art-x:45%;--art-zoom:1.12}
+  .page-services-workflows .page-hero{--art-x:22%;--art-origin:22%;--art-zoom:1.12}
+  /* The lighthouse stands about 15% across the photo */
+  .page-services-leadership .page-hero{--art-x:15%;--art-origin:15%;--art-zoom:1.12}
 }
 /* Peeks */
 .dash-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
